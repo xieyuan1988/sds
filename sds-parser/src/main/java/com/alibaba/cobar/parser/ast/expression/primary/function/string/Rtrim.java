@@ -18,17 +18,17 @@
  */
 package com.alibaba.cobar.parser.ast.expression.primary.function.string;
 
-import java.util.List;
-
 import com.alibaba.cobar.parser.ast.expression.Expression;
 import com.alibaba.cobar.parser.ast.expression.primary.function.FunctionExpression;
+
+import java.util.List;
 
 /**
  * @author <a href="mailto:shuo.qius@alibaba-inc.com">QIU Shuo</a>
  */
 public class Rtrim extends FunctionExpression {
 
-    public Rtrim(List<Expression> arguments){
+    public Rtrim(List<Expression> arguments) {
         super("RTRIM", arguments);
     }
 

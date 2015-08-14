@@ -29,12 +29,12 @@ public class DALSetNamesStatement implements SQLStatement {
     private final String charsetName;
     private final String collationName;
 
-    public DALSetNamesStatement(){
+    public DALSetNamesStatement() {
         this.charsetName = null;
         this.collationName = null;
     }
 
-    public DALSetNamesStatement(String charsetName, String collationName){
+    public DALSetNamesStatement(String charsetName, String collationName) {
         if (charsetName == null) throw new IllegalArgumentException("charsetName is null");
         this.charsetName = charsetName;
         this.collationName = collationName;

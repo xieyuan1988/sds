@@ -15,24 +15,17 @@
  */
 package com.alibaba.cobar.parser.recognizer.mysql.syntax;
 
-import static com.alibaba.cobar.parser.recognizer.mysql.MySQLToken.IDENTIFIER;
-import static com.alibaba.cobar.parser.recognizer.mysql.MySQLToken.KW_LIMIT;
-import static com.alibaba.cobar.parser.recognizer.mysql.MySQLToken.PUNC_DOT;
-import static com.alibaba.cobar.parser.recognizer.mysql.MySQLToken.SYS_VAR;
+import com.alibaba.cobar.parser.ast.expression.primary.*;
+import com.alibaba.cobar.parser.ast.fragment.Limit;
+import com.alibaba.cobar.parser.ast.fragment.VariableScope;
+import com.alibaba.cobar.parser.recognizer.mysql.MySQLToken;
+import com.alibaba.cobar.parser.recognizer.mysql.lexer.MySQLLexer;
 
 import java.sql.SQLSyntaxErrorException;
 import java.util.HashMap;
 import java.util.Map;
 
-import com.alibaba.cobar.parser.ast.expression.primary.Identifier;
-import com.alibaba.cobar.parser.ast.expression.primary.ParamMarker;
-import com.alibaba.cobar.parser.ast.expression.primary.PlaceHolder;
-import com.alibaba.cobar.parser.ast.expression.primary.SysVarPrimary;
-import com.alibaba.cobar.parser.ast.expression.primary.Wildcard;
-import com.alibaba.cobar.parser.ast.fragment.Limit;
-import com.alibaba.cobar.parser.ast.fragment.VariableScope;
-import com.alibaba.cobar.parser.recognizer.mysql.MySQLToken;
-import com.alibaba.cobar.parser.recognizer.mysql.lexer.MySQLLexer;
+import static com.alibaba.cobar.parser.recognizer.mysql.MySQLToken.*;
 
 /**
  * @author <a href="mailto:shuo.qius@alibaba-inc.com">QIU Shuo</a>
@@ -42,11 +35,11 @@ public abstract class MySQLParser {
     public static final String DEFAULT_CHARSET = "utf-8";
     protected final MySQLLexer lexer;
 
-    public MySQLParser(MySQLLexer lexer){
+    public MySQLParser(MySQLLexer lexer) {
         this(lexer, true);
     }
 
-    public MySQLParser(MySQLLexer lexer, boolean cacheEvalRst){
+    public MySQLParser(MySQLLexer lexer, boolean cacheEvalRst) {
         this.lexer = lexer;
         this.cacheEvalRst = cacheEvalRst;
     }
@@ -56,13 +49,14 @@ public abstract class MySQLParser {
     }
 
     private static final Map<String, SpecialIdentifier> specialIdentifiers = new HashMap<String, SpecialIdentifier>();
+
     static {
         specialIdentifiers.put("GLOBAL", SpecialIdentifier.GLOBAL);
         specialIdentifiers.put("SESSION", SpecialIdentifier.SESSION);
         specialIdentifiers.put("LOCAL", SpecialIdentifier.LOCAL);
     }
 
-    protected final boolean                             cacheEvalRst;
+    protected final boolean cacheEvalRst;
 
     /**
      * @return type of {@link Wildcard} is possible. never null
@@ -87,7 +81,7 @@ public abstract class MySQLParser {
             default:
                 throw err("expect id or * after '.'");
         }
-        for (; lexer.token() == PUNC_DOT;) {
+        for (; lexer.token() == PUNC_DOT; ) {
             switch (lexer.nextToken()) {
                 case OP_ASTERISK:
                     lexer.nextToken();
@@ -150,7 +144,7 @@ public abstract class MySQLParser {
 
     /**
      * nothing has been pre-consumed
-     * 
+     *
      * @return null if there is no order limit
      */
     protected Limit limit() throws SQLSyntaxErrorException {
@@ -254,7 +248,7 @@ public abstract class MySQLParser {
      */
     protected int matchIdentifier(String... expectTextUppercase) throws SQLSyntaxErrorException {
         if (expectTextUppercase == null || expectTextUppercase.length <= 0) throw new IllegalArgumentException(
-                                                                                                               "at least one expect token");
+                "at least one expect token");
         if (lexer.token() != MySQLToken.IDENTIFIER) {
             throw err("expect an id");
         }
@@ -274,7 +268,7 @@ public abstract class MySQLParser {
      */
     protected int match(MySQLToken... expectToken) throws SQLSyntaxErrorException {
         if (expectToken == null || expectToken.length <= 0) throw new IllegalArgumentException(
-                                                                                               "at least one expect token");
+                "at least one expect token");
         MySQLToken token = lexer.token();
         for (int i = 0; i < expectToken.length; ++i) {
             if (token == expectToken[i]) {

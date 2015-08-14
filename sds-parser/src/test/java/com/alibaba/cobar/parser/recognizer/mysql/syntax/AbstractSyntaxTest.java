@@ -15,10 +15,9 @@
  */
 package com.alibaba.cobar.parser.recognizer.mysql.syntax;
 
-import junit.framework.TestCase;
-
 import com.alibaba.cobar.parser.ast.ASTNode;
 import com.alibaba.cobar.parser.visitor.MySQLOutputASTVisitor;
+import junit.framework.TestCase;
 
 public abstract class AbstractSyntaxTest extends TestCase {
 

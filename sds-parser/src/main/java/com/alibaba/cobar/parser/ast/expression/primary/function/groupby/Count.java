@@ -18,11 +18,11 @@
  */
 package com.alibaba.cobar.parser.ast.expression.primary.function.groupby;
 
-import java.util.List;
-
 import com.alibaba.cobar.parser.ast.expression.Expression;
 import com.alibaba.cobar.parser.ast.expression.primary.function.FunctionExpression;
 import com.alibaba.cobar.parser.visitor.SQLASTVisitor;
+
+import java.util.List;
 
 /**
  * @author <a href="mailto:shuo.qius@alibaba-inc.com">QIU Shuo</a>
@@ -34,12 +34,12 @@ public class Count extends FunctionExpression {
      */
     private final boolean distinct;
 
-    public Count(List<Expression> arguments){
+    public Count(List<Expression> arguments) {
         super("COUNT", arguments);
         this.distinct = true;
     }
 
-    public Count(Expression arg){
+    public Count(Expression arg) {
         super("COUNT", wrapList(arg));
         this.distinct = false;
     }

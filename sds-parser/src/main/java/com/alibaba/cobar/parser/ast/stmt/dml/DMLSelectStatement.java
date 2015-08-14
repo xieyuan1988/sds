@@ -18,11 +18,6 @@
  */
 package com.alibaba.cobar.parser.ast.stmt.dml;
 
-import java.sql.SQLSyntaxErrorException;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
-
 import com.alibaba.cobar.parser.ast.expression.Expression;
 import com.alibaba.cobar.parser.ast.fragment.GroupBy;
 import com.alibaba.cobar.parser.ast.fragment.Limit;
@@ -31,13 +26,19 @@ import com.alibaba.cobar.parser.ast.fragment.tableref.TableReferences;
 import com.alibaba.cobar.parser.util.Pair;
 import com.alibaba.cobar.parser.visitor.SQLASTVisitor;
 
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
+
 /**
  * @author <a href="mailto:shuo.qius@alibaba-inc.com">QIU Shuo</a>
  */
 public class DMLSelectStatement extends DMLQueryStatement {
 
     public static enum SelectDuplicationStrategy {
-        /** default */
+        /**
+         * default
+         */
         ALL, DISTINCT, DISTINCTROW
     }
 
@@ -55,14 +56,14 @@ public class DMLSelectStatement extends DMLQueryStatement {
 
     public static final class SelectOption {
 
-        public SelectDuplicationStrategy resultDup        = SelectDuplicationStrategy.ALL;
-        public boolean                   highPriority     = false;
-        public boolean                   straightJoin     = false;
-        public SmallOrBigResult          resultSize       = SmallOrBigResult.UNDEF;
-        public boolean                   sqlBufferResult  = false;
-        public QueryCacheStrategy        queryCache       = QueryCacheStrategy.UNDEF;
-        public boolean                   sqlCalcFoundRows = false;
-        public LockMode                  lockMode         = LockMode.UNDEF;
+        public SelectDuplicationStrategy resultDup = SelectDuplicationStrategy.ALL;
+        public boolean highPriority = false;
+        public boolean straightJoin = false;
+        public SmallOrBigResult resultSize = SmallOrBigResult.UNDEF;
+        public boolean sqlBufferResult = false;
+        public QueryCacheStrategy queryCache = QueryCacheStrategy.UNDEF;
+        public boolean sqlCalcFoundRows = false;
+        public LockMode lockMode = LockMode.UNDEF;
 
         @Override
         public String toString() {
@@ -81,15 +82,17 @@ public class DMLSelectStatement extends DMLQueryStatement {
         }
     }
 
-    private final SelectOption                   option;
-    /** string: id | `id` | 'id' */
+    private final SelectOption option;
+    /**
+     * string: id | `id` | 'id'
+     */
     private final List<Pair<Expression, String>> selectExprList;
-    private final TableReferences                tables;
-    private final Expression                     where;
-    private final GroupBy                        group;
-    private final Expression                     having;
-    private final OrderBy                        order;
-    private final Limit                          limit;
+    private final TableReferences tables;
+    private final Expression where;
+    private final GroupBy group;
+    private final Expression having;
+    private final OrderBy order;
+    private final Limit limit;
 
     /**
      * @throws java.sql.SQLSyntaxErrorException
@@ -97,7 +100,7 @@ public class DMLSelectStatement extends DMLQueryStatement {
     @SuppressWarnings("unchecked")
     public DMLSelectStatement(SelectOption option, List<Pair<Expression, String>> selectExprList,
                               TableReferences tables, Expression where, GroupBy group, Expression having,
-                              OrderBy order, Limit limit){
+                              OrderBy order, Limit limit) {
         if (option == null) throw new IllegalArgumentException("argument 'option' is null");
         this.option = option;
         if (selectExprList == null || selectExprList.isEmpty()) {
@@ -124,7 +127,9 @@ public class DMLSelectStatement extends DMLQueryStatement {
         return selectExprList;
     }
 
-    /** @performance slow */
+    /**
+     * @performance slow
+     */
     public List<Expression> getSelectExprListWithoutAlias() {
         if (selectExprList == null || selectExprList.isEmpty()) return Collections.emptyList();
         List<Expression> list = new ArrayList<Expression>(selectExprList.size());

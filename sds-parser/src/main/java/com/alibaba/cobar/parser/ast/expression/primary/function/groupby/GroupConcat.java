@@ -18,27 +18,27 @@
  */
 package com.alibaba.cobar.parser.ast.expression.primary.function.groupby;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
-
 import com.alibaba.cobar.parser.ast.expression.Expression;
 import com.alibaba.cobar.parser.ast.expression.primary.function.FunctionExpression;
 import com.alibaba.cobar.parser.visitor.SQLASTVisitor;
+
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
 
 /**
  * @author <a href="mailto:shuo.qius@alibaba-inc.com">QIU Shuo</a>
  */
 public class GroupConcat extends FunctionExpression {
 
-    private final boolean          distinct;
-    private final Expression       orderBy;
-    private final boolean          isDesc;
+    private final boolean distinct;
+    private final Expression orderBy;
+    private final boolean isDesc;
     private final List<Expression> appendedColumnNames;
-    private final String           separator;
+    private final String separator;
 
     public GroupConcat(boolean distinct, List<Expression> exprList, Expression orderBy, boolean isDesc,
-                       List<Expression> appendedColumnNames, String separator){
+                       List<Expression> appendedColumnNames, String separator) {
         super("GROUP_CONCAT", exprList);
         this.distinct = distinct;
         this.orderBy = orderBy;

@@ -26,15 +26,17 @@ import com.alibaba.cobar.parser.visitor.SQLASTVisitor;
  */
 public class ShowCreate extends DALShowStatement {
 
-    /** enum name must equals to real sql string */
+    /**
+     * enum name must equals to real sql string
+     */
     public static enum Type {
         DATABASE, EVENT, FUNCTION, PROCEDURE, TABLE, TRIGGER, VIEW
     }
 
-    private final Type       type;
+    private final Type type;
     private final Identifier id;
 
-    public ShowCreate(Type type, Identifier id){
+    public ShowCreate(Type type, Identifier id) {
         this.type = type;
         this.id = id;
     }

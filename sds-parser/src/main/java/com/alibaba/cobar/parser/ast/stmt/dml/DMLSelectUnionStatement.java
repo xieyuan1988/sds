@@ -18,30 +18,32 @@
  */
 package com.alibaba.cobar.parser.ast.stmt.dml;
 
-import java.util.LinkedList;
-import java.util.List;
-
 import com.alibaba.cobar.parser.ast.fragment.Limit;
 import com.alibaba.cobar.parser.ast.fragment.OrderBy;
 import com.alibaba.cobar.parser.visitor.SQLASTVisitor;
+
+import java.util.LinkedList;
+import java.util.List;
 
 /**
  * @author <a href="mailto:shuo.qius@alibaba-inc.com">QIU Shuo</a>
  */
 public class DMLSelectUnionStatement extends DMLQueryStatement {
 
-    /** might be {@link java.util.LinkedList} */
+    /**
+     * might be {@link java.util.LinkedList}
+     */
     private final List<DMLSelectStatement> selectStmtList;
     /**
      * <code>Mixed UNION types are treated such that a DISTINCT union overrides any ALL union to its left</code> <br/>
      * 0 means all relations of selects are union all<br/>
      * last index of {@link #selectStmtList} means all relations of selects are union distinct<br/>
      */
-    private int                            firstDistinctIndex = 0;
-    private OrderBy                        orderBy;
-    private Limit                          limit;
+    private int firstDistinctIndex = 0;
+    private OrderBy orderBy;
+    private Limit limit;
 
-    public DMLSelectUnionStatement(DMLSelectStatement select){
+    public DMLSelectUnionStatement(DMLSelectStatement select) {
         super();
         this.selectStmtList = new LinkedList<DMLSelectStatement>();
         this.selectStmtList.add(select);

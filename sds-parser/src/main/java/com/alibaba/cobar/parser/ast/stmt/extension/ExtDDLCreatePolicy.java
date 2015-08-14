@@ -18,24 +18,24 @@
  */
 package com.alibaba.cobar.parser.ast.stmt.extension;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import com.alibaba.cobar.parser.ast.expression.Expression;
 import com.alibaba.cobar.parser.ast.expression.primary.Identifier;
 import com.alibaba.cobar.parser.ast.stmt.ddl.DDLStatement;
 import com.alibaba.cobar.parser.util.Pair;
 import com.alibaba.cobar.parser.visitor.SQLASTVisitor;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  * @author <a href="mailto:shuo.qius@alibaba-inc.com">QIU Shuo</a>
  */
 public class ExtDDLCreatePolicy implements DDLStatement {
 
-    private final Identifier                      name;
+    private final Identifier name;
     private final List<Pair<Integer, Expression>> proportion;
 
-    public ExtDDLCreatePolicy(Identifier name){
+    public ExtDDLCreatePolicy(Identifier name) {
         this.name = name;
         this.proportion = new ArrayList<Pair<Integer, Expression>>(1);
     }

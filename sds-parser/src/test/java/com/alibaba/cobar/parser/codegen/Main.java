@@ -15,18 +15,11 @@
  */
 package com.alibaba.cobar.parser.codegen;
 
-import java.io.BufferedReader;
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileOutputStream;
-import java.io.InputStream;
-import java.io.InputStreamReader;
-import java.io.OutputStreamWriter;
-import java.io.PrintWriter;
+import java.io.*;
 
 /**
  * (created at 2010-9-26)
- * 
+ *
  * @author <a href="mailto:shuo.qius@alibaba-inc.com">QIU Shuo</a>
  */
 public class Main {
@@ -49,7 +42,7 @@ public class Main {
         }
     }
 
-    protected static final String srcString    = "<a href=\"mailto:QiuShuo1985@gmail.com\">";
+    protected static final String srcString = "<a href=\"mailto:QiuShuo1985@gmail.com\">";
     protected static final String targetString = "<a href=\"mailto:shuo.qius@alibaba-inc.com\">";
 
     // void visit(ASTNode groupBy);
@@ -66,7 +59,7 @@ public class Main {
             try {
                 tout = new PrintWriter(new OutputStreamWriter(new FileOutputStream(tmp), "gbk"));
                 StringBuilder sb = new StringBuilder();
-                for (String line = null; (line = fin.readLine()) != null;) {
+                for (String line = null; (line = fin.readLine()) != null; ) {
                     sb.append(line).append("\r\n");
                 }
                 int index = sb.lastIndexOf("}");
@@ -98,7 +91,8 @@ public class Main {
     private File getTmpFile(File file) throws Exception {
         File[] sub = file.getParentFile().listFiles();
         String newName = file.getName() + ".temp";
-        loop1: while (true) {
+        loop1:
+        while (true) {
             for (File s : sub) {
                 if (newName.equalsIgnoreCase(s.getName())) {
                     newName = newName + "1";

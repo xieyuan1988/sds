@@ -22,12 +22,12 @@ import com.alibaba.cobar.parser.visitor.SQLASTVisitor;
 
 /**
  * stand for <code>*</code>
- * 
+ *
  * @author <a href="mailto:shuo.qius@alibaba-inc.com">QIU Shuo</a>
  */
 public class Wildcard extends Identifier {
 
-    public Wildcard(Identifier parent){
+    public Wildcard(Identifier parent) {
         super(parent, "*", "*");
     }
 

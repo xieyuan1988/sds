@@ -26,10 +26,10 @@ import com.alibaba.cobar.parser.visitor.SQLASTVisitor;
  */
 public class ShowCharaterSet extends DALShowStatement {
 
-    private final String     pattern;
+    private final String pattern;
     private final Expression where;
 
-    public ShowCharaterSet(String pattern){
+    public ShowCharaterSet(String pattern) {
         this.pattern = pattern;
         this.where = null;
     }
@@ -42,12 +42,12 @@ public class ShowCharaterSet extends DALShowStatement {
         return where;
     }
 
-    public ShowCharaterSet(Expression where){
+    public ShowCharaterSet(Expression where) {
         this.pattern = null;
         this.where = where;
     }
 
-    public ShowCharaterSet(){
+    public ShowCharaterSet() {
         this.pattern = null;
         this.where = null;
     }

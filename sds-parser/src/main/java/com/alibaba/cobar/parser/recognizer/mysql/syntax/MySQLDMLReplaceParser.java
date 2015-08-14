@@ -18,18 +18,6 @@
  */
 package com.alibaba.cobar.parser.recognizer.mysql.syntax;
 
-import static com.alibaba.cobar.parser.recognizer.mysql.MySQLToken.KW_INTO;
-import static com.alibaba.cobar.parser.recognizer.mysql.MySQLToken.KW_REPLACE;
-import static com.alibaba.cobar.parser.recognizer.mysql.MySQLToken.OP_ASSIGN;
-import static com.alibaba.cobar.parser.recognizer.mysql.MySQLToken.OP_EQUALS;
-import static com.alibaba.cobar.parser.recognizer.mysql.MySQLToken.PUNC_COMMA;
-import static com.alibaba.cobar.parser.recognizer.mysql.MySQLToken.PUNC_RIGHT_PAREN;
-
-import java.sql.SQLSyntaxErrorException;
-import java.util.ArrayList;
-import java.util.LinkedList;
-import java.util.List;
-
 import com.alibaba.cobar.parser.ast.expression.Expression;
 import com.alibaba.cobar.parser.ast.expression.misc.QueryExpression;
 import com.alibaba.cobar.parser.ast.expression.primary.Identifier;
@@ -37,12 +25,19 @@ import com.alibaba.cobar.parser.ast.expression.primary.RowExpression;
 import com.alibaba.cobar.parser.ast.stmt.dml.DMLReplaceStatement;
 import com.alibaba.cobar.parser.recognizer.mysql.lexer.MySQLLexer;
 
+import java.sql.SQLSyntaxErrorException;
+import java.util.ArrayList;
+import java.util.LinkedList;
+import java.util.List;
+
+import static com.alibaba.cobar.parser.recognizer.mysql.MySQLToken.*;
+
 /**
  * @author <a href="mailto:shuo.qius@alibaba-inc.com">QIU Shuo</a>
  */
 public class MySQLDMLReplaceParser extends MySQLDMLInsertReplaceParser {
 
-    public MySQLDMLReplaceParser(MySQLLexer lexer, MySQLExprParser exprParser){
+    public MySQLDMLReplaceParser(MySQLLexer lexer, MySQLExprParser exprParser) {
         super(lexer, exprParser);
     }
 
@@ -89,7 +84,7 @@ public class MySQLDMLReplaceParser extends MySQLDMLInsertReplaceParser {
                 lexer.nextToken();
                 columnNameList = new LinkedList<Identifier>();
                 tempRowValue = new LinkedList<Expression>();
-                for (;; lexer.nextToken()) {
+                for (; ; lexer.nextToken()) {
                     Identifier id = identifier();
                     match(OP_EQUALS, OP_ASSIGN);
                     Expression expr = exprParser.expression();

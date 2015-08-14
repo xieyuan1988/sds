@@ -30,7 +30,7 @@ public class BetweenAndExpression extends TernaryOperatorExpression implements R
 
     private final boolean not;
 
-    public BetweenAndExpression(boolean not, Expression comparee, Expression notLessThan, Expression notGreaterThan){
+    public BetweenAndExpression(boolean not, Expression comparee, Expression notLessThan, Expression notGreaterThan) {
         super(comparee, notLessThan, notGreaterThan);
         this.not = not;
     }

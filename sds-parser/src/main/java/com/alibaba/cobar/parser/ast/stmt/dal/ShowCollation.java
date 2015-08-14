@@ -26,20 +26,20 @@ import com.alibaba.cobar.parser.visitor.SQLASTVisitor;
  */
 public class ShowCollation extends DALShowStatement {
 
-    private final String     pattern;
+    private final String pattern;
     private final Expression where;
 
-    public ShowCollation(Expression where){
+    public ShowCollation(Expression where) {
         this.pattern = null;
         this.where = where;
     }
 
-    public ShowCollation(String pattern){
+    public ShowCollation(String pattern) {
         this.pattern = pattern;
         this.where = null;
     }
 
-    public ShowCollation(){
+    public ShowCollation() {
         this.pattern = null;
         this.where = null;
     }

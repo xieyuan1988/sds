@@ -18,20 +18,6 @@
  */
 package com.alibaba.cobar.parser.recognizer.mysql.syntax;
 
-import static com.alibaba.cobar.parser.recognizer.mysql.MySQLToken.KW_IGNORE;
-import static com.alibaba.cobar.parser.recognizer.mysql.MySQLToken.KW_LOW_PRIORITY;
-import static com.alibaba.cobar.parser.recognizer.mysql.MySQLToken.KW_SET;
-import static com.alibaba.cobar.parser.recognizer.mysql.MySQLToken.KW_UPDATE;
-import static com.alibaba.cobar.parser.recognizer.mysql.MySQLToken.KW_WHERE;
-import static com.alibaba.cobar.parser.recognizer.mysql.MySQLToken.OP_ASSIGN;
-import static com.alibaba.cobar.parser.recognizer.mysql.MySQLToken.OP_EQUALS;
-import static com.alibaba.cobar.parser.recognizer.mysql.MySQLToken.PUNC_COMMA;
-
-import java.sql.SQLSyntaxErrorException;
-import java.util.ArrayList;
-import java.util.LinkedList;
-import java.util.List;
-
 import com.alibaba.cobar.parser.ast.expression.Expression;
 import com.alibaba.cobar.parser.ast.expression.primary.Identifier;
 import com.alibaba.cobar.parser.ast.fragment.Limit;
@@ -41,12 +27,19 @@ import com.alibaba.cobar.parser.ast.stmt.dml.DMLUpdateStatement;
 import com.alibaba.cobar.parser.recognizer.mysql.lexer.MySQLLexer;
 import com.alibaba.cobar.parser.util.Pair;
 
+import java.sql.SQLSyntaxErrorException;
+import java.util.ArrayList;
+import java.util.LinkedList;
+import java.util.List;
+
+import static com.alibaba.cobar.parser.recognizer.mysql.MySQLToken.*;
+
 /**
  * @author <a href="mailto:shuo.qius@alibaba-inc.com">QIU Shuo</a>
  */
 public class MySQLDMLUpdateParser extends MySQLDMLParser {
 
-    public MySQLDMLUpdateParser(MySQLLexer lexer, MySQLExprParser exprParser){
+    public MySQLDMLUpdateParser(MySQLLexer lexer, MySQLExprParser exprParser) {
         super(lexer, exprParser);
     }
 
@@ -79,7 +72,7 @@ public class MySQLDMLUpdateParser extends MySQLDMLParser {
         if (lexer.token() == PUNC_COMMA) {
             values = new LinkedList<Pair<Identifier, Expression>>();
             values.add(new Pair<Identifier, Expression>(col, expr));
-            for (; lexer.token() == PUNC_COMMA;) {
+            for (; lexer.token() == PUNC_COMMA; ) {
                 lexer.nextToken();
                 col = identifier();
                 match(OP_EQUALS, OP_ASSIGN);

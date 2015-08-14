@@ -18,12 +18,12 @@
  */
 package com.alibaba.cobar.parser.ast.fragment.tableref;
 
+import com.alibaba.cobar.parser.ast.expression.Expression;
+import com.alibaba.cobar.parser.visitor.SQLASTVisitor;
+
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
-
-import com.alibaba.cobar.parser.ast.expression.Expression;
-import com.alibaba.cobar.parser.visitor.SQLASTVisitor;
 
 /**
  * @author <a href="mailto:shuo.qius@alibaba-inc.com">QIU Shuo</a>
@@ -39,10 +39,10 @@ public class InnerJoin implements TableReference {
 
     private final TableReference leftTableRef;
     private final TableReference rightTableRef;
-    private Expression           onCond;
-    private List<String>         using;
+    private Expression onCond;
+    private List<String> using;
 
-    private InnerJoin(TableReference leftTableRef, TableReference rightTableRef, Expression onCond, List<String> using){
+    private InnerJoin(TableReference leftTableRef, TableReference rightTableRef, Expression onCond, List<String> using) {
         super();
         this.leftTableRef = leftTableRef;
         this.rightTableRef = rightTableRef;
@@ -50,15 +50,15 @@ public class InnerJoin implements TableReference {
         this.using = ensureListType(using);
     }
 
-    public InnerJoin(TableReference leftTableRef, TableReference rightTableRef){
+    public InnerJoin(TableReference leftTableRef, TableReference rightTableRef) {
         this(leftTableRef, rightTableRef, null, null);
     }
 
-    public InnerJoin(TableReference leftTableRef, TableReference rightTableRef, Expression onCond){
+    public InnerJoin(TableReference leftTableRef, TableReference rightTableRef, Expression onCond) {
         this(leftTableRef, rightTableRef, onCond, null);
     }
 
-    public InnerJoin(TableReference leftTableRef, TableReference rightTableRef, List<String> using){
+    public InnerJoin(TableReference leftTableRef, TableReference rightTableRef, List<String> using) {
         this(leftTableRef, rightTableRef, null, using);
     }
 

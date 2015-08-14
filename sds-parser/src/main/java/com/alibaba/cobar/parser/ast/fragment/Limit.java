@@ -27,13 +27,15 @@ import com.alibaba.cobar.parser.visitor.SQLASTVisitor;
  */
 public class Limit implements ASTNode {
 
-    /** when it is null, to sql generated must ignore this number */
-    private final Number      offset;
-    private final Number      size;
+    /**
+     * when it is null, to sql generated must ignore this number
+     */
+    private final Number offset;
+    private final Number size;
     private final ParamMarker offsetP;
     private final ParamMarker sizeP;
 
-    public Limit(Number offset, Number size){
+    public Limit(Number offset, Number size) {
         if (offset == null) throw new IllegalArgumentException();
         if (size == null) throw new IllegalArgumentException();
         this.offset = offset;
@@ -42,7 +44,7 @@ public class Limit implements ASTNode {
         this.sizeP = null;
     }
 
-    public Limit(Number offset, ParamMarker sizeP){
+    public Limit(Number offset, ParamMarker sizeP) {
         if (offset == null) throw new IllegalArgumentException();
         if (sizeP == null) throw new IllegalArgumentException();
         this.offset = offset;
@@ -51,7 +53,7 @@ public class Limit implements ASTNode {
         this.sizeP = sizeP;
     }
 
-    public Limit(ParamMarker offsetP, Number size){
+    public Limit(ParamMarker offsetP, Number size) {
         if (offsetP == null) throw new IllegalArgumentException();
         if (size == null) throw new IllegalArgumentException();
         this.offset = null;
@@ -60,7 +62,7 @@ public class Limit implements ASTNode {
         this.sizeP = null;
     }
 
-    public Limit(ParamMarker offsetP, ParamMarker sizeP){
+    public Limit(ParamMarker offsetP, ParamMarker sizeP) {
         if (offsetP == null) throw new IllegalArgumentException();
         if (sizeP == null) throw new IllegalArgumentException();
         this.offset = null;

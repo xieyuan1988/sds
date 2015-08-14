@@ -18,17 +18,17 @@
  */
 package com.alibaba.cobar.parser.ast.expression.primary.function.misc;
 
-import java.util.List;
-
 import com.alibaba.cobar.parser.ast.expression.Expression;
 import com.alibaba.cobar.parser.ast.expression.primary.function.FunctionExpression;
+
+import java.util.List;
 
 /**
  * @author <a href="mailto:shuo.qius@alibaba-inc.com">QIU Shuo</a>
  */
 public class UuidShort extends FunctionExpression {
 
-    public UuidShort(List<Expression> arguments){
+    public UuidShort(List<Expression> arguments) {
         super("UUID_SHORT", arguments);
     }
 

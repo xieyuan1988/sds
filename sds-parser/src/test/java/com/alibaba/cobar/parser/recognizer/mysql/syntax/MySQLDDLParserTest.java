@@ -18,12 +18,11 @@
  */
 package com.alibaba.cobar.parser.recognizer.mysql.syntax;
 
-import org.junit.Assert;
-
 import com.alibaba.cobar.parser.ast.stmt.ddl.DDLStatement;
 import com.alibaba.cobar.parser.ast.stmt.ddl.DDLTruncateStatement;
 import com.alibaba.cobar.parser.recognizer.mysql.MySQLToken;
 import com.alibaba.cobar.parser.recognizer.mysql.lexer.MySQLLexer;
+import org.junit.Assert;
 
 /**
  * @author <a href="mailto:danping.yudp@alibaba-inc.com">YU Danping</a>

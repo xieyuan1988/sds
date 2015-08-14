@@ -18,17 +18,17 @@
  */
 package com.alibaba.cobar.parser.ast.expression.primary.function.arithmetic;
 
-import java.util.List;
-
 import com.alibaba.cobar.parser.ast.expression.Expression;
 import com.alibaba.cobar.parser.ast.expression.primary.function.FunctionExpression;
+
+import java.util.List;
 
 /**
  * @author <a href="mailto:shuo.qius@alibaba-inc.com">QIU Shuo</a>
  */
 public class Sqrt extends FunctionExpression {
 
-    public Sqrt(List<Expression> arguments){
+    public Sqrt(List<Expression> arguments) {
         super("SQRT", arguments);
     }
 

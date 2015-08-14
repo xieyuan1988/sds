@@ -29,10 +29,10 @@ public class LiteralBitField extends Literal {
     private final String introducer;
 
     /**
-     * @param introducer e.g. "_latin1"
+     * @param introducer   e.g. "_latin1"
      * @param bitFieldText e.g. "01010"
      */
-    public LiteralBitField(String introducer, String bitFieldText){
+    public LiteralBitField(String introducer, String bitFieldText) {
         super();
         if (bitFieldText == null) throw new IllegalArgumentException("bit text is null");
         this.introducer = introducer;

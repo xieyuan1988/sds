@@ -27,11 +27,11 @@ import com.alibaba.cobar.parser.visitor.SQLASTVisitor;
  */
 public class ShowBinLogEvent extends DALShowStatement {
 
-    private final String     logName;
+    private final String logName;
     private final Expression pos;
-    private final Limit      limit;
+    private final Limit limit;
 
-    public ShowBinLogEvent(String logName, Expression pos, Limit limit){
+    public ShowBinLogEvent(String logName, Expression pos, Limit limit) {
         this.logName = logName;
         this.pos = pos;
         this.limit = limit;

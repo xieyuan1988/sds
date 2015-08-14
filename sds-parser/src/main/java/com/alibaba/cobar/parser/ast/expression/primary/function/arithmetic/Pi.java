@@ -18,17 +18,17 @@
  */
 package com.alibaba.cobar.parser.ast.expression.primary.function.arithmetic;
 
-import java.util.List;
-
 import com.alibaba.cobar.parser.ast.expression.Expression;
 import com.alibaba.cobar.parser.ast.expression.primary.function.FunctionExpression;
+
+import java.util.List;
 
 /**
  * @author <a href="mailto:shuo.qius@alibaba-inc.com">QIU Shuo</a>
  */
 public class Pi extends FunctionExpression {
 
-    public Pi(List<Expression> arguments){
+    public Pi(List<Expression> arguments) {
         super("PI", arguments);
     }
 

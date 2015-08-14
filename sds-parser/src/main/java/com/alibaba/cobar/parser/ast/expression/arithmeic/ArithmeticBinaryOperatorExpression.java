@@ -18,20 +18,20 @@
  */
 package com.alibaba.cobar.parser.ast.expression.arithmeic;
 
-import java.util.Map;
-
 import com.alibaba.cobar.parser.ast.expression.BinaryOperatorExpression;
 import com.alibaba.cobar.parser.ast.expression.Expression;
 import com.alibaba.cobar.parser.util.BinaryOperandCalculator;
 import com.alibaba.cobar.parser.util.ExprEvalUtils;
 import com.alibaba.cobar.parser.util.Pair;
 
+import java.util.Map;
+
 /**
  * @author <a href="mailto:shuo.qius@alibaba-inc.com">QIU Shuo</a>
  */
 public abstract class ArithmeticBinaryOperatorExpression extends BinaryOperatorExpression implements BinaryOperandCalculator {
 
-    protected ArithmeticBinaryOperatorExpression(Expression leftOprand, Expression rightOprand, int precedence){
+    protected ArithmeticBinaryOperatorExpression(Expression leftOprand, Expression rightOprand, int precedence) {
         super(leftOprand, rightOprand, precedence, true);
     }
 

@@ -28,7 +28,7 @@ public class SubqueryFactor extends AliasableTableReference {
 
     private final QueryExpression subquery;
 
-    public SubqueryFactor(QueryExpression subquery, String alias){
+    public SubqueryFactor(QueryExpression subquery, String alias) {
         super(alias);
         if (alias == null) throw new IllegalArgumentException("alias is required for subquery factor");
         if (subquery == null) throw new IllegalArgumentException("subquery is null");

@@ -18,31 +18,31 @@
  */
 package com.alibaba.cobar.parser.ast.expression.primary.literal;
 
-import java.io.UnsupportedEncodingException;
-import java.util.Map;
-
 import com.alibaba.cobar.parser.util.ParseString;
 import com.alibaba.cobar.parser.visitor.SQLASTVisitor;
+
+import java.io.UnsupportedEncodingException;
+import java.util.Map;
 
 /**
  * @author <a href="mailto:shuo.qius@alibaba-inc.com">QIU Shuo</a>
  */
 public class LiteralHexadecimal extends Literal {
 
-    private byte[]       bytes;
+    private byte[] bytes;
     private final String introducer;
     private final String charset;
     private final char[] string;
-    private final int    offset;
-    private final int    size;
+    private final int offset;
+    private final int size;
 
     /**
      * @param introducer e.g. "_latin1"
-     * @param string e.g. "select x'89df'"
-     * @param offset e.g. 9
-     * @param size e.g. 4
+     * @param string     e.g. "select x'89df'"
+     * @param offset     e.g. 9
+     * @param size       e.g. 4
      */
-    public LiteralHexadecimal(String introducer, char[] string, int offset, int size, String charset){
+    public LiteralHexadecimal(String introducer, char[] string, int offset, int size, String charset) {
         super();
         if (string == null || offset + size > string.length) throw new IllegalArgumentException("hex text is invalid");
         if (charset == null) throw new IllegalArgumentException("charset is null");

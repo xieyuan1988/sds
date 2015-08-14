@@ -27,9 +27,9 @@ import com.alibaba.cobar.parser.visitor.SQLASTVisitor;
 public class ShowWarnings extends DALShowStatement {
 
     private final boolean count;
-    private final Limit   limit;
+    private final Limit limit;
 
-    public ShowWarnings(boolean count, Limit limit){
+    public ShowWarnings(boolean count, Limit limit) {
         this.count = count;
         this.limit = limit;
     }

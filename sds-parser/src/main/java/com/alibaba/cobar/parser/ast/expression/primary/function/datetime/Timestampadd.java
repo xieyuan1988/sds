@@ -18,12 +18,12 @@
  */
 package com.alibaba.cobar.parser.ast.expression.primary.function.datetime;
 
-import java.util.List;
-
 import com.alibaba.cobar.parser.ast.expression.Expression;
 import com.alibaba.cobar.parser.ast.expression.primary.function.FunctionExpression;
 import com.alibaba.cobar.parser.ast.expression.primary.literal.IntervalPrimary;
 import com.alibaba.cobar.parser.visitor.SQLASTVisitor;
+
+import java.util.List;
 
 /**
  * @author <a href="mailto:shuo.qius@alibaba-inc.com">QIU Shuo</a>
@@ -32,7 +32,7 @@ public class Timestampadd extends FunctionExpression {
 
     private IntervalPrimary.Unit unit;
 
-    public Timestampadd(IntervalPrimary.Unit unit, List<Expression> arguments){
+    public Timestampadd(IntervalPrimary.Unit unit, List<Expression> arguments) {
         super("TIMESTAMPADD", arguments);
         this.unit = unit;
     }

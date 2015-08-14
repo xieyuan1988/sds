@@ -26,20 +26,20 @@ import com.alibaba.cobar.parser.visitor.SQLASTVisitor;
  */
 public class ShowProcedureStatus extends DALShowStatement {
 
-    private final String     pattern;
+    private final String pattern;
     private final Expression where;
 
-    public ShowProcedureStatus(String pattern){
+    public ShowProcedureStatus(String pattern) {
         this.pattern = pattern;
         this.where = null;
     }
 
-    public ShowProcedureStatus(Expression where){
+    public ShowProcedureStatus(Expression where) {
         this.pattern = null;
         this.where = where;
     }
 
-    public ShowProcedureStatus(){
+    public ShowProcedureStatus() {
         this.pattern = null;
         this.where = null;
     }

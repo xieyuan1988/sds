@@ -26,22 +26,22 @@ import com.alibaba.cobar.parser.visitor.SQLASTVisitor;
  */
 public class ShowDatabases extends DALShowStatement {
 
-    private final String     pattern;
+    private final String pattern;
     private final Expression where;
 
-    public ShowDatabases(String pattern){
+    public ShowDatabases(String pattern) {
         super();
         this.pattern = pattern;
         this.where = null;
     }
 
-    public ShowDatabases(Expression where){
+    public ShowDatabases(Expression where) {
         super();
         this.pattern = null;
         this.where = where;
     }
 
-    public ShowDatabases(){
+    public ShowDatabases() {
         super();
         this.pattern = null;
         this.where = null;

@@ -23,20 +23,20 @@ import java.util.Map;
 /**
  * an operator with arity of 3<br/>
  * left conbine in default
- * 
+ *
  * @author <a href="mailto:shuo.qius@alibaba-inc.com">QIU Shuo</a>
  */
 public abstract class BinaryOperatorExpression extends AbstractExpression {
 
     protected final Expression leftOprand;
     protected final Expression rightOprand;
-    protected final int        precedence;
-    protected final boolean    leftCombine;
+    protected final int precedence;
+    protected final boolean leftCombine;
 
     /**
      * {@link #leftCombine} is true
      */
-    protected BinaryOperatorExpression(Expression leftOprand, Expression rightOprand, int precedence){
+    protected BinaryOperatorExpression(Expression leftOprand, Expression rightOprand, int precedence) {
         this.leftOprand = leftOprand;
         this.rightOprand = rightOprand;
         this.precedence = precedence;
@@ -44,7 +44,7 @@ public abstract class BinaryOperatorExpression extends AbstractExpression {
     }
 
     protected BinaryOperatorExpression(Expression leftOprand, Expression rightOprand, int precedence,
-                                       boolean leftCombine){
+                                       boolean leftCombine) {
         this.leftOprand = leftOprand;
         this.rightOprand = rightOprand;
         this.precedence = precedence;

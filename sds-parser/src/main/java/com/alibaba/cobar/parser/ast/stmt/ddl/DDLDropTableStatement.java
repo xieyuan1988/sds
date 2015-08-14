@@ -18,11 +18,11 @@
  */
 package com.alibaba.cobar.parser.ast.stmt.ddl;
 
-import java.util.Collections;
-import java.util.List;
-
 import com.alibaba.cobar.parser.ast.expression.primary.Identifier;
 import com.alibaba.cobar.parser.visitor.SQLASTVisitor;
+
+import java.util.Collections;
+import java.util.List;
 
 /**
  * @author <a href="mailto:shuo.qius@alibaba-inc.com">QIU Shuo</a>
@@ -34,15 +34,15 @@ public class DDLDropTableStatement implements DDLStatement {
     }
 
     private final List<Identifier> tableNames;
-    private final boolean          temp;
-    private final boolean          ifExists;
-    private final Mode             mode;
+    private final boolean temp;
+    private final boolean ifExists;
+    private final Mode mode;
 
-    public DDLDropTableStatement(List<Identifier> tableNames, boolean temp, boolean ifExists){
+    public DDLDropTableStatement(List<Identifier> tableNames, boolean temp, boolean ifExists) {
         this(tableNames, temp, ifExists, Mode.UNDEF);
     }
 
-    public DDLDropTableStatement(List<Identifier> tableNames, boolean temp, boolean ifExists, Mode mode){
+    public DDLDropTableStatement(List<Identifier> tableNames, boolean temp, boolean ifExists, Mode mode) {
         if (tableNames == null || tableNames.isEmpty()) {
             this.tableNames = Collections.emptyList();
         } else {

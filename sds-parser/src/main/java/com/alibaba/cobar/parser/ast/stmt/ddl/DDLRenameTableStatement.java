@@ -18,13 +18,13 @@
  */
 package com.alibaba.cobar.parser.ast.stmt.ddl;
 
-import java.util.Collections;
-import java.util.LinkedList;
-import java.util.List;
-
 import com.alibaba.cobar.parser.ast.expression.primary.Identifier;
 import com.alibaba.cobar.parser.util.Pair;
 import com.alibaba.cobar.parser.visitor.SQLASTVisitor;
+
+import java.util.Collections;
+import java.util.LinkedList;
+import java.util.List;
 
 /**
  * @author <a href="mailto:shuo.qius@alibaba-inc.com">QIU Shuo</a>
@@ -33,11 +33,11 @@ public class DDLRenameTableStatement implements DDLStatement {
 
     private final List<Pair<Identifier, Identifier>> list;
 
-    public DDLRenameTableStatement(){
+    public DDLRenameTableStatement() {
         this.list = new LinkedList<Pair<Identifier, Identifier>>();
     }
 
-    public DDLRenameTableStatement(List<Pair<Identifier, Identifier>> list){
+    public DDLRenameTableStatement(List<Pair<Identifier, Identifier>> list) {
         if (list == null) {
             this.list = Collections.emptyList();
         } else {

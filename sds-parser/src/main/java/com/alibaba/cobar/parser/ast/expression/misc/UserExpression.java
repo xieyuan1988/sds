@@ -31,7 +31,7 @@ public class UserExpression extends PrimaryExpression {
     /**
      * @param userAtHost
      */
-    public UserExpression(String userAtHost){
+    public UserExpression(String userAtHost) {
         super();
         this.userAtHost = userAtHost;
     }

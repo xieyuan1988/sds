@@ -27,12 +27,12 @@ import com.alibaba.cobar.parser.visitor.SQLASTVisitor;
  */
 public class ShowColumns extends DALShowStatement {
 
-    private final boolean    full;
+    private final boolean full;
     private final Identifier table;
-    private final String     pattern;
+    private final String pattern;
     private final Expression where;
 
-    public ShowColumns(boolean full, Identifier table, Identifier database, Expression where){
+    public ShowColumns(boolean full, Identifier table, Identifier database, Expression where) {
         this.full = full;
         this.table = table;
         if (database != null) {
@@ -42,7 +42,7 @@ public class ShowColumns extends DALShowStatement {
         this.where = where;
     }
 
-    public ShowColumns(boolean full, Identifier table, Identifier database, String pattern){
+    public ShowColumns(boolean full, Identifier table, Identifier database, String pattern) {
         this.full = full;
         this.table = table;
         if (database != null) {
@@ -52,7 +52,7 @@ public class ShowColumns extends DALShowStatement {
         this.where = null;
     }
 
-    public ShowColumns(boolean full, Identifier table, Identifier database){
+    public ShowColumns(boolean full, Identifier table, Identifier database) {
         this.full = full;
         this.table = table;
         if (database != null) {

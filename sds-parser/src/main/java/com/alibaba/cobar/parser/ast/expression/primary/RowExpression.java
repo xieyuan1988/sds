@@ -18,12 +18,12 @@
  */
 package com.alibaba.cobar.parser.ast.expression.primary;
 
+import com.alibaba.cobar.parser.ast.expression.Expression;
+import com.alibaba.cobar.parser.visitor.SQLASTVisitor;
+
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
-
-import com.alibaba.cobar.parser.ast.expression.Expression;
-import com.alibaba.cobar.parser.visitor.SQLASTVisitor;
 
 /**
  * @author <a href="mailto:shuo.qius@alibaba-inc.com">QIU Shuo</a>
@@ -32,7 +32,7 @@ public class RowExpression extends PrimaryExpression {
 
     private final List<Expression> rowExprList;
 
-    public RowExpression(List<Expression> rowExprList){
+    public RowExpression(List<Expression> rowExprList) {
         if (rowExprList == null || rowExprList.isEmpty()) {
             this.rowExprList = Collections.emptyList();
         } else if (rowExprList instanceof ArrayList) {

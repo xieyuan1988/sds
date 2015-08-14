@@ -29,7 +29,7 @@ public class ExtDDLDropPolicy implements DDLStatement {
 
     private final Identifier policyName;
 
-    public ExtDDLDropPolicy(Identifier policyName){
+    public ExtDDLDropPolicy(Identifier policyName) {
         this.policyName = policyName;
     }
 

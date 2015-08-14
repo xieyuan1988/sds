@@ -18,37 +18,6 @@
  */
 package com.alibaba.cobar.parser.recognizer.mysql.syntax;
 
-import static com.alibaba.cobar.parser.recognizer.mysql.MySQLToken.IDENTIFIER;
-import static com.alibaba.cobar.parser.recognizer.mysql.MySQLToken.KW_CHARACTER;
-import static com.alibaba.cobar.parser.recognizer.mysql.MySQLToken.KW_COLLATE;
-import static com.alibaba.cobar.parser.recognizer.mysql.MySQLToken.KW_DEFAULT;
-import static com.alibaba.cobar.parser.recognizer.mysql.MySQLToken.KW_DESC;
-import static com.alibaba.cobar.parser.recognizer.mysql.MySQLToken.KW_DESCRIBE;
-import static com.alibaba.cobar.parser.recognizer.mysql.MySQLToken.KW_FOR;
-import static com.alibaba.cobar.parser.recognizer.mysql.MySQLToken.KW_FROM;
-import static com.alibaba.cobar.parser.recognizer.mysql.MySQLToken.KW_IN;
-import static com.alibaba.cobar.parser.recognizer.mysql.MySQLToken.KW_LIKE;
-import static com.alibaba.cobar.parser.recognizer.mysql.MySQLToken.KW_LIMIT;
-import static com.alibaba.cobar.parser.recognizer.mysql.MySQLToken.KW_OPTION;
-import static com.alibaba.cobar.parser.recognizer.mysql.MySQLToken.KW_READ;
-import static com.alibaba.cobar.parser.recognizer.mysql.MySQLToken.KW_SET;
-import static com.alibaba.cobar.parser.recognizer.mysql.MySQLToken.KW_SHOW;
-import static com.alibaba.cobar.parser.recognizer.mysql.MySQLToken.KW_WHERE;
-import static com.alibaba.cobar.parser.recognizer.mysql.MySQLToken.OP_ASSIGN;
-import static com.alibaba.cobar.parser.recognizer.mysql.MySQLToken.OP_ASTERISK;
-import static com.alibaba.cobar.parser.recognizer.mysql.MySQLToken.OP_EQUALS;
-import static com.alibaba.cobar.parser.recognizer.mysql.MySQLToken.PUNC_COMMA;
-import static com.alibaba.cobar.parser.recognizer.mysql.MySQLToken.PUNC_LEFT_PAREN;
-import static com.alibaba.cobar.parser.recognizer.mysql.MySQLToken.PUNC_RIGHT_PAREN;
-
-import java.sql.SQLSyntaxErrorException;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.HashMap;
-import java.util.LinkedList;
-import java.util.List;
-import java.util.Map;
-
 import com.alibaba.cobar.parser.ast.expression.Expression;
 import com.alibaba.cobar.parser.ast.expression.primary.Identifier;
 import com.alibaba.cobar.parser.ast.expression.primary.SysVarPrimary;
@@ -58,48 +27,16 @@ import com.alibaba.cobar.parser.ast.expression.primary.literal.LiteralString;
 import com.alibaba.cobar.parser.ast.fragment.Limit;
 import com.alibaba.cobar.parser.ast.fragment.VariableScope;
 import com.alibaba.cobar.parser.ast.stmt.SQLStatement;
-import com.alibaba.cobar.parser.ast.stmt.dal.DALSetCharacterSetStatement;
-import com.alibaba.cobar.parser.ast.stmt.dal.DALSetNamesStatement;
-import com.alibaba.cobar.parser.ast.stmt.dal.DALSetStatement;
-import com.alibaba.cobar.parser.ast.stmt.dal.DALShowStatement;
-import com.alibaba.cobar.parser.ast.stmt.dal.ShowAuthors;
-import com.alibaba.cobar.parser.ast.stmt.dal.ShowBinLogEvent;
-import com.alibaba.cobar.parser.ast.stmt.dal.ShowBinaryLog;
-import com.alibaba.cobar.parser.ast.stmt.dal.ShowCharaterSet;
-import com.alibaba.cobar.parser.ast.stmt.dal.ShowCollation;
-import com.alibaba.cobar.parser.ast.stmt.dal.ShowColumns;
-import com.alibaba.cobar.parser.ast.stmt.dal.ShowContributors;
-import com.alibaba.cobar.parser.ast.stmt.dal.ShowCreate;
-import com.alibaba.cobar.parser.ast.stmt.dal.ShowDatabases;
-import com.alibaba.cobar.parser.ast.stmt.dal.ShowEngine;
-import com.alibaba.cobar.parser.ast.stmt.dal.ShowEngines;
-import com.alibaba.cobar.parser.ast.stmt.dal.ShowErrors;
-import com.alibaba.cobar.parser.ast.stmt.dal.ShowEvents;
-import com.alibaba.cobar.parser.ast.stmt.dal.ShowFunctionCode;
-import com.alibaba.cobar.parser.ast.stmt.dal.ShowFunctionStatus;
-import com.alibaba.cobar.parser.ast.stmt.dal.ShowGrants;
-import com.alibaba.cobar.parser.ast.stmt.dal.ShowIndex;
-import com.alibaba.cobar.parser.ast.stmt.dal.ShowMasterStatus;
-import com.alibaba.cobar.parser.ast.stmt.dal.ShowOpenTables;
-import com.alibaba.cobar.parser.ast.stmt.dal.ShowPlugins;
-import com.alibaba.cobar.parser.ast.stmt.dal.ShowPrivileges;
-import com.alibaba.cobar.parser.ast.stmt.dal.ShowProcedureCode;
-import com.alibaba.cobar.parser.ast.stmt.dal.ShowProcedureStatus;
-import com.alibaba.cobar.parser.ast.stmt.dal.ShowProcesslist;
-import com.alibaba.cobar.parser.ast.stmt.dal.ShowProfile;
-import com.alibaba.cobar.parser.ast.stmt.dal.ShowProfiles;
-import com.alibaba.cobar.parser.ast.stmt.dal.ShowSlaveHosts;
-import com.alibaba.cobar.parser.ast.stmt.dal.ShowSlaveStatus;
-import com.alibaba.cobar.parser.ast.stmt.dal.ShowStatus;
-import com.alibaba.cobar.parser.ast.stmt.dal.ShowTableStatus;
-import com.alibaba.cobar.parser.ast.stmt.dal.ShowTables;
-import com.alibaba.cobar.parser.ast.stmt.dal.ShowTriggers;
-import com.alibaba.cobar.parser.ast.stmt.dal.ShowVariables;
-import com.alibaba.cobar.parser.ast.stmt.dal.ShowWarnings;
+import com.alibaba.cobar.parser.ast.stmt.dal.*;
 import com.alibaba.cobar.parser.ast.stmt.ddl.DescTableStatement;
 import com.alibaba.cobar.parser.ast.stmt.mts.MTSSetTransactionStatement;
 import com.alibaba.cobar.parser.recognizer.mysql.lexer.MySQLLexer;
 import com.alibaba.cobar.parser.util.Pair;
+
+import java.sql.SQLSyntaxErrorException;
+import java.util.*;
+
+import static com.alibaba.cobar.parser.recognizer.mysql.MySQLToken.*;
 
 /**
  * @author <a href="mailto:shuo.qius@alibaba-inc.com">QIU Shuo</a>
@@ -108,7 +45,7 @@ public class MySQLDALParser extends MySQLParser {
 
     protected MySQLExprParser exprParser;
 
-    public MySQLDALParser(MySQLLexer lexer, MySQLExprParser exprParser){
+    public MySQLDALParser(MySQLLexer lexer, MySQLExprParser exprParser) {
         super(lexer);
         this.exprParser = exprParser;
     }
@@ -122,6 +59,7 @@ public class MySQLDALParser extends MySQLParser {
     }
 
     private static final Map<String, SpecialIdentifier> specialIdentifiers = new HashMap<String, SpecialIdentifier>();
+
     static {
         specialIdentifiers.put("AUTHORS", SpecialIdentifier.AUTHORS);
         specialIdentifiers.put("BINLOG", SpecialIdentifier.BINLOG);
@@ -211,7 +149,8 @@ public class MySQLDALParser extends MySQLParser {
                 }
             case KW_CREATE:
                 ShowCreate.Type showCreateType;
-                switch1: switch (lexer.nextToken()) {
+                switch1:
+                switch (lexer.nextToken()) {
                     case KW_DATABASE:
                         showCreateType = ShowCreate.Type.DATABASE;
                         break;
@@ -692,7 +631,7 @@ public class MySQLDALParser extends MySQLParser {
         } else if (lexer.token() == PUNC_COMMA) {
             types = new LinkedList<ShowProfile.Type>();
             types.add(type);
-            for (; lexer.token() == PUNC_COMMA;) {
+            for (; lexer.token() == PUNC_COMMA; ) {
                 lexer.nextToken();
                 type = showPrifileType();
                 types.add(type);
@@ -760,7 +699,7 @@ public class MySQLDALParser extends MySQLParser {
 
     /**
      * First token is {@link com.alibaba.cobar.parser.recognizer.mysql.syntax.MySQLDALParser.SpecialIdentifier#COLUMNS}
-     * 
+     * <p/>
      * <pre>
      * SHOW [FULL] <code>COLUMNS {FROM | IN} tbl_name [{FROM | IN} db_name] [LIKE 'pattern' | WHERE expr] </code>
      * </pre>
@@ -827,7 +766,7 @@ public class MySQLDALParser extends MySQLParser {
             lexer.nextToken();
         }
         if (lexer.token() == IDENTIFIER
-            && SpecialIdentifier.NAMES == specialIdentifiers.get(lexer.stringValueUppercase())) {
+                && SpecialIdentifier.NAMES == specialIdentifiers.get(lexer.stringValueUppercase())) {
             if (lexer.nextToken() == KW_DEFAULT) {
                 lexer.nextToken();
                 return new DALSetNamesStatement();
@@ -863,7 +802,7 @@ public class MySQLDALParser extends MySQLParser {
         }
         assignmentList = new LinkedList<Pair<VariableExpression, Expression>>();
         assignmentList.add(pair);
-        for (; lexer.token() == PUNC_COMMA;) {
+        for (; lexer.token() == PUNC_COMMA; ) {
             lexer.nextToken();
             pair = (Pair<VariableExpression, Expression>) varAssign();
             assignmentList.add(pair);
@@ -875,7 +814,7 @@ public class MySQLDALParser extends MySQLParser {
      * first token is <code>TRANSACTION</code>
      */
     private MTSSetTransactionStatement setMTSSetTransactionStatement(VariableScope scope)
-                                                                                         throws SQLSyntaxErrorException {
+            throws SQLSyntaxErrorException {
         lexer.nextToken();
         matchIdentifier("ISOLATION");
         matchIdentifier("LEVEL");
@@ -890,13 +829,13 @@ public class MySQLDALParser extends MySQLParser {
                         case COMMITTED:
                             lexer.nextToken();
                             return new MTSSetTransactionStatement(
-                                                                  scope,
-                                                                  MTSSetTransactionStatement.IsolationLevel.READ_COMMITTED);
+                                    scope,
+                                    MTSSetTransactionStatement.IsolationLevel.READ_COMMITTED);
                         case UNCOMMITTED:
                             lexer.nextToken();
                             return new MTSSetTransactionStatement(
-                                                                  scope,
-                                                                  MTSSetTransactionStatement.IsolationLevel.READ_UNCOMMITTED);
+                                    scope,
+                                    MTSSetTransactionStatement.IsolationLevel.READ_UNCOMMITTED);
                     }
                 }
                 throw err("unknown isolation read level: " + lexer.stringValue());
@@ -908,13 +847,13 @@ public class MySQLDALParser extends MySQLParser {
                             lexer.nextToken();
                             match(KW_READ);
                             return new MTSSetTransactionStatement(
-                                                                  scope,
-                                                                  MTSSetTransactionStatement.IsolationLevel.REPEATABLE_READ);
+                                    scope,
+                                    MTSSetTransactionStatement.IsolationLevel.REPEATABLE_READ);
                         case SERIALIZABLE:
                             lexer.nextToken();
                             return new MTSSetTransactionStatement(
-                                                                  scope,
-                                                                  MTSSetTransactionStatement.IsolationLevel.SERIALIZABLE);
+                                    scope,
+                                    MTSSetTransactionStatement.IsolationLevel.SERIALIZABLE);
                     }
                 }
         }
@@ -944,7 +883,7 @@ public class MySQLDALParser extends MySQLParser {
                     }
                 }
                 if (explictScope
-                    && specialIdentifiers.get(lexer.stringValueUppercase()) == SpecialIdentifier.TRANSACTION) {
+                        && specialIdentifiers.get(lexer.stringValueUppercase()) == SpecialIdentifier.TRANSACTION) {
                     return setMTSSetTransactionStatement(scope);
                 }
                 var = new SysVarPrimary(scope, lexer.stringValue(), lexer.stringValueUppercase());

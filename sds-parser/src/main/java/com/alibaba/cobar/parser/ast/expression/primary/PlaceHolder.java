@@ -18,9 +18,9 @@
  */
 package com.alibaba.cobar.parser.ast.expression.primary;
 
-import java.util.Map;
-
 import com.alibaba.cobar.parser.visitor.SQLASTVisitor;
+
+import java.util.Map;
 
 /**
  * @author <a href="mailto:shuo.qius@alibaba-inc.com">QIU Shuo</a>
@@ -30,7 +30,7 @@ public class PlaceHolder extends PrimaryExpression {
     private final String name;
     private final String nameUp;
 
-    public PlaceHolder(String name, String nameUp){
+    public PlaceHolder(String name, String nameUp) {
         this.name = name;
         this.nameUp = nameUp;
     }

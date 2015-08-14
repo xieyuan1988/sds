@@ -25,15 +25,15 @@ import com.alibaba.cobar.parser.visitor.SQLASTVisitor;
  */
 public class NaturalJoin implements TableReference {
 
-    private final boolean        isOuter;
+    private final boolean isOuter;
     /**
      * make sense only if {@link #isOuter} is true. Eigher <code>LEFT</code> or <code>RIGHT</code>
      */
-    private final boolean        isLeft;
+    private final boolean isLeft;
     private final TableReference leftTableRef;
     private final TableReference rightTableRef;
 
-    public NaturalJoin(boolean isOuter, boolean isLeft, TableReference leftTableRef, TableReference rightTableRef){
+    public NaturalJoin(boolean isOuter, boolean isLeft, TableReference leftTableRef, TableReference rightTableRef) {
         super();
         this.isOuter = isOuter;
         this.isLeft = isLeft;

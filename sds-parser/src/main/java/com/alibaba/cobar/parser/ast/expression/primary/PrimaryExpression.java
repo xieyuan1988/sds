@@ -18,9 +18,9 @@
  */
 package com.alibaba.cobar.parser.ast.expression.primary;
 
-import java.util.Map;
-
 import com.alibaba.cobar.parser.ast.expression.AbstractExpression;
+
+import java.util.Map;
 
 /**
  * @author <a href="mailto:shuo.qius@alibaba-inc.com">QIU Shuo</a>

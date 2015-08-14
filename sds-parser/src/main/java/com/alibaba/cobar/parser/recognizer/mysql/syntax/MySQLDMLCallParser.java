@@ -18,27 +18,24 @@
  */
 package com.alibaba.cobar.parser.recognizer.mysql.syntax;
 
-import static com.alibaba.cobar.parser.recognizer.mysql.MySQLToken.KW_CALL;
-import static com.alibaba.cobar.parser.recognizer.mysql.MySQLToken.PUNC_COMMA;
-import static com.alibaba.cobar.parser.recognizer.mysql.MySQLToken.PUNC_LEFT_PAREN;
-import static com.alibaba.cobar.parser.recognizer.mysql.MySQLToken.PUNC_RIGHT_PAREN;
+import com.alibaba.cobar.parser.ast.expression.Expression;
+import com.alibaba.cobar.parser.ast.expression.primary.Identifier;
+import com.alibaba.cobar.parser.ast.stmt.dml.DMLCallStatement;
+import com.alibaba.cobar.parser.recognizer.mysql.lexer.MySQLLexer;
 
 import java.sql.SQLSyntaxErrorException;
 import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 
-import com.alibaba.cobar.parser.ast.expression.Expression;
-import com.alibaba.cobar.parser.ast.expression.primary.Identifier;
-import com.alibaba.cobar.parser.ast.stmt.dml.DMLCallStatement;
-import com.alibaba.cobar.parser.recognizer.mysql.lexer.MySQLLexer;
+import static com.alibaba.cobar.parser.recognizer.mysql.MySQLToken.*;
 
 /**
  * @author <a href="mailto:shuo.qius@alibaba-inc.com">QIU Shuo</a>
  */
 public class MySQLDMLCallParser extends MySQLDMLParser {
 
-    public MySQLDMLCallParser(MySQLLexer lexer, MySQLExprParser exprParser){
+    public MySQLDMLCallParser(MySQLLexer lexer, MySQLExprParser exprParser) {
         super(lexer, exprParser);
     }
 
@@ -56,7 +53,7 @@ public class MySQLDMLCallParser extends MySQLDMLParser {
             case PUNC_COMMA:
                 arguments = new LinkedList<Expression>();
                 arguments.add(expr);
-                for (; lexer.token() == PUNC_COMMA;) {
+                for (; lexer.token() == PUNC_COMMA; ) {
                     lexer.nextToken();
                     expr = exprParser.expression();
                     arguments.add(expr);

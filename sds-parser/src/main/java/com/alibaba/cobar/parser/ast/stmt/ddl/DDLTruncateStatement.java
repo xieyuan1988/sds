@@ -28,7 +28,7 @@ public class DDLTruncateStatement implements DDLStatement {
 
     private final Identifier table;
 
-    public DDLTruncateStatement(Identifier table){
+    public DDLTruncateStatement(Identifier table) {
         this.table = table;
     }
 

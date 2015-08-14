@@ -33,33 +33,33 @@ public class IndexOption implements ASTNode {
         BTREE, HASH
     }
 
-    private final Expression    keyBlockSize;
-    private final IndexType     indexType;
-    private final Identifier    parserName;
+    private final Expression keyBlockSize;
+    private final IndexType indexType;
+    private final Identifier parserName;
     private final LiteralString comment;
 
-    public IndexOption(Expression keyBlockSize){
+    public IndexOption(Expression keyBlockSize) {
         this.keyBlockSize = keyBlockSize;
         this.indexType = null;
         this.parserName = null;
         this.comment = null;
     }
 
-    public IndexOption(IndexType indexType){
+    public IndexOption(IndexType indexType) {
         this.keyBlockSize = null;
         this.indexType = indexType;
         this.parserName = null;
         this.comment = null;
     }
 
-    public IndexOption(Identifier parserName){
+    public IndexOption(Identifier parserName) {
         this.keyBlockSize = null;
         this.indexType = null;
         this.parserName = parserName;
         this.comment = null;
     }
 
-    public IndexOption(LiteralString comment){
+    public IndexOption(LiteralString comment) {
         this.keyBlockSize = null;
         this.indexType = null;
         this.parserName = null;

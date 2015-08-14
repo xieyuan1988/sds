@@ -18,20 +18,20 @@
  */
 package com.alibaba.cobar.parser.ast.expression.primary.literal;
 
-import java.util.Map;
-
 import com.alibaba.cobar.parser.visitor.SQLASTVisitor;
+
+import java.util.Map;
 
 /**
  * literal date is also possible
- * 
+ *
  * @author <a href="mailto:shuo.qius@alibaba-inc.com">QIU Shuo</a>
  */
 public class LiteralNumber extends Literal {
 
     private final Number number;
 
-    public LiteralNumber(Number number){
+    public LiteralNumber(Number number) {
         super();
         if (number == null) throw new IllegalArgumentException("number is null!");
         this.number = number;

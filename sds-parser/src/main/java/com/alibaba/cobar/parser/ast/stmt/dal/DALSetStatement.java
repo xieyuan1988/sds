@@ -18,15 +18,15 @@
  */
 package com.alibaba.cobar.parser.ast.stmt.dal;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
-
 import com.alibaba.cobar.parser.ast.expression.Expression;
 import com.alibaba.cobar.parser.ast.expression.primary.VariableExpression;
 import com.alibaba.cobar.parser.ast.stmt.SQLStatement;
 import com.alibaba.cobar.parser.util.Pair;
 import com.alibaba.cobar.parser.visitor.SQLASTVisitor;
+
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
 
 /**
  * @author <a href="mailto:shuo.qius@alibaba-inc.com">QIU Shuo</a>
@@ -35,7 +35,7 @@ public class DALSetStatement implements SQLStatement {
 
     private final List<Pair<VariableExpression, Expression>> assignmentList;
 
-    public DALSetStatement(List<Pair<VariableExpression, Expression>> assignmentList){
+    public DALSetStatement(List<Pair<VariableExpression, Expression>> assignmentList) {
         if (assignmentList == null || assignmentList.isEmpty()) {
             this.assignmentList = Collections.emptyList();
         } else if (assignmentList instanceof ArrayList) {

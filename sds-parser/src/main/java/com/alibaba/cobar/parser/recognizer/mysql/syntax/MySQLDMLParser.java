@@ -18,20 +18,18 @@
  */
 package com.alibaba.cobar.parser.recognizer.mysql.syntax;
 
-import static com.alibaba.cobar.parser.recognizer.mysql.MySQLToken.IDENTIFIER;
-import static com.alibaba.cobar.parser.recognizer.mysql.MySQLToken.KW_AS;
-import static com.alibaba.cobar.parser.recognizer.mysql.MySQLToken.KW_BY;
-import static com.alibaba.cobar.parser.recognizer.mysql.MySQLToken.KW_FOR;
-import static com.alibaba.cobar.parser.recognizer.mysql.MySQLToken.KW_GROUP;
-import static com.alibaba.cobar.parser.recognizer.mysql.MySQLToken.KW_JOIN;
-import static com.alibaba.cobar.parser.recognizer.mysql.MySQLToken.KW_ORDER;
-import static com.alibaba.cobar.parser.recognizer.mysql.MySQLToken.KW_OUTER;
-import static com.alibaba.cobar.parser.recognizer.mysql.MySQLToken.KW_UNION;
-import static com.alibaba.cobar.parser.recognizer.mysql.MySQLToken.KW_WITH;
-import static com.alibaba.cobar.parser.recognizer.mysql.MySQLToken.LITERAL_CHARS;
-import static com.alibaba.cobar.parser.recognizer.mysql.MySQLToken.PUNC_COMMA;
-import static com.alibaba.cobar.parser.recognizer.mysql.MySQLToken.PUNC_LEFT_PAREN;
-import static com.alibaba.cobar.parser.recognizer.mysql.MySQLToken.PUNC_RIGHT_PAREN;
+import com.alibaba.cobar.parser.ast.expression.Expression;
+import com.alibaba.cobar.parser.ast.expression.misc.QueryExpression;
+import com.alibaba.cobar.parser.ast.expression.primary.Identifier;
+import com.alibaba.cobar.parser.ast.fragment.GroupBy;
+import com.alibaba.cobar.parser.ast.fragment.OrderBy;
+import com.alibaba.cobar.parser.ast.fragment.SortOrder;
+import com.alibaba.cobar.parser.ast.fragment.tableref.*;
+import com.alibaba.cobar.parser.ast.stmt.dml.DMLQueryStatement;
+import com.alibaba.cobar.parser.ast.stmt.dml.DMLSelectStatement;
+import com.alibaba.cobar.parser.ast.stmt.dml.DMLSelectUnionStatement;
+import com.alibaba.cobar.parser.recognizer.mysql.MySQLToken;
+import com.alibaba.cobar.parser.recognizer.mysql.lexer.MySQLLexer;
 
 import java.sql.SQLSyntaxErrorException;
 import java.util.ArrayList;
@@ -39,26 +37,7 @@ import java.util.Collections;
 import java.util.LinkedList;
 import java.util.List;
 
-import com.alibaba.cobar.parser.ast.expression.Expression;
-import com.alibaba.cobar.parser.ast.expression.misc.QueryExpression;
-import com.alibaba.cobar.parser.ast.expression.primary.Identifier;
-import com.alibaba.cobar.parser.ast.fragment.GroupBy;
-import com.alibaba.cobar.parser.ast.fragment.OrderBy;
-import com.alibaba.cobar.parser.ast.fragment.SortOrder;
-import com.alibaba.cobar.parser.ast.fragment.tableref.IndexHint;
-import com.alibaba.cobar.parser.ast.fragment.tableref.InnerJoin;
-import com.alibaba.cobar.parser.ast.fragment.tableref.NaturalJoin;
-import com.alibaba.cobar.parser.ast.fragment.tableref.OuterJoin;
-import com.alibaba.cobar.parser.ast.fragment.tableref.StraightJoin;
-import com.alibaba.cobar.parser.ast.fragment.tableref.SubqueryFactor;
-import com.alibaba.cobar.parser.ast.fragment.tableref.TableRefFactor;
-import com.alibaba.cobar.parser.ast.fragment.tableref.TableReference;
-import com.alibaba.cobar.parser.ast.fragment.tableref.TableReferences;
-import com.alibaba.cobar.parser.ast.stmt.dml.DMLQueryStatement;
-import com.alibaba.cobar.parser.ast.stmt.dml.DMLSelectStatement;
-import com.alibaba.cobar.parser.ast.stmt.dml.DMLSelectUnionStatement;
-import com.alibaba.cobar.parser.recognizer.mysql.MySQLToken;
-import com.alibaba.cobar.parser.recognizer.mysql.lexer.MySQLLexer;
+import static com.alibaba.cobar.parser.recognizer.mysql.MySQLToken.*;
 
 /**
  * @author <a href="mailto:shuo.qius@alibaba-inc.com">QIU Shuo</a>
@@ -67,14 +46,14 @@ public abstract class MySQLDMLParser extends MySQLParser {
 
     protected MySQLExprParser exprParser;
 
-    public MySQLDMLParser(MySQLLexer lexer, MySQLExprParser exprParser){
+    public MySQLDMLParser(MySQLLexer lexer, MySQLExprParser exprParser) {
         super(lexer);
         this.exprParser = exprParser;
     }
 
     /**
      * nothing has been pre-consumed
-     * 
+     *
      * @return null if there is no order by
      */
     protected GroupBy groupBy() throws SQLSyntaxErrorException {
@@ -104,7 +83,7 @@ public abstract class MySQLDMLParser extends MySQLParser {
             default:
                 return new GroupBy(expr, order, false);
         }
-        for (groupBy = new GroupBy().addOrderByItem(expr, order); lexer.token() == PUNC_COMMA;) {
+        for (groupBy = new GroupBy().addOrderByItem(expr, order); lexer.token() == PUNC_COMMA; ) {
             lexer.nextToken();
             order = SortOrder.ASC;
             expr = exprParser.expression();
@@ -128,7 +107,7 @@ public abstract class MySQLDMLParser extends MySQLParser {
 
     /**
      * nothing has been pre-consumed
-     * 
+     *
      * @return null if there is no order by
      */
     protected OrderBy orderBy() throws SQLSyntaxErrorException {
@@ -154,7 +133,7 @@ public abstract class MySQLDMLParser extends MySQLParser {
             default:
                 return new OrderBy(expr, order);
         }
-        for (; lexer.token() == PUNC_COMMA;) {
+        for (; lexer.token() == PUNC_COMMA; ) {
             lexer.nextToken();
             order = SortOrder.ASC;
             expr = exprParser.expression();
@@ -180,7 +159,7 @@ public abstract class MySQLDMLParser extends MySQLParser {
         }
         List<Identifier> list = new LinkedList<Identifier>();
         list.add(id);
-        for (; lexer.token() == PUNC_COMMA;) {
+        for (; lexer.token() == PUNC_COMMA; ) {
             lexer.nextToken();
             id = identifier();
             list.add(id);
@@ -190,7 +169,7 @@ public abstract class MySQLDMLParser extends MySQLParser {
 
     /**
      * <code>(id (',' id)*)?</code>
-     * 
+     *
      * @return never null or empty. {@link java.util.LinkedList} is possible
      */
     protected List<Identifier> idList() throws SQLSyntaxErrorException {
@@ -199,7 +178,7 @@ public abstract class MySQLDMLParser extends MySQLParser {
 
     /**
      * <code>( idName (',' idName)*)? ')'</code>
-     * 
+     *
      * @return empty list if emtpy id list
      */
     protected List<String> idNameList() throws SQLSyntaxErrorException {
@@ -212,7 +191,7 @@ public abstract class MySQLDMLParser extends MySQLParser {
         if (lexer.nextToken() == PUNC_COMMA) {
             list = new LinkedList<String>();
             list.add(str);
-            for (; lexer.token() == PUNC_COMMA;) {
+            for (; lexer.token() == PUNC_COMMA; ) {
                 lexer.nextToken();
                 list.add(lexer.stringValue());
                 match(IDENTIFIER);
@@ -238,7 +217,7 @@ public abstract class MySQLDMLParser extends MySQLParser {
         if (lexer.token() == PUNC_COMMA) {
             list = new LinkedList<TableReference>();
             list.add(ref);
-            for (; lexer.token() == PUNC_COMMA;) {
+            for (; lexer.token() == PUNC_COMMA; ) {
                 lexer.nextToken();
                 ref = tableReference();
                 list.add(ref);
@@ -257,7 +236,7 @@ public abstract class MySQLDMLParser extends MySQLParser {
 
     @SuppressWarnings("unchecked")
     private TableReference buildTableReference(TableReference ref) throws SQLSyntaxErrorException {
-        for (;;) {
+        for (; ; ) {
             Expression on;
             List<String> using;
             TableReference temp;
@@ -444,7 +423,7 @@ public abstract class MySQLDMLParser extends MySQLParser {
         if (lexer.token() == PUNC_COMMA) {
             list = new LinkedList<TableReference>();
             list.add((TableReference) ref);
-            for (; lexer.token() == PUNC_COMMA;) {
+            for (; lexer.token() == PUNC_COMMA; ) {
                 lexer.nextToken();
                 ref = tableReference();
                 list.add((TableReference) ref);
@@ -541,7 +520,7 @@ public abstract class MySQLDMLParser extends MySQLParser {
             return select;
         }
         DMLSelectUnionStatement union = new DMLSelectUnionStatement(select);
-        for (; lexer.token() == KW_UNION;) {
+        for (; lexer.token() == KW_UNION; ) {
             lexer.nextToken();
             boolean isAll = false;
             switch (lexer.token()) {

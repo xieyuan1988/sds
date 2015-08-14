@@ -18,17 +18,17 @@
  */
 package com.alibaba.cobar.parser.ast.expression.primary.function.misc;
 
-import java.util.List;
-
 import com.alibaba.cobar.parser.ast.expression.Expression;
 import com.alibaba.cobar.parser.ast.expression.primary.function.FunctionExpression;
+
+import java.util.List;
 
 /**
  * @author <a href="mailto:shuo.qius@alibaba-inc.com">QIU Shuo</a>
  */
 public class InetNtoa extends FunctionExpression {
 
-    public InetNtoa(List<Expression> arguments){
+    public InetNtoa(List<Expression> arguments) {
         super("INET_NTOA", arguments);
     }
 

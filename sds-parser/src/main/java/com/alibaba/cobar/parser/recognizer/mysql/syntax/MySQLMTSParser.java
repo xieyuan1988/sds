@@ -19,18 +19,18 @@
  */
 package com.alibaba.cobar.parser.recognizer.mysql.syntax;
 
-import static com.alibaba.cobar.parser.recognizer.mysql.MySQLToken.EOF;
-import static com.alibaba.cobar.parser.recognizer.mysql.MySQLToken.KW_RELEASE;
-
-import java.sql.SQLSyntaxErrorException;
-import java.util.HashMap;
-import java.util.Map;
-
 import com.alibaba.cobar.parser.ast.expression.primary.Identifier;
 import com.alibaba.cobar.parser.ast.stmt.mts.MTSReleaseStatement;
 import com.alibaba.cobar.parser.ast.stmt.mts.MTSRollbackStatement;
 import com.alibaba.cobar.parser.ast.stmt.mts.MTSSavepointStatement;
 import com.alibaba.cobar.parser.recognizer.mysql.lexer.MySQLLexer;
+
+import java.sql.SQLSyntaxErrorException;
+import java.util.HashMap;
+import java.util.Map;
+
+import static com.alibaba.cobar.parser.recognizer.mysql.MySQLToken.EOF;
+import static com.alibaba.cobar.parser.recognizer.mysql.MySQLToken.KW_RELEASE;
 
 /**
  * @author <a href="mailto:shuo.qius@alibaba-inc.com">QIU Shuo</a>
@@ -42,6 +42,7 @@ public class MySQLMTSParser extends MySQLParser {
     }
 
     private static final Map<String, SpecialIdentifier> specialIdentifiers = new HashMap<String, SpecialIdentifier>();
+
     static {
         specialIdentifiers.put("SAVEPOINT", SpecialIdentifier.SAVEPOINT);
         specialIdentifiers.put("WORK", SpecialIdentifier.WORK);
@@ -50,7 +51,7 @@ public class MySQLMTSParser extends MySQLParser {
         specialIdentifiers.put("NO", SpecialIdentifier.NO);
     }
 
-    public MySQLMTSParser(MySQLLexer lexer){
+    public MySQLMTSParser(MySQLLexer lexer) {
         super(lexer);
     }
 
@@ -78,7 +79,7 @@ public class MySQLMTSParser extends MySQLParser {
 
     /**
      * first token <code>ROLLBACK</code> is scanned but not yet consumed
-     * 
+     * <p/>
      * <pre>
      *         ROLLBACK [WORK] TO [SAVEPOINT] identifier
      *         ROLLBACK [WORK] [AND [NO] CHAIN | [NO] RELEASE]

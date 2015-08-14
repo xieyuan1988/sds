@@ -15,9 +15,9 @@
  */
 /**
  * Project: fastjson
- * 
+ *
  * File Created at 2010-12-2
- * 
+ *
  * Copyright 1999-2100 Alibaba.com Corporation Limited.
  * All rights reserved.
  *
@@ -29,21 +29,21 @@
  */
 package com.alibaba.cobar.parser.recognizer.mysql.lexer;
 
+import com.alibaba.cobar.parser.recognizer.mysql.MySQLToken;
+
 import java.util.HashMap;
 import java.util.Map;
-
-import com.alibaba.cobar.parser.recognizer.mysql.MySQLToken;
 
 /**
  * @author <a href="mailto:shuo.qius@alibaba-inc.com">QIU Shuo</a>
  */
 class MySQLKeywords {
 
-    public static final MySQLKeywords     DEFAULT_KEYWORDS = new MySQLKeywords();
+    public static final MySQLKeywords DEFAULT_KEYWORDS = new MySQLKeywords();
 
-    private final Map<String, MySQLToken> keywords         = new HashMap<String, MySQLToken>(230);
+    private final Map<String, MySQLToken> keywords = new HashMap<String, MySQLToken>(230);
 
-    private MySQLKeywords(){
+    private MySQLKeywords() {
         for (MySQLToken type : MySQLToken.class.getEnumConstants()) {
             String name = type.name();
             if (name.startsWith("KW_")) {

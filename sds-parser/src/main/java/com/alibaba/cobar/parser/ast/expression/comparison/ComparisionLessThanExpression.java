@@ -24,12 +24,12 @@ import com.alibaba.cobar.parser.visitor.SQLASTVisitor;
 
 /**
  * <code>higherPreExpr '&lt;' higherPreExpr</code>
- * 
+ *
  * @author <a href="mailto:shuo.qius@alibaba-inc.com">QIU Shuo</a>
  */
 public class ComparisionLessThanExpression extends BinaryOperatorExpression {
 
-    public ComparisionLessThanExpression(Expression leftOprand, Expression rightOprand){
+    public ComparisionLessThanExpression(Expression leftOprand, Expression rightOprand) {
         super(leftOprand, rightOprand, PRECEDENCE_COMPARISION);
     }
 

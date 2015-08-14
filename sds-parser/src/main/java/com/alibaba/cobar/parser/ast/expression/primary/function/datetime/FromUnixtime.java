@@ -18,17 +18,17 @@
  */
 package com.alibaba.cobar.parser.ast.expression.primary.function.datetime;
 
-import java.util.List;
-
 import com.alibaba.cobar.parser.ast.expression.Expression;
 import com.alibaba.cobar.parser.ast.expression.primary.function.FunctionExpression;
+
+import java.util.List;
 
 /**
  * @author <a href="mailto:shuo.qius@alibaba-inc.com">QIU Shuo</a>
  */
 public class FromUnixtime extends FunctionExpression {
 
-    public FromUnixtime(List<Expression> arguments){
+    public FromUnixtime(List<Expression> arguments) {
         super("FROM_UNIXTIME", arguments);
     }
 

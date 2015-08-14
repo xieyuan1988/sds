@@ -18,20 +18,20 @@
  */
 package com.alibaba.cobar.parser.ast.expression.primary.literal;
 
-import java.util.Map;
-
 import com.alibaba.cobar.parser.visitor.SQLASTVisitor;
+
+import java.util.Map;
 
 /**
  * @author <a href="mailto:shuo.qius@alibaba-inc.com">QIU Shuo</a>
  */
 public class LiteralBoolean extends Literal {
 
-    public static final Integer TRUE  = new Integer(1);
+    public static final Integer TRUE = new Integer(1);
     public static final Integer FALSE = new Integer(0);
-    private final boolean       value;
+    private final boolean value;
 
-    public LiteralBoolean(boolean value){
+    public LiteralBoolean(boolean value) {
         super();
         this.value = value;
     }

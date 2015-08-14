@@ -18,20 +18,20 @@
  */
 package com.alibaba.cobar.parser.ast.expression.arithmeic;
 
-import java.math.BigDecimal;
-import java.math.BigInteger;
-
 import com.alibaba.cobar.parser.ast.expression.Expression;
 import com.alibaba.cobar.parser.visitor.SQLASTVisitor;
 
+import java.math.BigDecimal;
+import java.math.BigInteger;
+
 /**
  * <code>higherExpr '-' higherExpr</code>
- * 
+ *
  * @author <a href="mailto:shuo.qius@alibaba-inc.com">QIU Shuo</a>
  */
 public class ArithmeticSubtractExpression extends ArithmeticBinaryOperatorExpression {
 
-    public ArithmeticSubtractExpression(Expression leftOprand, Expression rightOprand){
+    public ArithmeticSubtractExpression(Expression leftOprand, Expression rightOprand) {
         super(leftOprand, rightOprand, PRECEDENCE_ARITHMETIC_TERM_OP);
     }
 

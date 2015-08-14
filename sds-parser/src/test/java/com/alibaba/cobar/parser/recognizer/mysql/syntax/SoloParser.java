@@ -18,32 +18,26 @@
  */
 package com.alibaba.cobar.parser.recognizer.mysql.syntax;
 
-import static com.alibaba.cobar.parser.recognizer.mysql.MySQLToken.KW_AS;
-import static com.alibaba.cobar.parser.recognizer.mysql.MySQLToken.KW_JOIN;
-import static com.alibaba.cobar.parser.recognizer.mysql.MySQLToken.KW_SELECT;
-import static com.alibaba.cobar.parser.recognizer.mysql.MySQLToken.KW_UNION;
-import static com.alibaba.cobar.parser.recognizer.mysql.MySQLToken.PUNC_COMMA;
-import static com.alibaba.cobar.parser.recognizer.mysql.MySQLToken.PUNC_LEFT_PAREN;
-import static com.alibaba.cobar.parser.recognizer.mysql.MySQLToken.PUNC_RIGHT_PAREN;
+import com.alibaba.cobar.parser.recognizer.mysql.lexer.MySQLLexer;
 
 import java.sql.SQLSyntaxErrorException;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.alibaba.cobar.parser.recognizer.mysql.lexer.MySQLLexer;
+import static com.alibaba.cobar.parser.recognizer.mysql.MySQLToken.*;
 
 /**
  * @author <a href="mailto:shuo.qius@alibaba-inc.com">QIU Shuo</a>
  */
 public class SoloParser extends MySQLParser {
 
-    public SoloParser(MySQLLexer lexer){
+    public SoloParser(MySQLLexer lexer) {
         super(lexer);
     }
 
     public Refs refs() throws SQLSyntaxErrorException {
         Refs refs = new Refs();
-        for (;;) {
+        for (; ; ) {
             Ref ref = ref();
             refs.addRef(ref);
             if (lexer.token() == PUNC_COMMA) {
@@ -55,7 +49,7 @@ public class SoloParser extends MySQLParser {
     }
 
     public Ref buildRef(Ref first) throws SQLSyntaxErrorException {
-        for (; lexer.token() == KW_JOIN;) {
+        for (; lexer.token() == KW_JOIN; ) {
             lexer.nextToken();
             Ref temp = factor();
             first = new Join(first, temp);
@@ -102,7 +96,7 @@ public class SoloParser extends MySQLParser {
         switch (lexer.token()) {
             case KW_SELECT:
                 u = new Union();
-                for (;;) {
+                for (; ; ) {
                     Select s = selectPrimary();
                     u.addSelect(s);
                     if (lexer.token() == KW_UNION) {
@@ -153,7 +147,7 @@ public class SoloParser extends MySQLParser {
         if (lexer.token() == PUNC_COMMA) {
             rst = new Refs();
             rst.addRef(temp);
-            for (; lexer.token() == PUNC_COMMA;) {
+            for (; lexer.token() == PUNC_COMMA; ) {
                 lexer.nextToken();
                 temp = ref();
                 rst.addRef(temp);
@@ -200,7 +194,7 @@ class Factor implements Ref {
     String tableName;
     String alias;
 
-    public Factor(String tableName, String alias){
+    public Factor(String tableName, String alias) {
         super();
         this.tableName = tableName;
         this.alias = alias;
@@ -218,10 +212,10 @@ class Factor implements Ref {
 
 class SubQuery implements Ref {
 
-    Query  u;
+    Query u;
     String alias;
 
-    public SubQuery(Query u, String alias){
+    public SubQuery(Query u, String alias) {
         super();
         this.u = u;
         this.alias = alias;
@@ -244,7 +238,7 @@ class Join implements Ref {
     Ref left;
     Ref right;
 
-    public Join(Ref left, Ref right){
+    public Join(Ref left, Ref right) {
         super();
         this.left = left;
         this.right = right;

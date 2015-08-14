@@ -18,13 +18,12 @@
  */
 package com.alibaba.cobar.parser.recognizer.mysql.syntax;
 
-import java.sql.SQLSyntaxErrorException;
-
-import org.junit.Assert;
-
 import com.alibaba.cobar.parser.ast.stmt.dml.DMLReplaceStatement;
 import com.alibaba.cobar.parser.recognizer.mysql.MySQLToken;
 import com.alibaba.cobar.parser.recognizer.mysql.lexer.MySQLLexer;
+import org.junit.Assert;
+
+import java.sql.SQLSyntaxErrorException;
 
 /**
  * @author <a href="mailto:shuo.qius@alibaba-inc.com">QIU Shuo</a>

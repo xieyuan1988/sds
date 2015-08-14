@@ -31,10 +31,10 @@ public class MTSSetTransactionStatement implements SQLStatement {
         READ_UNCOMMITTED, READ_COMMITTED, REPEATABLE_READ, SERIALIZABLE
     }
 
-    private final VariableScope  scope;
+    private final VariableScope scope;
     private final IsolationLevel level;
 
-    public MTSSetTransactionStatement(VariableScope scope, IsolationLevel level){
+    public MTSSetTransactionStatement(VariableScope scope, IsolationLevel level) {
         super();
         if (level == null) throw new IllegalArgumentException("isolation level is null");
         this.level = level;

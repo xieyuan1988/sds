@@ -28,22 +28,22 @@ import com.alibaba.cobar.parser.visitor.SQLASTVisitor;
 public class ShowVariables extends DALShowStatement {
 
     private final VariableScope scope;
-    private final String        pattern;
-    private final Expression    where;
+    private final String pattern;
+    private final Expression where;
 
-    public ShowVariables(VariableScope scope, String pattern){
+    public ShowVariables(VariableScope scope, String pattern) {
         this.scope = scope;
         this.pattern = pattern;
         this.where = null;
     }
 
-    public ShowVariables(VariableScope scope, Expression where){
+    public ShowVariables(VariableScope scope, Expression where) {
         this.scope = scope;
         this.pattern = null;
         this.where = where;
     }
 
-    public ShowVariables(VariableScope scope){
+    public ShowVariables(VariableScope scope) {
         this.scope = scope;
         this.pattern = null;
         this.where = null;

@@ -18,10 +18,6 @@
  */
 package com.alibaba.cobar.parser.ast.stmt.dml;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
-
 import com.alibaba.cobar.parser.ast.expression.Expression;
 import com.alibaba.cobar.parser.ast.expression.primary.Identifier;
 import com.alibaba.cobar.parser.ast.fragment.Limit;
@@ -30,21 +26,25 @@ import com.alibaba.cobar.parser.ast.fragment.tableref.TableReferences;
 import com.alibaba.cobar.parser.util.Pair;
 import com.alibaba.cobar.parser.visitor.SQLASTVisitor;
 
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
+
 /**
  * @author <a href="mailto:shuo.qius@alibaba-inc.com">QIU Shuo</a>
  */
 public class DMLUpdateStatement extends DMLStatement {
 
-    private final boolean                            lowPriority;
-    private final boolean                            ignore;
-    private final TableReferences                    tableRefs;
+    private final boolean lowPriority;
+    private final boolean ignore;
+    private final TableReferences tableRefs;
     private final List<Pair<Identifier, Expression>> values;
-    private final Expression                         where;
-    private final OrderBy                            orderBy;
-    private final Limit                              limit;
+    private final Expression where;
+    private final OrderBy orderBy;
+    private final Limit limit;
 
     public DMLUpdateStatement(boolean lowPriority, boolean ignore, TableReferences tableRefs,
-                              List<Pair<Identifier, Expression>> values, Expression where, OrderBy orderBy, Limit limit){
+                              List<Pair<Identifier, Expression>> values, Expression where, OrderBy orderBy, Limit limit) {
         this.lowPriority = lowPriority;
         this.ignore = ignore;
         if (tableRefs == null) throw new IllegalArgumentException("argument tableRefs is null for update stmt");

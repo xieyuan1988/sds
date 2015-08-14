@@ -28,7 +28,7 @@ public class ShowProcedureCode extends DALShowStatement {
 
     private final Identifier procedureName;
 
-    public ShowProcedureCode(Identifier procedureName){
+    public ShowProcedureCode(Identifier procedureName) {
         this.procedureName = procedureName;
     }
 

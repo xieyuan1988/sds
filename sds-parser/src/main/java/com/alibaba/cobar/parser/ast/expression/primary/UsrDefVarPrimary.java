@@ -25,10 +25,12 @@ import com.alibaba.cobar.parser.visitor.SQLASTVisitor;
  */
 public class UsrDefVarPrimary extends VariableExpression {
 
-    /** include starting '@', e.g. "@'mary''s'" */
+    /**
+     * include starting '@', e.g. "@'mary''s'"
+     */
     private final String varText;
 
-    public UsrDefVarPrimary(String varText){
+    public UsrDefVarPrimary(String varText) {
         this.varText = varText;
     }
 

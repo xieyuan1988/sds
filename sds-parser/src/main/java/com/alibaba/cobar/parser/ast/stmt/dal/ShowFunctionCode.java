@@ -28,7 +28,7 @@ public class ShowFunctionCode extends DALShowStatement {
 
     private final Identifier functionName;
 
-    public ShowFunctionCode(Identifier functionName){
+    public ShowFunctionCode(Identifier functionName) {
         this.functionName = functionName;
     }
 

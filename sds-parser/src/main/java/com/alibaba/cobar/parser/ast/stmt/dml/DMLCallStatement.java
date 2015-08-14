@@ -18,23 +18,23 @@
  */
 package com.alibaba.cobar.parser.ast.stmt.dml;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
-
 import com.alibaba.cobar.parser.ast.expression.Expression;
 import com.alibaba.cobar.parser.ast.expression.primary.Identifier;
 import com.alibaba.cobar.parser.visitor.SQLASTVisitor;
+
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
 
 /**
  * @author <a href="mailto:shuo.qius@alibaba-inc.com">QIU Shuo</a>
  */
 public class DMLCallStatement extends DMLStatement {
 
-    private final Identifier       procedure;
+    private final Identifier procedure;
     private final List<Expression> arguments;
 
-    public DMLCallStatement(Identifier procedure, List<Expression> arguments){
+    public DMLCallStatement(Identifier procedure, List<Expression> arguments) {
         this.procedure = procedure;
         if (arguments == null || arguments.isEmpty()) {
             this.arguments = Collections.emptyList();
@@ -45,7 +45,7 @@ public class DMLCallStatement extends DMLStatement {
         }
     }
 
-    public DMLCallStatement(Identifier procedure){
+    public DMLCallStatement(Identifier procedure) {
         this.procedure = procedure;
         this.arguments = Collections.emptyList();
     }

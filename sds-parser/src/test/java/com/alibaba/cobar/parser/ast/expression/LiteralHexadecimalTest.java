@@ -18,13 +18,11 @@
  */
 package com.alibaba.cobar.parser.ast.expression;
 
-import junit.framework.TestCase;
-
-import org.junit.Assert;
-
 import com.alibaba.cobar.parser.ast.expression.primary.literal.LiteralHexadecimal;
 import com.alibaba.cobar.parser.recognizer.mysql.lexer.MySQLLexer;
 import com.alibaba.cobar.parser.recognizer.mysql.syntax.MySQLExprParser;
+import junit.framework.TestCase;
+import org.junit.Assert;
 
 /**
  * @author <a href="mailto:shuo.qius@alibaba-inc.com">QIU Shuo</a>

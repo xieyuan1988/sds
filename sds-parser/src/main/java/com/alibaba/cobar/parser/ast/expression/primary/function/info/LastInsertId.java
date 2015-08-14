@@ -18,17 +18,17 @@
  */
 package com.alibaba.cobar.parser.ast.expression.primary.function.info;
 
-import java.util.List;
-
 import com.alibaba.cobar.parser.ast.expression.Expression;
 import com.alibaba.cobar.parser.ast.expression.primary.function.FunctionExpression;
+
+import java.util.List;
 
 /**
  * @author <a href="mailto:shuo.qius@alibaba-inc.com">QIU Shuo</a>
  */
 public class LastInsertId extends FunctionExpression {
 
-    public LastInsertId(List<Expression> arguments){
+    public LastInsertId(List<Expression> arguments) {
         super("LAST_INSERT_ID", arguments);
     }
 

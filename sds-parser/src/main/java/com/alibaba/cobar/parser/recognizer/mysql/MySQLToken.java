@@ -25,9 +25,13 @@ public enum MySQLToken {
     SYS_VAR,
     USR_VAR,
 
-    /** number composed purely of digit */
+    /**
+     * number composed purely of digit
+     */
     LITERAL_NUM_PURE_DIGIT,
-    /** number composed of digit mixed with <code>.</code> or <code>e</code> */
+    /**
+     * number composed of digit mixed with <code>.</code> or <code>e</code>
+     */
     LITERAL_NUM_MIX_DIGIT,
     LITERAL_HEX,
     LITERAL_BIT,
@@ -37,79 +41,147 @@ public enum MySQLToken {
     LITERAL_BOOL_TRUE,
     LITERAL_BOOL_FALSE,
 
-    /** ? */
+    /**
+     * ?
+     */
     QUESTION_MARK,
 
-    /** ( */
+    /**
+     * (
+     */
     PUNC_LEFT_PAREN,
-    /** ) */
+    /**
+     * )
+     */
     PUNC_RIGHT_PAREN,
-    /** { */
+    /**
+     * {
+     */
     PUNC_LEFT_BRACE,
-    /** } */
+    /**
+     * }
+     */
     PUNC_RIGHT_BRACE,
-    /** [ */
+    /**
+     * [
+     */
     PUNC_LEFT_BRACKET,
-    /** ] */
+    /**
+     * ]
+     */
     PUNC_RIGHT_BRACKET,
-    /** ; */
+    /**
+     * ;
+     */
     PUNC_SEMICOLON,
-    /** , */
+    /**
+     * ,
+     */
     PUNC_COMMA,
-    /** , */
+    /**
+     * ,
+     */
     PUNC_DOT,
-    /** : */
+    /**
+     * :
+     */
     PUNC_COLON,
-    /** <code>*</code><code>/</code> */
+    /**
+     * <code>*</code><code>/</code>
+     */
     PUNC_C_STYLE_COMMENT_END,
 
     //    /** &#64; */
     //    OP_AT,
-    /** = */
+    /**
+     * =
+     */
     OP_EQUALS,
-    /** > */
+    /**
+     * >
+     */
     OP_GREATER_THAN,
-    /** < */
+    /**
+     * <
+     */
     OP_LESS_THAN,
-    /** ! */
+    /**
+     * !
+     */
     OP_EXCLAMATION,
-    /** ~ */
+    /**
+     * ~
+     */
     OP_TILDE,
-    /** + */
+    /**
+     * +
+     */
     OP_PLUS,
-    /** - */
+    /**
+     * -
+     */
     OP_MINUS,
     /** * */
     OP_ASTERISK,
-    /** / */
+    /**
+     * /
+     */
     OP_SLASH,
-    /** & */
+    /**
+     * &
+     */
     OP_AMPERSAND,
-    /** | */
+    /**
+     * |
+     */
     OP_VERTICAL_BAR,
-    /** ^ */
+    /**
+     * ^
+     */
     OP_CARET,
-    /** % */
+    /**
+     * %
+     */
     OP_PERCENT,
-    /** := */
+    /**
+     * :=
+     */
     OP_ASSIGN,
-    /** <= */
+    /**
+     * <=
+     */
     OP_LESS_OR_EQUALS,
-    /** <> */
+    /**
+     * <>
+     */
     OP_LESS_OR_GREATER,
-    /** >= */
+    /**
+     * >=
+     */
     OP_GREATER_OR_EQUALS,
-    /** != */
+    /**
+     * !=
+     */
     OP_NOT_EQUALS,
-    /** && */
+    /**
+     * &&
+     */
     OP_LOGICAL_AND,
-    /** || */
+    /**
+     * ||
+     */
     OP_LOGICAL_OR,
-    /** << */
+    /**
+     * <<
+     */
     OP_LEFT_SHIFT,
-    /** >> */
+    /**
+     * >>
+     */
     OP_RIGHT_SHIFT,
-    /** <=> */
+    /**
+     * <=>
+     */
     OP_NULL_SAFE_EQUALS,
 
     KW_ACCESSIBLE, KW_ADD, KW_ALL, KW_ALTER, KW_ANALYZE, KW_AND, KW_AS, KW_ASC, KW_ASENSITIVE, KW_BEFORE, KW_BETWEEN,

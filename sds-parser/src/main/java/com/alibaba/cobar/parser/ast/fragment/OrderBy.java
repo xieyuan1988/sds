@@ -18,21 +18,23 @@
  */
 package com.alibaba.cobar.parser.ast.fragment;
 
-import java.util.ArrayList;
-import java.util.LinkedList;
-import java.util.List;
-
 import com.alibaba.cobar.parser.ast.ASTNode;
 import com.alibaba.cobar.parser.ast.expression.Expression;
 import com.alibaba.cobar.parser.util.Pair;
 import com.alibaba.cobar.parser.visitor.SQLASTVisitor;
+
+import java.util.ArrayList;
+import java.util.LinkedList;
+import java.util.List;
 
 /**
  * @author <a href="mailto:shuo.qius@alibaba-inc.com">QIU Shuo</a>
  */
 public class OrderBy implements ASTNode {
 
-    /** might be {@link java.util.LinkedList} */
+    /**
+     * might be {@link java.util.LinkedList}
+     */
     private final List<Pair<Expression, SortOrder>> orderByList;
 
     public List<Pair<Expression, SortOrder>> getOrderByList() {
@@ -42,19 +44,19 @@ public class OrderBy implements ASTNode {
     /**
      * performance tip: linked list is used
      */
-    public OrderBy(){
+    public OrderBy() {
         this.orderByList = new LinkedList<Pair<Expression, SortOrder>>();
     }
 
     /**
      * performance tip: expect to have only 1 order item
      */
-    public OrderBy(Expression expr, SortOrder order){
+    public OrderBy(Expression expr, SortOrder order) {
         this.orderByList = new ArrayList<Pair<Expression, SortOrder>>(1);
         this.orderByList.add(new Pair<Expression, SortOrder>(expr, order));
     }
 
-    public OrderBy(List<Pair<Expression, SortOrder>> orderByList){
+    public OrderBy(List<Pair<Expression, SortOrder>> orderByList) {
         if (orderByList == null) throw new IllegalArgumentException("order list is null");
         this.orderByList = orderByList;
     }

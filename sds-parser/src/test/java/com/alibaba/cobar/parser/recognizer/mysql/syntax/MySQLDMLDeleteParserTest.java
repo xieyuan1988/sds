@@ -18,13 +18,12 @@
  */
 package com.alibaba.cobar.parser.recognizer.mysql.syntax;
 
-import java.sql.SQLSyntaxErrorException;
-
-import org.junit.Assert;
-
 import com.alibaba.cobar.parser.ast.stmt.dml.DMLDeleteStatement;
 import com.alibaba.cobar.parser.recognizer.mysql.MySQLToken;
 import com.alibaba.cobar.parser.recognizer.mysql.lexer.MySQLLexer;
+import org.junit.Assert;
+
+import java.sql.SQLSyntaxErrorException;
 
 /**
  * @author <a href="mailto:shuo.qius@alibaba-inc.com">QIU Shuo</a>
@@ -63,8 +62,8 @@ public class MySQLDMLDeleteParserTest extends AbstractSyntaxTest {
         parser.match(MySQLToken.EOF);
         output = output2MySQL(delete, sql);
         Assert.assertEquals(
-                            "DELETE OFFER.*, WP_IMAGE.* FROM OFFER AS A, WP_IMAGE AS B WHERE A.MEMBER_ID = B.MEMBER_ID AND A.MEMBER_ID = 'abc'",
-                            output);
+                "DELETE OFFER.*, WP_IMAGE.* FROM OFFER AS A, WP_IMAGE AS B WHERE A.MEMBER_ID = B.MEMBER_ID AND A.MEMBER_ID = 'abc'",
+                output);
 
         sql = "deLetE from id1.id where col1='adf' limit 1,?";
         lexer = new MySQLLexer(sql);

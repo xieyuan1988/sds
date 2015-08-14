@@ -18,11 +18,11 @@
  */
 package com.alibaba.cobar.parser.ast.expression.primary.function.groupby;
 
-import java.util.List;
-
 import com.alibaba.cobar.parser.ast.expression.Expression;
 import com.alibaba.cobar.parser.ast.expression.primary.function.FunctionExpression;
 import com.alibaba.cobar.parser.visitor.SQLASTVisitor;
+
+import java.util.List;
 
 /**
  * @author <a href="mailto:shuo.qius@alibaba-inc.com">QIU Shuo</a>
@@ -31,7 +31,7 @@ public class Min extends FunctionExpression {
 
     private final boolean distinct;
 
-    public Min(Expression expr, boolean distinct){
+    public Min(Expression expr, boolean distinct) {
         super("MIN", wrapList(expr));
         this.distinct = distinct;
     }

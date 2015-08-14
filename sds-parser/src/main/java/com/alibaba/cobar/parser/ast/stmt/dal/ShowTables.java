@@ -27,26 +27,26 @@ import com.alibaba.cobar.parser.visitor.SQLASTVisitor;
  */
 public class ShowTables extends DALShowStatement {
 
-    private final boolean    full;
-    private Identifier       schema;
-    private final String     pattern;
+    private final boolean full;
+    private Identifier schema;
+    private final String pattern;
     private final Expression where;
 
-    public ShowTables(boolean full, Identifier schema, String pattern){
+    public ShowTables(boolean full, Identifier schema, String pattern) {
         this.full = full;
         this.schema = schema;
         this.pattern = pattern;
         this.where = null;
     }
 
-    public ShowTables(boolean full, Identifier schema, Expression where){
+    public ShowTables(boolean full, Identifier schema, Expression where) {
         this.full = full;
         this.schema = schema;
         this.pattern = null;
         this.where = where;
     }
 
-    public ShowTables(boolean full, Identifier schema){
+    public ShowTables(boolean full, Identifier schema) {
         this.full = full;
         this.schema = schema;
         this.pattern = null;

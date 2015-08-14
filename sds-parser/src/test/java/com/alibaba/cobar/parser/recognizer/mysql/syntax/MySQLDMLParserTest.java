@@ -18,11 +18,6 @@
  */
 package com.alibaba.cobar.parser.recognizer.mysql.syntax;
 
-import java.sql.SQLSyntaxErrorException;
-import java.util.List;
-
-import org.junit.Assert;
-
 import com.alibaba.cobar.parser.ast.expression.Expression;
 import com.alibaba.cobar.parser.ast.expression.comparison.ComparisionEqualsExpression;
 import com.alibaba.cobar.parser.ast.expression.logical.LogicalAndExpression;
@@ -32,19 +27,15 @@ import com.alibaba.cobar.parser.ast.fragment.GroupBy;
 import com.alibaba.cobar.parser.ast.fragment.Limit;
 import com.alibaba.cobar.parser.ast.fragment.OrderBy;
 import com.alibaba.cobar.parser.ast.fragment.SortOrder;
-import com.alibaba.cobar.parser.ast.fragment.tableref.IndexHint;
-import com.alibaba.cobar.parser.ast.fragment.tableref.InnerJoin;
-import com.alibaba.cobar.parser.ast.fragment.tableref.NaturalJoin;
-import com.alibaba.cobar.parser.ast.fragment.tableref.OuterJoin;
-import com.alibaba.cobar.parser.ast.fragment.tableref.StraightJoin;
-import com.alibaba.cobar.parser.ast.fragment.tableref.SubqueryFactor;
-import com.alibaba.cobar.parser.ast.fragment.tableref.TableRefFactor;
-import com.alibaba.cobar.parser.ast.fragment.tableref.TableReference;
-import com.alibaba.cobar.parser.ast.fragment.tableref.TableReferences;
+import com.alibaba.cobar.parser.ast.fragment.tableref.*;
 import com.alibaba.cobar.parser.ast.stmt.dml.DMLSelectStatement;
 import com.alibaba.cobar.parser.recognizer.mysql.lexer.MySQLLexer;
 import com.alibaba.cobar.parser.util.ListUtil;
 import com.alibaba.cobar.parser.util.Pair;
+import org.junit.Assert;
+
+import java.sql.SQLSyntaxErrorException;
+import java.util.List;
 
 /**
  * @author <a href="mailto:shuo.qius@alibaba-inc.com">QIU Shuo</a>
@@ -64,12 +55,12 @@ public class MySQLDMLParserTest extends AbstractSyntaxTest {
         OrderBy orderBy = parser.orderBy();
         String output = output2MySQL(orderBy, sql);
         ListUtil.isEquals(
-                          ListUtil.createList(
-                                              new Pair<Expression, SortOrder>(new Identifier(null, "c1"), SortOrder.ASC),
-                                              new Pair<Expression, SortOrder>(new Identifier(null, "c2"),
-                                                                              SortOrder.DESC),
-                                              new Pair<Expression, SortOrder>(new Identifier(null, "c3"), SortOrder.ASC)),
-                          orderBy.getOrderByList());
+                ListUtil.createList(
+                        new Pair<Expression, SortOrder>(new Identifier(null, "c1"), SortOrder.ASC),
+                        new Pair<Expression, SortOrder>(new Identifier(null, "c2"),
+                                SortOrder.DESC),
+                        new Pair<Expression, SortOrder>(new Identifier(null, "c3"), SortOrder.ASC)),
+                orderBy.getOrderByList());
         Assert.assertEquals("ORDER BY C1, C2 DESC, C3", output);
 
         sql = "order by c1   ";
@@ -78,8 +69,8 @@ public class MySQLDMLParserTest extends AbstractSyntaxTest {
         orderBy = parser.orderBy();
         output = output2MySQL(orderBy, sql);
         ListUtil.isEquals(
-                          ListUtil.createList(new Pair<Expression, SortOrder>(new Identifier(null, "c1"), SortOrder.ASC)),
-                          orderBy.getOrderByList());
+                ListUtil.createList(new Pair<Expression, SortOrder>(new Identifier(null, "c1"), SortOrder.ASC)),
+                orderBy.getOrderByList());
         Assert.assertEquals("ORDER BY C1", output);
 
         sql = "order by c1 asc  ";
@@ -88,8 +79,8 @@ public class MySQLDMLParserTest extends AbstractSyntaxTest {
         orderBy = parser.orderBy();
         output = output2MySQL(orderBy, sql);
         ListUtil.isEquals(
-                          ListUtil.createList(new Pair<Expression, SortOrder>(new Identifier(null, "c1"), SortOrder.ASC)),
-                          orderBy.getOrderByList());
+                ListUtil.createList(new Pair<Expression, SortOrder>(new Identifier(null, "c1"), SortOrder.ASC)),
+                orderBy.getOrderByList());
         Assert.assertEquals("ORDER BY C1", output);
 
         sql = "order by c1 desc  ";
@@ -98,8 +89,8 @@ public class MySQLDMLParserTest extends AbstractSyntaxTest {
         orderBy = parser.orderBy();
         output = output2MySQL(orderBy, sql);
         ListUtil.isEquals(ListUtil.createList(new Pair<Expression, SortOrder>(new Identifier(null, "c1"),
-                                                                              SortOrder.DESC)),
-                          orderBy.getOrderByList());
+                        SortOrder.DESC)),
+                orderBy.getOrderByList());
         Assert.assertEquals("ORDER BY C1 DESC", output);
     }
 
@@ -203,12 +194,12 @@ public class MySQLDMLParserTest extends AbstractSyntaxTest {
         GroupBy groupBy = parser.groupBy();
         String output = output2MySQL(groupBy, sql);
         ListUtil.isEquals(
-                          ListUtil.createList(
-                                              new Pair<Expression, SortOrder>(new Identifier(null, "c1"), SortOrder.ASC),
-                                              new Pair<Expression, SortOrder>(new Identifier(null, "c2"),
-                                                                              SortOrder.DESC),
-                                              new Pair<Expression, SortOrder>(new Identifier(null, "c3"), SortOrder.ASC)),
-                          groupBy.getOrderByList());
+                ListUtil.createList(
+                        new Pair<Expression, SortOrder>(new Identifier(null, "c1"), SortOrder.ASC),
+                        new Pair<Expression, SortOrder>(new Identifier(null, "c2"),
+                                SortOrder.DESC),
+                        new Pair<Expression, SortOrder>(new Identifier(null, "c3"), SortOrder.ASC)),
+                groupBy.getOrderByList());
         Assert.assertEquals("GROUP BY C1, C2 DESC, C3 WITH ROLLUP", output);
 
         sql = "group by c1 asc, c2 desc  , c3 ";
@@ -217,12 +208,12 @@ public class MySQLDMLParserTest extends AbstractSyntaxTest {
         groupBy = parser.groupBy();
         output = output2MySQL(groupBy, sql);
         ListUtil.isEquals(
-                          ListUtil.createList(
-                                              new Pair<Expression, SortOrder>(new Identifier(null, "c1"), SortOrder.ASC),
-                                              new Pair<Expression, SortOrder>(new Identifier(null, "c2"),
-                                                                              SortOrder.DESC),
-                                              new Pair<Expression, SortOrder>(new Identifier(null, "c3"), SortOrder.ASC)),
-                          groupBy.getOrderByList());
+                ListUtil.createList(
+                        new Pair<Expression, SortOrder>(new Identifier(null, "c1"), SortOrder.ASC),
+                        new Pair<Expression, SortOrder>(new Identifier(null, "c2"),
+                                SortOrder.DESC),
+                        new Pair<Expression, SortOrder>(new Identifier(null, "c3"), SortOrder.ASC)),
+                groupBy.getOrderByList());
         Assert.assertEquals("GROUP BY C1, C2 DESC, C3", output);
 
         sql = "group by c1   ";
@@ -231,8 +222,8 @@ public class MySQLDMLParserTest extends AbstractSyntaxTest {
         groupBy = parser.groupBy();
         output = output2MySQL(groupBy, sql);
         ListUtil.isEquals(
-                          ListUtil.createList(new Pair<Expression, SortOrder>(new Identifier(null, "c1"), SortOrder.ASC)),
-                          groupBy.getOrderByList());
+                ListUtil.createList(new Pair<Expression, SortOrder>(new Identifier(null, "c1"), SortOrder.ASC)),
+                groupBy.getOrderByList());
         Assert.assertEquals("GROUP BY C1", output);
 
         sql = "group by c1 asc  ";
@@ -241,8 +232,8 @@ public class MySQLDMLParserTest extends AbstractSyntaxTest {
         groupBy = parser.groupBy();
         output = output2MySQL(groupBy, sql);
         ListUtil.isEquals(
-                          ListUtil.createList(new Pair<Expression, SortOrder>(new Identifier(null, "c1"), SortOrder.ASC)),
-                          groupBy.getOrderByList());
+                ListUtil.createList(new Pair<Expression, SortOrder>(new Identifier(null, "c1"), SortOrder.ASC)),
+                groupBy.getOrderByList());
         Assert.assertEquals("GROUP BY C1", output);
 
         sql = "group by c1 desc  ";
@@ -251,8 +242,8 @@ public class MySQLDMLParserTest extends AbstractSyntaxTest {
         groupBy = parser.groupBy();
         output = output2MySQL(groupBy, sql);
         ListUtil.isEquals(ListUtil.createList(new Pair<Expression, SortOrder>(new Identifier(null, "c1"),
-                                                                              SortOrder.DESC)),
-                          groupBy.getOrderByList());
+                        SortOrder.DESC)),
+                groupBy.getOrderByList());
         Assert.assertEquals("GROUP BY C1 DESC", output);
 
         sql = "group by c1 with rollup  ";
@@ -261,8 +252,8 @@ public class MySQLDMLParserTest extends AbstractSyntaxTest {
         groupBy = parser.groupBy();
         output = output2MySQL(groupBy, sql);
         ListUtil.isEquals(
-                          ListUtil.createList(new Pair<Expression, SortOrder>(new Identifier(null, "c1"), SortOrder.ASC)),
-                          groupBy.getOrderByList());
+                ListUtil.createList(new Pair<Expression, SortOrder>(new Identifier(null, "c1"), SortOrder.ASC)),
+                groupBy.getOrderByList());
         Assert.assertEquals("GROUP BY C1 WITH ROLLUP", output);
     }
 
@@ -291,7 +282,7 @@ public class MySQLDMLParserTest extends AbstractSyntaxTest {
         Assert.assertEquals(SubqueryFactor.class, list.get(0).getClass());
         Assert.assertEquals(TableReferences.class, list.get(1).getClass());
         Assert.assertEquals("((SELECT * FROM ANY) UNION (SELECT `SELECT` FROM `FROM` ORDER BY DD)) AS 'a1', T2, T3",
-                            output);
+                output);
 
         sql = "(t1)";
         lexer = new MySQLLexer(sql);
@@ -497,7 +488,7 @@ public class MySQLDMLParserTest extends AbstractSyntaxTest {
         Assert.assertEquals("INDEX", indexhint.getType().name());
         Assert.assertEquals("GROUP_BY", indexhint.getScope().name());
         Assert.assertEquals("TB1 USE KEY FOR ORDER BY (i1, i2) "
-                            + "USE KEY FOR GROUP BY () IGNORE INDEX FOR GROUP BY (i1, i2)", output);
+                + "USE KEY FOR GROUP BY () IGNORE INDEX FOR GROUP BY (i1, i2)", output);
 
         sql = "tb1 use index for order by (i1,i2) force index for group by (i1)";
         lexer = new MySQLLexer(sql);
@@ -573,8 +564,8 @@ public class MySQLDMLParserTest extends AbstractSyntaxTest {
         trs = parser.tableRefs();
         output = output2MySQL(trs, sql);
         Assert.assertEquals(
-                            "OFFER AS A STRAIGHT_JOIN WP_IMAGE AS B USE KEY FOR JOIN (t1, t2) ON A.MEMBER_ID = B.MEMBER_ID INNER JOIN PRODUCT_VISIT AS C",
-                            output);
+                "OFFER AS A STRAIGHT_JOIN WP_IMAGE AS B USE KEY FOR JOIN (t1, t2) ON A.MEMBER_ID = B.MEMBER_ID INNER JOIN PRODUCT_VISIT AS C",
+                output);
 
         sql = "tb1 ignore index for order by(i1)";
         lexer = new MySQLLexer(sql);
@@ -696,10 +687,10 @@ public class MySQLDMLParserTest extends AbstractSyntaxTest {
         Assert.assertEquals("ALL", indexhint.getScope().name());
         Assert.assertEquals(ComparisionEqualsExpression.class, ((OuterJoin) list.get(0)).getOnCond().getClass());
         Assert.assertEquals("(TB1 FORCE INDEX FOR JOIN (i1, i2)) "
-                            + "LEFT JOIN TB2 AS T2 USE INDEX (i1, i2, i3) ON T1.ID1 = T2.ID1", output);
+                + "LEFT JOIN TB2 AS T2 USE INDEX (i1, i2, i3) ON T1.ID1 = T2.ID1", output);
 
         sql = " (((tb1 force index for join (i1,i2),tb3),tb4),tb5) "
-              + "left outer join (tb2 as t2 use index (i1,i2,i3)) using(id1)";
+                + "left outer join (tb2 as t2 use index (i1,i2,i3)) using(id1)";
         lexer = new MySQLLexer(sql);
         parser = getDMLParser(lexer);
         trs = parser.tableRefs();
@@ -749,17 +740,17 @@ public class MySQLDMLParserTest extends AbstractSyntaxTest {
         using_list = ((OuterJoin) (trs.getTableReferenceList()).get(0)).getUsing();
         Assert.assertEquals(1, using_list.size());
         Assert.assertEquals("(TB1 FORCE INDEX FOR JOIN (i1, i2), TB3, TB4, TB5) LEFT JOIN "
-                            + "(TB2 AS T2 USE INDEX (i1, i2, i3)) USING (id1)", output);
+                + "(TB2 AS T2 USE INDEX (i1, i2, i3)) USING (id1)", output);
 
         sql = "(tb1 force index for join (i1,i2),tb3) "
-              + "left outer join tb2 as t2 use index (i1,i2,i3) using(id1,id2)";
+                + "left outer join tb2 as t2 use index (i1,i2,i3) using(id1,id2)";
         lexer = new MySQLLexer(sql);
         parser = getDMLParser(lexer);
         trs = parser.tableRefs();
         output = output2MySQL(trs, sql);
         Assert.assertEquals(
-                            "(TB1 FORCE INDEX FOR JOIN (i1, i2), TB3) LEFT JOIN TB2 AS T2 USE INDEX (i1, i2, i3) USING (id1, id2)",
-                            output);
+                "(TB1 FORCE INDEX FOR JOIN (i1, i2), TB3) LEFT JOIN TB2 AS T2 USE INDEX (i1, i2, i3) USING (id1, id2)",
+                output);
 
         sql = "(tb1 force index for join (i1,i2),tb3) left outer join (tb2 as t2 use index (i1,i2,i3)) using(id1,id2)";
         lexer = new MySQLLexer(sql);
@@ -767,8 +758,8 @@ public class MySQLDMLParserTest extends AbstractSyntaxTest {
         trs = parser.tableRefs();
         output = output2MySQL(trs, sql);
         Assert.assertEquals(
-                            "(TB1 FORCE INDEX FOR JOIN (i1, i2), TB3) LEFT JOIN (TB2 AS T2 USE INDEX (i1, i2, i3)) USING (id1, id2)",
-                            output);
+                "(TB1 FORCE INDEX FOR JOIN (i1, i2), TB3) LEFT JOIN (TB2 AS T2 USE INDEX (i1, i2, i3)) USING (id1, id2)",
+                output);
 
         sql = "tb1 as t1 cross join tb2 as t2 use index(i1)using(id1)";
         lexer = new MySQLLexer(sql);
@@ -863,7 +854,7 @@ public class MySQLDMLParserTest extends AbstractSyntaxTest {
         Assert.assertEquals("tb3", rtf.getTable().getIdText());
         Assert.assertEquals(LogicalAndExpression.class, ((InnerJoin) list.get(0)).getOnCond().getClass());
         Assert.assertEquals("(TB1 RIGHT JOIN TB2 USING ()) INNER JOIN TB3 ON TB1.ID = TB2.ID AND TB2.ID = TB3.ID",
-                            output);
+                output);
 
         sql = "tb1 right outer join tb2 using(id1,id2) " + "join (tb3,tb4) on tb1.id=tb2.id and tb2.id=tb3.id";
         lexer = new MySQLLexer(sql);
@@ -885,8 +876,8 @@ public class MySQLDMLParserTest extends AbstractSyntaxTest {
         Assert.assertEquals("tb4", ((TableRefFactor) (rtr.getTableReferenceList().get(1))).getTable().getIdText());
         Assert.assertEquals(LogicalAndExpression.class, ((InnerJoin) list.get(0)).getOnCond().getClass());
         Assert.assertEquals(
-                            "TB1 RIGHT JOIN TB2 USING (id1, id2) INNER JOIN (TB3, TB4) ON TB1.ID = TB2.ID AND TB2.ID = TB3.ID",
-                            output);
+                "TB1 RIGHT JOIN TB2 USING (id1, id2) INNER JOIN (TB3, TB4) ON TB1.ID = TB2.ID AND TB2.ID = TB3.ID",
+                output);
 
         sql = "tb1 left outer join tb2 join tb3 using(id)";
         lexer = new MySQLLexer(sql);
@@ -952,7 +943,7 @@ public class MySQLDMLParserTest extends AbstractSyntaxTest {
         Assert.assertEquals(SubqueryFactor.class, list.get(0).getClass());
         Assert.assertEquals("ANY", ((SubqueryFactor) list.get(0)).getAlias());
         Assert.assertEquals("(SELECT SELECT * FROM TB1 FROM `SELECT` WHERE `ANY` = ANY (SELECT ID2 FROM TB2)) AS ANY",
-                            output);
+                output);
 
         sql = "((tb1),(tb3 as t3,`select`),tb2 use key for join (i1,i2))" + " left join tb4 join tb5 using ()";
         lexer = new MySQLLexer(sql);
@@ -968,11 +959,11 @@ public class MySQLDMLParserTest extends AbstractSyntaxTest {
         list = ((TableReferences) list.get(1)).getTableReferenceList();
         Assert.assertEquals(2, list.size());
         Assert.assertEquals(
-                            "(TB1, TB3 AS T3, `SELECT`, TB2 USE KEY FOR JOIN (i1, i2)) LEFT JOIN (TB4 INNER JOIN TB5) USING ()",
-                            output);
+                "(TB1, TB3 AS T3, `SELECT`, TB2 USE KEY FOR JOIN (i1, i2)) LEFT JOIN (TB4 INNER JOIN TB5) USING ()",
+                output);
 
         sql = "((select `select` from `from` ) tb1),(tb3 as t3,`select`),tb2 use key for join (i1,i2) "
-              + "left join tb4 using (i1,i2)straight_join tb5";
+                + "left join tb4 using (i1,i2)straight_join tb5";
         lexer = new MySQLLexer(sql);
         parser = getDMLParser(lexer);
         trs = parser.tableRefs();
@@ -996,13 +987,13 @@ public class MySQLDMLParserTest extends AbstractSyntaxTest {
         using_list = oj.getUsing();
         Assert.assertEquals(2, using_list.size());
         Assert.assertEquals(
-                            "(SELECT `SELECT` FROM `FROM`) AS TB1, TB3 AS T3, `SELECT`, TB2 USE KEY FOR JOIN (i1, i2) LEFT JOIN TB4 USING (i1, i2) STRAIGHT_JOIN TB5",
-                            output);
+                "(SELECT `SELECT` FROM `FROM`) AS TB1, TB3 AS T3, `SELECT`, TB2 USE KEY FOR JOIN (i1, i2) LEFT JOIN TB4 USING (i1, i2) STRAIGHT_JOIN TB5",
+                output);
 
         sql = "(`select`,(tb1 as t1 use index for join()ignore key for group by (i1)))" + "join tb2 on cd1=any "
-              + "right join " + "tb3 straight_join "
-              + "(tb4 use index() left outer join (tb6,tb7) on id3=all(select `all` from `all`)) "
-              + " on id2=any(select * from any) using  (i1)";
+                + "right join " + "tb3 straight_join "
+                + "(tb4 use index() left outer join (tb6,tb7) on id3=all(select `all` from `all`)) "
+                + " on id2=any(select * from any) using  (i1)";
         lexer = new MySQLLexer(sql);
         parser = getDMLParser(lexer);
         trs = parser.tableRefs();
@@ -1020,8 +1011,8 @@ public class MySQLDMLParserTest extends AbstractSyntaxTest {
         list = ((TableReferences) rsj.getRightTableRef()).getTableReferenceList();
         Assert.assertEquals(OuterJoin.class, list.get(0).getClass());
         Assert.assertEquals(
-                            "(`SELECT`, TB1 AS T1 USE INDEX FOR JOIN () IGNORE KEY FOR GROUP BY (i1)) INNER JOIN TB2 ON CD1 = ANY RIGHT JOIN (TB3 STRAIGHT_JOIN (TB4 USE INDEX () LEFT JOIN (TB6, TB7) ON ID3 = ALL (SELECT `ALL` FROM `ALL`)) ON ID2 = ANY (SELECT * FROM ANY)) USING (i1)",
-                            output);
+                "(`SELECT`, TB1 AS T1 USE INDEX FOR JOIN () IGNORE KEY FOR GROUP BY (i1)) INNER JOIN TB2 ON CD1 = ANY RIGHT JOIN (TB3 STRAIGHT_JOIN (TB4 USE INDEX () LEFT JOIN (TB6, TB7) ON ID3 = ALL (SELECT `ALL` FROM `ALL`)) ON ID2 = ANY (SELECT * FROM ANY)) USING (i1)",
+                output);
     }
 
 }

@@ -38,12 +38,13 @@ public final class ParseUtil {
 
     /**
      * <code>'abc'</code>
-     * 
+     *
      * @param offset stmt.charAt(offset) == first <code>'</code>
      */
     private static String parseString(String stmt, int offset) {
         StringBuilder sb = new StringBuilder();
-        loop: for (++offset; offset < stmt.length(); ++offset) {
+        loop:
+        for (++offset; offset < stmt.length(); ++offset) {
             char c = stmt.charAt(offset);
             if (c == '\\') {
                 switch (c = stmt.charAt(++offset)) {
@@ -84,12 +85,13 @@ public final class ParseUtil {
 
     /**
      * <code>"abc"</code>
-     * 
+     *
      * @param offset stmt.charAt(offset) == first <code>"</code>
      */
     private static String parseString2(String stmt, int offset) {
         StringBuilder sb = new StringBuilder();
-        loop: for (++offset; offset < stmt.length(); ++offset) {
+        loop:
+        for (++offset; offset < stmt.length(); ++offset) {
             char c = stmt.charAt(offset);
             if (c == '\\') {
                 switch (c = stmt.charAt(++offset)) {
@@ -130,12 +132,13 @@ public final class ParseUtil {
 
     /**
      * <code>AS `abc`</code>
-     * 
+     *
      * @param offset stmt.charAt(offset) == first <code>`</code>
      */
     private static String parseIdentifierEscape(String stmt, int offset) {
         StringBuilder sb = new StringBuilder();
-        loop: for (++offset; offset < stmt.length(); ++offset) {
+        loop:
+        for (++offset; offset < stmt.length(); ++offset) {
             char c = stmt.charAt(offset);
             if (c == '`') {
                 if (offset + 1 < stmt.length() && stmt.charAt(offset + 1) == '`') {
@@ -211,20 +214,22 @@ public final class ParseUtil {
         return true;
     }
 
-    /*****
+    /**
+     * **
      * 检查下一个字符是否为分隔符，并把偏移量加1
      */
     public static boolean nextCharIsSep(String stmt, int offset) {
         return currentCharIsSep(stmt, ++offset);
     }
 
-    /*****
+    /**
+     * **
      * 检查下一个字符串是否为期望的字符串，并把偏移量移到从offset开始计算，expectValue之后的位置
-     * 
-     * @param stmt 被解析的sql
-     * @param offset 被解析的sql的当前位置
+     *
+     * @param stmt               被解析的sql
+     * @param offset             被解析的sql的当前位置
      * @param nextExpectedString 在stmt中准备查找的字符串
-     * @param checkSepChar 当找到expectValue值时，是否检查其后面字符为分隔符号
+     * @param checkSepChar       当找到expectValue值时，是否检查其后面字符为分隔符号
      * @return 如果包含指定的字符串，则移动相应的偏移量，否则返回值=offset
      */
     public static int nextStringIsExpectedWithIgnoreSepChar(String stmt, int offset, String nextExpectedString,
@@ -259,15 +264,16 @@ public final class ParseUtil {
     }
 
     private static final String JSON = "json";
-    private static final String EQ   = "=";
+    private static final String EQ = "=";
 
     //private static final String WHERE = "where";
     //private static final String SET = "set";
 
-    /**********
+    /**
+     * *******
      * 检查下一个字符串是否json= *
-     * 
-     * @param stmt 被解析的sql
+     *
+     * @param stmt   被解析的sql
      * @param offset 被解析的sql的当前位置
      * @return 如果包含指定的字符串，则移动相应的偏移量，否则返回值=offset
      */

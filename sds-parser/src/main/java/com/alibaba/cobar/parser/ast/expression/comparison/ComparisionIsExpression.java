@@ -18,35 +18,35 @@
  */
 package com.alibaba.cobar.parser.ast.expression.comparison;
 
-import java.util.Map;
-
 import com.alibaba.cobar.parser.ast.expression.AbstractExpression;
 import com.alibaba.cobar.parser.ast.expression.Expression;
 import com.alibaba.cobar.parser.ast.expression.ReplacableExpression;
 import com.alibaba.cobar.parser.visitor.SQLASTVisitor;
+
+import java.util.Map;
 
 /**
  * @author <a href="mailto:shuo.qius@alibaba-inc.com">QIU Shuo</a>
  */
 public class ComparisionIsExpression extends AbstractExpression implements ReplacableExpression {
 
-    public static final int  IS_NULL        = 1;
-    public static final int  IS_TRUE        = 2;
-    public static final int  IS_FALSE       = 3;
-    public static final int  IS_UNKNOWN     = 4;
-    public static final int  IS_NOT_NULL    = 5;
-    public static final int  IS_NOT_TRUE    = 6;
-    public static final int  IS_NOT_FALSE   = 7;
-    public static final int  IS_NOT_UNKNOWN = 8;
+    public static final int IS_NULL = 1;
+    public static final int IS_TRUE = 2;
+    public static final int IS_FALSE = 3;
+    public static final int IS_UNKNOWN = 4;
+    public static final int IS_NOT_NULL = 5;
+    public static final int IS_NOT_TRUE = 6;
+    public static final int IS_NOT_FALSE = 7;
+    public static final int IS_NOT_UNKNOWN = 8;
 
-    private final int        mode;
+    private final int mode;
     private final Expression operand;
 
     /**
      * @param mode {@link #IS_NULL} or {@link #IS_TRUE} or {@link #IS_FALSE} or {@link #IS_UNKNOWN} or
-     * {@link #IS_NOT_NULL} or {@link #IS_NOT_TRUE} or {@link #IS_NOT_FALSE} or {@link #IS_NOT_UNKNOWN}
+     *             {@link #IS_NOT_NULL} or {@link #IS_NOT_TRUE} or {@link #IS_NOT_FALSE} or {@link #IS_NOT_UNKNOWN}
      */
-    public ComparisionIsExpression(Expression operand, int mode){
+    public ComparisionIsExpression(Expression operand, int mode) {
         this.operand = operand;
         this.mode = mode;
     }

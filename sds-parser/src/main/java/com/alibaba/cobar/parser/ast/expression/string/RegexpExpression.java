@@ -24,14 +24,14 @@ import com.alibaba.cobar.parser.visitor.SQLASTVisitor;
 
 /**
  * <code>higherPreExpr 'NOT'? ('REGEXP'|'RLIKE') higherPreExp</code>
- * 
+ *
  * @author <a href="mailto:shuo.qius@alibaba-inc.com">QIU Shuo</a>
  */
 public class RegexpExpression extends BinaryOperatorExpression {
 
     private final boolean not;
 
-    public RegexpExpression(boolean not, Expression comparee, Expression pattern){
+    public RegexpExpression(boolean not, Expression comparee, Expression pattern) {
         super(comparee, pattern, PRECEDENCE_COMPARISION);
         this.not = not;
     }

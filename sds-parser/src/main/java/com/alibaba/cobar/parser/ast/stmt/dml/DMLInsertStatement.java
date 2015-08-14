@@ -18,8 +18,6 @@
  */
 package com.alibaba.cobar.parser.ast.stmt.dml;
 
-import java.util.List;
-
 import com.alibaba.cobar.parser.ast.expression.Expression;
 import com.alibaba.cobar.parser.ast.expression.misc.QueryExpression;
 import com.alibaba.cobar.parser.ast.expression.primary.Identifier;
@@ -27,28 +25,32 @@ import com.alibaba.cobar.parser.ast.expression.primary.RowExpression;
 import com.alibaba.cobar.parser.util.Pair;
 import com.alibaba.cobar.parser.visitor.SQLASTVisitor;
 
+import java.util.List;
+
 /**
  * @author <a href="mailto:shuo.qius@alibaba-inc.com">QIU Shuo</a>
  */
 public class DMLInsertStatement extends DMLInsertReplaceStatement {
 
     public static enum InsertMode {
-        /** default */
+        /**
+         * default
+         */
         UNDEF, LOW, DELAY, HIGH
     }
 
-    private final InsertMode                         mode;
-    private final boolean                            ignore;
+    private final InsertMode mode;
+    private final boolean ignore;
     private final List<Pair<Identifier, Expression>> duplicateUpdate;
 
     /**
      * (insert ... values | insert ... set) format
-     * 
+     *
      * @param columnNameList can be null
      */
     @SuppressWarnings("unchecked")
     public DMLInsertStatement(InsertMode mode, boolean ignore, Identifier table, List<Identifier> columnNameList,
-                              List<RowExpression> rowList, List<Pair<Identifier, Expression>> duplicateUpdate){
+                              List<RowExpression> rowList, List<Pair<Identifier, Expression>> duplicateUpdate) {
         super(table, columnNameList, rowList);
         this.mode = mode;
         this.ignore = ignore;
@@ -57,12 +59,12 @@ public class DMLInsertStatement extends DMLInsertReplaceStatement {
 
     /**
      * insert ... select format
-     * 
+     *
      * @param columnNameList can be null
      */
     @SuppressWarnings("unchecked")
     public DMLInsertStatement(InsertMode mode, boolean ignore, Identifier table, List<Identifier> columnNameList,
-                              QueryExpression select, List<Pair<Identifier, Expression>> duplicateUpdate){
+                              QueryExpression select, List<Pair<Identifier, Expression>> duplicateUpdate) {
         super(table, columnNameList, select);
         this.mode = mode;
         this.ignore = ignore;

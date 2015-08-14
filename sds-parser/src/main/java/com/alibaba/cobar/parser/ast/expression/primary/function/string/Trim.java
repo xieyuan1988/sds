@@ -18,12 +18,12 @@
  */
 package com.alibaba.cobar.parser.ast.expression.primary.function.string;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import com.alibaba.cobar.parser.ast.expression.Expression;
 import com.alibaba.cobar.parser.ast.expression.primary.function.FunctionExpression;
 import com.alibaba.cobar.parser.visitor.SQLASTVisitor;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * @author <a href="mailto:shuo.qius@alibaba-inc.com">QIU Shuo</a>
@@ -31,7 +31,9 @@ import com.alibaba.cobar.parser.visitor.SQLASTVisitor;
 public class Trim extends FunctionExpression {
 
     public static enum Direction {
-        /** no tag for direction */
+        /**
+         * no tag for direction
+         */
         DEFAULT, BOTH, LEADING, TRAILING
     }
 
@@ -45,7 +47,7 @@ public class Trim extends FunctionExpression {
         return list;
     }
 
-    public Trim(Direction direction, Expression remstr, Expression str){
+    public Trim(Direction direction, Expression remstr, Expression str) {
         super("TRIM", wrapList(str, remstr));
         this.direction = direction;
     }

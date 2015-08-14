@@ -24,7 +24,7 @@ import com.alibaba.cobar.parser.visitor.SQLASTVisitor;
 
 /**
  * <code>higherExpr ( ('&lt;&lt;'|'&gt;&gt;') higherExpr )+</code>
- * 
+ *
  * @author <a href="mailto:shuo.qius@alibaba-inc.com">QIU Shuo</a>
  */
 public class BitShiftExpression extends BinaryOperatorExpression {
@@ -34,7 +34,7 @@ public class BitShiftExpression extends BinaryOperatorExpression {
     /**
      * @param negative true if right shift
      */
-    public BitShiftExpression(boolean negative, Expression leftOprand, Expression rightOprand){
+    public BitShiftExpression(boolean negative, Expression leftOprand, Expression rightOprand) {
         super(leftOprand, rightOprand, PRECEDENCE_BIT_SHIFT);
         this.negative = negative;
     }

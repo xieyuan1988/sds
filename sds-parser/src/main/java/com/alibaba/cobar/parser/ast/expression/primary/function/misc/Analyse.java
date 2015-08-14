@@ -18,19 +18,19 @@
  */
 package com.alibaba.cobar.parser.ast.expression.primary.function.misc;
 
-import java.util.List;
-
 import com.alibaba.cobar.parser.ast.expression.Expression;
 import com.alibaba.cobar.parser.ast.expression.primary.function.FunctionExpression;
 
+import java.util.List;
+
 /**
  * MySQL extending function
- * 
+ *
  * @author <a href="mailto:shuo.qius@alibaba-inc.com">QIU Shuo</a>
  */
 public class Analyse extends FunctionExpression {
 
-    public Analyse(List<Expression> arguments){
+    public Analyse(List<Expression> arguments) {
         super("ANALYSE", arguments);
     }
 

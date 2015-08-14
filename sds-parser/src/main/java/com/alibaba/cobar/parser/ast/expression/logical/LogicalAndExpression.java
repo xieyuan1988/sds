@@ -18,20 +18,20 @@
  */
 package com.alibaba.cobar.parser.ast.expression.logical;
 
-import java.util.Map;
-
 import com.alibaba.cobar.parser.ast.expression.Expression;
 import com.alibaba.cobar.parser.ast.expression.PolyadicOperatorExpression;
 import com.alibaba.cobar.parser.ast.expression.primary.literal.LiteralBoolean;
 import com.alibaba.cobar.parser.util.ExprEvalUtils;
 import com.alibaba.cobar.parser.visitor.SQLASTVisitor;
 
+import java.util.Map;
+
 /**
  * @author <a href="mailto:shuo.qius@alibaba-inc.com">QIU Shuo</a>
  */
 public class LogicalAndExpression extends PolyadicOperatorExpression {
 
-    public LogicalAndExpression(){
+    public LogicalAndExpression() {
         super(PRECEDENCE_LOGICAL_AND);
     }
 

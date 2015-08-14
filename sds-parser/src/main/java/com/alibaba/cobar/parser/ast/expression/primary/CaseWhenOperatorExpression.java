@@ -18,30 +18,30 @@
  */
 package com.alibaba.cobar.parser.ast.expression.primary;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import com.alibaba.cobar.parser.ast.expression.Expression;
 import com.alibaba.cobar.parser.util.Pair;
 import com.alibaba.cobar.parser.visitor.SQLASTVisitor;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  * <code>'CASE' value? ('WHEN' condition 'THEN' result)+ ('ELSE' result)? 'END' </code>
- * 
+ *
  * @author <a href="mailto:shuo.qius@alibaba-inc.com">QIU Shuo</a>
  */
 public class CaseWhenOperatorExpression extends PrimaryExpression {
 
-    private final Expression                         comparee;
+    private final Expression comparee;
     private final List<Pair<Expression, Expression>> whenList;
-    private final Expression                         elseResult;
+    private final Expression elseResult;
 
     /**
      * @param whenList never null or empry; no pair contains null key or value
      * @param comparee null for format of <code>CASE WHEN ...</code>, otherwise, <code>CASE comparee WHEN ...</code>
      */
     public CaseWhenOperatorExpression(Expression comparee, List<Pair<Expression, Expression>> whenList,
-                                      Expression elseResult){
+                                      Expression elseResult) {
         super();
         this.comparee = comparee;
         if (whenList instanceof ArrayList) {

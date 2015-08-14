@@ -25,13 +25,13 @@ import com.alibaba.cobar.parser.ast.ASTNode;
  */
 public interface TableReference extends ASTNode {
 
-    int PRECEDENCE_REFS   = 0;
-    int PRECEDENCE_JOIN   = 1;
+    int PRECEDENCE_REFS = 0;
+    int PRECEDENCE_JOIN = 1;
     int PRECEDENCE_FACTOR = 2;
 
     /**
      * remove last condition element is success
-     * 
+     *
      * @return {@link java.util.List List&lt;String&gt;} or {@link com.alibaba.cobar.parser.ast.expression.Expression
      * Expression}. null if last condition element cannot be removed.
      */

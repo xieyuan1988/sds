@@ -18,15 +18,15 @@
  */
 package com.alibaba.cobar.parser.ast.fragment.tableref;
 
+import com.alibaba.cobar.parser.visitor.SQLASTVisitor;
+
 import java.sql.SQLSyntaxErrorException;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.alibaba.cobar.parser.visitor.SQLASTVisitor;
-
 /**
  * used in <code>FROM</code> fragment
- * 
+ *
  * @author <a href="mailto:shuo.qius@alibaba-inc.com">QIU Shuo</a>
  */
 public class TableReferences implements TableReference {
@@ -45,7 +45,7 @@ public class TableReferences implements TableReference {
         return list;
     }
 
-    public TableReferences(List<TableReference> list) throws SQLSyntaxErrorException{
+    public TableReferences(List<TableReference> list) throws SQLSyntaxErrorException {
         if (list == null || list.isEmpty()) {
             throw new SQLSyntaxErrorException("at least one table reference");
         }

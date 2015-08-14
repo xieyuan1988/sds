@@ -29,7 +29,7 @@ public class DDLCreateIndexStatement implements DDLStatement {
     private final Identifier indexName;
     private final Identifier table;
 
-    public DDLCreateIndexStatement(Identifier indexName, Identifier table){
+    public DDLCreateIndexStatement(Identifier indexName, Identifier table) {
         this.indexName = indexName;
         this.table = table;
     }

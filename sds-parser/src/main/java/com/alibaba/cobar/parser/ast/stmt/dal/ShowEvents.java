@@ -27,23 +27,23 @@ import com.alibaba.cobar.parser.visitor.SQLASTVisitor;
  */
 public class ShowEvents extends DALShowStatement {
 
-    private Identifier       schema;
-    private final String     pattern;
+    private Identifier schema;
+    private final String pattern;
     private final Expression where;
 
-    public ShowEvents(Identifier schema, String pattern){
+    public ShowEvents(Identifier schema, String pattern) {
         this.schema = schema;
         this.pattern = pattern;
         this.where = null;
     }
 
-    public ShowEvents(Identifier schema, Expression where){
+    public ShowEvents(Identifier schema, Expression where) {
         this.schema = schema;
         this.pattern = null;
         this.where = where;
     }
 
-    public ShowEvents(Identifier schema){
+    public ShowEvents(Identifier schema) {
         this.schema = schema;
         this.pattern = null;
         this.where = null;

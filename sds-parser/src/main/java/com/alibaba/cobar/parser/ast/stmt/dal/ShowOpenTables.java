@@ -27,23 +27,23 @@ import com.alibaba.cobar.parser.visitor.SQLASTVisitor;
  */
 public class ShowOpenTables extends DALShowStatement {
 
-    private Identifier       schema;
-    private final String     pattern;
+    private Identifier schema;
+    private final String pattern;
     private final Expression where;
 
-    public ShowOpenTables(Identifier schema, String pattern){
+    public ShowOpenTables(Identifier schema, String pattern) {
         this.schema = schema;
         this.pattern = pattern;
         this.where = null;
     }
 
-    public ShowOpenTables(Identifier schema, Expression where){
+    public ShowOpenTables(Identifier schema, Expression where) {
         this.schema = schema;
         this.pattern = null;
         this.where = where;
     }
 
-    public ShowOpenTables(Identifier schema){
+    public ShowOpenTables(Identifier schema) {
         this.schema = schema;
         this.pattern = null;
         this.where = null;

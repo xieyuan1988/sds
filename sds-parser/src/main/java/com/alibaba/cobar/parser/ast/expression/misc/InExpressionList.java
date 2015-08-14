@@ -18,14 +18,14 @@
  */
 package com.alibaba.cobar.parser.ast.expression.misc;
 
+import com.alibaba.cobar.parser.ast.expression.AbstractExpression;
+import com.alibaba.cobar.parser.ast.expression.Expression;
+import com.alibaba.cobar.parser.visitor.SQLASTVisitor;
+
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.Map;
-
-import com.alibaba.cobar.parser.ast.expression.AbstractExpression;
-import com.alibaba.cobar.parser.ast.expression.Expression;
-import com.alibaba.cobar.parser.visitor.SQLASTVisitor;
 
 /**
  * @author <a href="mailto:shuo.qius@alibaba-inc.com">QIU Shuo</a>
@@ -34,7 +34,7 @@ public class InExpressionList extends AbstractExpression {
 
     private List<Expression> list;
 
-    public InExpressionList(List<Expression> list){
+    public InExpressionList(List<Expression> list) {
         if (list == null || list.size() == 0) {
             this.list = Collections.emptyList();
         } else if (list instanceof ArrayList) {

@@ -18,17 +18,17 @@
  */
 package com.alibaba.cobar.parser.ast.expression.primary.function.datetime;
 
-import java.util.List;
-
 import com.alibaba.cobar.parser.ast.expression.Expression;
 import com.alibaba.cobar.parser.ast.expression.primary.function.FunctionExpression;
+
+import java.util.List;
 
 /**
  * @author <a href="mailto:shuo.qius@alibaba-inc.com">QIU Shuo</a>
  */
 public class SecToTime extends FunctionExpression {
 
-    public SecToTime(List<Expression> arguments){
+    public SecToTime(List<Expression> arguments) {
         super("SEC_TO_TIME", arguments);
     }
 

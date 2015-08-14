@@ -18,13 +18,13 @@
  */
 package com.alibaba.cobar.parser.ast.expression.primary;
 
-import java.util.Map;
-
 import com.alibaba.cobar.parser.visitor.SQLASTVisitor;
+
+import java.util.Map;
 
 /**
  * <code>'?'</code>
- * 
+ *
  * @author <a href="mailto:shuo.qius@alibaba-inc.com">QIU Shuo</a>
  */
 public class ParamMarker extends PrimaryExpression {
@@ -34,7 +34,7 @@ public class ParamMarker extends PrimaryExpression {
     /**
      * @param paramIndex start from 1
      */
-    public ParamMarker(int paramIndex){
+    public ParamMarker(int paramIndex) {
         this.paramIndex = paramIndex;
     }
 

@@ -18,57 +18,17 @@
  */
 package com.alibaba.cobar.parser.recognizer.mysql.syntax;
 
-import org.junit.Assert;
-
-import com.alibaba.cobar.parser.ast.expression.BinaryOperatorExpression;
-import com.alibaba.cobar.parser.ast.expression.Expression;
-import com.alibaba.cobar.parser.ast.expression.PolyadicOperatorExpression;
-import com.alibaba.cobar.parser.ast.expression.TernaryOperatorExpression;
-import com.alibaba.cobar.parser.ast.expression.UnaryOperatorExpression;
-import com.alibaba.cobar.parser.ast.expression.arithmeic.ArithmeticAddExpression;
-import com.alibaba.cobar.parser.ast.expression.arithmeic.ArithmeticDivideExpression;
-import com.alibaba.cobar.parser.ast.expression.arithmeic.ArithmeticIntegerDivideExpression;
-import com.alibaba.cobar.parser.ast.expression.arithmeic.ArithmeticModExpression;
-import com.alibaba.cobar.parser.ast.expression.arithmeic.ArithmeticMultiplyExpression;
-import com.alibaba.cobar.parser.ast.expression.arithmeic.ArithmeticSubtractExpression;
-import com.alibaba.cobar.parser.ast.expression.arithmeic.MinusExpression;
-import com.alibaba.cobar.parser.ast.expression.bit.BitAndExpression;
-import com.alibaba.cobar.parser.ast.expression.bit.BitInvertExpression;
-import com.alibaba.cobar.parser.ast.expression.bit.BitOrExpression;
-import com.alibaba.cobar.parser.ast.expression.bit.BitShiftExpression;
-import com.alibaba.cobar.parser.ast.expression.bit.BitXORExpression;
-import com.alibaba.cobar.parser.ast.expression.comparison.BetweenAndExpression;
-import com.alibaba.cobar.parser.ast.expression.comparison.ComparisionEqualsExpression;
-import com.alibaba.cobar.parser.ast.expression.comparison.ComparisionGreaterThanExpression;
-import com.alibaba.cobar.parser.ast.expression.comparison.ComparisionGreaterThanOrEqualsExpression;
-import com.alibaba.cobar.parser.ast.expression.comparison.ComparisionIsExpression;
-import com.alibaba.cobar.parser.ast.expression.comparison.ComparisionLessOrGreaterThanExpression;
-import com.alibaba.cobar.parser.ast.expression.comparison.ComparisionLessThanExpression;
-import com.alibaba.cobar.parser.ast.expression.comparison.ComparisionLessThanOrEqualsExpression;
-import com.alibaba.cobar.parser.ast.expression.comparison.ComparisionNotEqualsExpression;
-import com.alibaba.cobar.parser.ast.expression.comparison.ComparisionNullSafeEqualsExpression;
-import com.alibaba.cobar.parser.ast.expression.comparison.InExpression;
-import com.alibaba.cobar.parser.ast.expression.logical.LogicalAndExpression;
-import com.alibaba.cobar.parser.ast.expression.logical.LogicalNotExpression;
-import com.alibaba.cobar.parser.ast.expression.logical.LogicalOrExpression;
-import com.alibaba.cobar.parser.ast.expression.logical.LogicalXORExpression;
-import com.alibaba.cobar.parser.ast.expression.logical.NegativeValueExpression;
+import com.alibaba.cobar.parser.ast.expression.*;
+import com.alibaba.cobar.parser.ast.expression.arithmeic.*;
+import com.alibaba.cobar.parser.ast.expression.bit.*;
+import com.alibaba.cobar.parser.ast.expression.comparison.*;
+import com.alibaba.cobar.parser.ast.expression.logical.*;
 import com.alibaba.cobar.parser.ast.expression.misc.AssignmentExpression;
 import com.alibaba.cobar.parser.ast.expression.misc.InExpressionList;
 import com.alibaba.cobar.parser.ast.expression.misc.QueryExpression;
 import com.alibaba.cobar.parser.ast.expression.misc.UserExpression;
-import com.alibaba.cobar.parser.ast.expression.primary.CaseWhenOperatorExpression;
-import com.alibaba.cobar.parser.ast.expression.primary.Identifier;
-import com.alibaba.cobar.parser.ast.expression.primary.ParamMarker;
-import com.alibaba.cobar.parser.ast.expression.primary.RowExpression;
-import com.alibaba.cobar.parser.ast.expression.primary.SysVarPrimary;
-import com.alibaba.cobar.parser.ast.expression.primary.UsrDefVarPrimary;
-import com.alibaba.cobar.parser.ast.expression.primary.Wildcard;
-import com.alibaba.cobar.parser.ast.expression.primary.literal.LiteralBitField;
-import com.alibaba.cobar.parser.ast.expression.primary.literal.LiteralHexadecimal;
-import com.alibaba.cobar.parser.ast.expression.primary.literal.LiteralNull;
-import com.alibaba.cobar.parser.ast.expression.primary.literal.LiteralNumber;
-import com.alibaba.cobar.parser.ast.expression.primary.literal.LiteralString;
+import com.alibaba.cobar.parser.ast.expression.primary.*;
+import com.alibaba.cobar.parser.ast.expression.primary.literal.*;
 import com.alibaba.cobar.parser.ast.expression.string.LikeExpression;
 import com.alibaba.cobar.parser.ast.expression.string.RegexpExpression;
 import com.alibaba.cobar.parser.ast.expression.string.SoundsLikeExpression;
@@ -77,6 +37,7 @@ import com.alibaba.cobar.parser.ast.expression.type.CollateExpression;
 import com.alibaba.cobar.parser.ast.fragment.VariableScope;
 import com.alibaba.cobar.parser.ast.stmt.dml.DMLSelectStatement;
 import com.alibaba.cobar.parser.recognizer.mysql.lexer.MySQLLexer;
+import org.junit.Assert;
 
 /**
  * @author <a href="mailto:shuo.qius@alibaba-inc.com">QIU Shuo</a>
@@ -178,8 +139,8 @@ public class MySQLExprParserTest extends AbstractSyntaxTest {
         expr = parser.expression();
         output = output2MySQL(expr, sql);
         Assert.assertEquals(
-                            "(N'\"abc\"abc\\'s' + 11.23 / ID3) * (1E+2 - A OR B) % x'abc' AND (SELECT b'1001' ^ b'0000')",
-                            output);
+                "(N'\"abc\"abc\\'s' + 11.23 / ID3) * (1E+2 - A OR B) % x'abc' AND (SELECT b'1001' ^ b'0000')",
+                output);
         Assert.assertEquals(LogicalAndExpression.class, expr.getClass());
         bex = (BinaryOperatorExpression) ((LogicalAndExpression) expr).getOperand(0);
         Assert.assertEquals(ArithmeticModExpression.class, bex.getClass());
@@ -198,8 +159,8 @@ public class MySQLExprParserTest extends AbstractSyntaxTest {
         expr = parser.expression();
         output = output2MySQL(expr, sql);
         Assert.assertEquals(
-                            "NOT ! ~ `SELECT` IN (1, CURDATE(), `CURRENT_DATE`) LIKE `ALL` DIV A BETWEEN (C AND D) AND D | E",
-                            output);
+                "NOT ! ~ `SELECT` IN (1, CURDATE(), `CURRENT_DATE`) LIKE `ALL` DIV A BETWEEN (C AND D) AND D | E",
+                output);
         Assert.assertEquals(LogicalNotExpression.class, expr.getClass());
         TernaryOperatorExpression tex = (TernaryOperatorExpression) ((LogicalNotExpression) expr).getOperand();
         Assert.assertEquals(BetweenAndExpression.class, tex.getClass());
@@ -221,8 +182,8 @@ public class MySQLExprParserTest extends AbstractSyntaxTest {
         expr = parser.expression();
         output = output2MySQL(expr, sql);
         Assert.assertEquals(
-                            "BINARY CASE ~ A OR B AND C ^ D XOR E WHEN 2 > ANY (SELECT A) THEN 3 ELSE 4 END IS NOT NULL = A",
-                            output);
+                "BINARY CASE ~ A OR B AND C ^ D XOR E WHEN 2 > ANY (SELECT A) THEN 3 ELSE 4 END IS NOT NULL = A",
+                output);
         Assert.assertEquals(ComparisionEqualsExpression.class, expr.getClass());
         bex = (BinaryOperatorExpression) ((ComparisionEqualsExpression) expr);
         Assert.assertEquals(ComparisionIsExpression.class, bex.getLeftOprand().getClass());
@@ -249,8 +210,8 @@ public class MySQLExprParserTest extends AbstractSyntaxTest {
         expr = parser.expression();
         output = output2MySQL(expr, sql);
         Assert.assertEquals(
-                            "! INTERVAL(A, B) <=> A >> B COLLATE x / ? + A != @@1 OR @var SOUNDS LIKE - (A - B) % - (D OR E)",
-                            output);
+                "! INTERVAL(A, B) <=> A >> B COLLATE x / ? + A != @@1 OR @var SOUNDS LIKE - (A - B) % - (D OR E)",
+                output);
         Assert.assertEquals(LogicalOrExpression.class, expr.getClass());
         pex = (LogicalOrExpression) expr;
         Assert.assertEquals(ComparisionNotEqualsExpression.class, pex.getOperand(0).getClass());
@@ -523,8 +484,8 @@ public class MySQLExprParserTest extends AbstractSyntaxTest {
         expr = parser.expression();
         output = output2MySQL(expr, sql);
         Assert.assertEquals(
-                            "A IS NOT NULL IS NOT FALSE IS NOT TRUE IS NOT UNKNOWN IS NULL IS FALSE IS TRUE IS UNKNOWN",
-                            output);
+                "A IS NOT NULL IS NOT FALSE IS NOT TRUE IS NOT UNKNOWN IS NULL IS FALSE IS TRUE IS UNKNOWN",
+                output);
         ComparisionIsExpression is = (ComparisionIsExpression) expr;
         ComparisionIsExpression is2 = (ComparisionIsExpression) is.getOperand();
         ComparisionIsExpression is3 = (ComparisionIsExpression) is2.getOperand();
@@ -784,8 +745,8 @@ public class MySQLExprParserTest extends AbstractSyntaxTest {
         expr = parser.expression();
         output = output2MySQL(expr, sql);
         Assert.assertEquals(
-                            "1 >= ANY (SELECT ID FROM T1 LIMIT 0, 1) > ALL (SELECT TB1.ID FROM TB1 AS T1, TB2 AS T2 WHERE T1.ID = T2.ID LIMIT 0, 1)",
-                            output);
+                "1 >= ANY (SELECT ID FROM T1 LIMIT 0, 1) > ALL (SELECT TB1.ID FROM TB1 AS T1, TB2 AS T2 WHERE T1.ID = T2.ID LIMIT 0, 1)",
+                output);
         ComparisionGreaterThanExpression gt = (ComparisionGreaterThanExpression) expr;
         ComparisionGreaterThanOrEqualsExpression ge = (ComparisionGreaterThanOrEqualsExpression) gt.getLeftOprand();
         Assert.assertEquals(LiteralNumber.class, ge.getLeftOprand().getClass());
@@ -1291,8 +1252,8 @@ public class MySQLExprParserTest extends AbstractSyntaxTest {
         expr = parser.expression();
         output = output2MySQL(expr, sql);
         Assert.assertEquals(
-                            "GROUP_CONCAT(DISTINCT EXPR1, EXPR2, EXPR3 ORDER BY COL_NAME1 DESC, COL_NAME2 SEPARATOR  )",
-                            output);
+                "GROUP_CONCAT(DISTINCT EXPR1, EXPR2, EXPR3 ORDER BY COL_NAME1 DESC, COL_NAME2 SEPARATOR  )",
+                output);
 
         sql = "GROUP_CONCAT(a||b,expr2,expr3 ORDER BY col_name1 asc,col_name2 SEPARATOR '@ ')";
         parser = new MySQLExprParser(new MySQLLexer(sql));
@@ -1606,6 +1567,6 @@ public class MySQLExprParserTest extends AbstractSyntaxTest {
         expr = parser.expression();
         output = output2MySQL(expr, sql);
         Assert.assertEquals("MATCH (TITLE, BODY) AGAINST ('database' IN NATURAL LANGUAGE MODE WITH QUERY EXPANSION)",
-                            output);
+                output);
     }
 }

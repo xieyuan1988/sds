@@ -18,29 +18,30 @@
  */
 package com.alibaba.cobar.parser.util;
 
+import com.alibaba.cobar.parser.ast.expression.Expression;
+import com.alibaba.cobar.parser.ast.expression.primary.literal.LiteralBoolean;
+import com.alibaba.cobar.parser.recognizer.mysql.lexer.MySQLLexer;
+
 import java.math.BigDecimal;
 import java.math.BigInteger;
 import java.sql.SQLSyntaxErrorException;
 import java.util.HashMap;
 import java.util.Map;
 
-import com.alibaba.cobar.parser.ast.expression.Expression;
-import com.alibaba.cobar.parser.ast.expression.primary.literal.LiteralBoolean;
-import com.alibaba.cobar.parser.recognizer.mysql.lexer.MySQLLexer;
-
 /**
  * adapt Java's expression rule into MySQL's
- * 
+ *
  * @author <a href="mailto:shuo.qius@alibaba-inc.com">QIU Shuo</a>
  */
 public class ExprEvalUtils {
 
-    private static final int                                   CLASS_MAP_DOUBLE      = 1;
-    private static final int                                   CLASS_MAP_FLOAT       = 2;
-    private static final int                                   CLASS_MAP_BIG_ING     = 3;
-    private static final int                                   CLASS_MAP_BIG_DECIMAL = 4;
-    private static final int                                   CLASS_MAP_LONG        = 5;
-    private static final Map<Class<? extends Number>, Integer> classMap              = new HashMap<Class<? extends Number>, Integer>(5);
+    private static final int CLASS_MAP_DOUBLE = 1;
+    private static final int CLASS_MAP_FLOAT = 2;
+    private static final int CLASS_MAP_BIG_ING = 3;
+    private static final int CLASS_MAP_BIG_DECIMAL = 4;
+    private static final int CLASS_MAP_LONG = 5;
+    private static final Map<Class<? extends Number>, Integer> classMap = new HashMap<Class<? extends Number>, Integer>(5);
+
     static {
         classMap.put(Double.class, CLASS_MAP_DOUBLE);
         classMap.put(Float.class, CLASS_MAP_FLOAT);
@@ -82,8 +83,8 @@ public class ExprEvalUtils {
         }
     }
 
-    private static final int NUM_INT         = 1;
-    private static final int NUM_LONG        = 2;
+    private static final int NUM_INT = 1;
+    private static final int NUM_LONG = 2;
     private static final int NUM_BIG_INTEGER = 3;
     private static final int NUM_BIG_DECIMAL = 4;
 

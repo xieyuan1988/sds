@@ -18,14 +18,12 @@
  */
 package com.alibaba.cobar.parser.recognizer.mysql.lexer;
 
-import java.sql.SQLSyntaxErrorException;
-
-import junit.framework.TestCase;
-
-import org.junit.Assert;
-
 import com.alibaba.cobar.parser.Performance;
 import com.alibaba.cobar.parser.recognizer.mysql.MySQLToken;
+import junit.framework.TestCase;
+import org.junit.Assert;
+
+import java.sql.SQLSyntaxErrorException;
 
 /**
  * @author <a href="mailto:shuo.qius@alibaba-inc.com">QIU Shuo</a>
@@ -39,7 +37,7 @@ public class MySQLLexerTest extends TestCase {
         long start = System.currentTimeMillis();
         long end = System.currentTimeMillis();
         for (int i = 0; i < 1; ++i) {
-            for (; !sut.eof();) {
+            for (; !sut.eof(); ) {
                 sut.nextToken();
                 switch (sut.token()) {
                     case LITERAL_NUM_MIX_DIGIT:
@@ -60,7 +58,7 @@ public class MySQLLexerTest extends TestCase {
         start = System.currentTimeMillis();
         for (int i = 0; i < loop; ++i) {
             sut = new MySQLLexer(chars);
-            for (; !sut.eof();) {
+            for (; !sut.eof(); ) {
                 sut.nextToken();
                 switch (sut.token()) {
                     case LITERAL_NUM_MIX_DIGIT:

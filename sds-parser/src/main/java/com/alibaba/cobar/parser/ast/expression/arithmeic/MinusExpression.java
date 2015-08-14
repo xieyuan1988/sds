@@ -18,23 +18,23 @@
  */
 package com.alibaba.cobar.parser.ast.expression.arithmeic;
 
-import java.math.BigDecimal;
-import java.math.BigInteger;
-import java.util.Map;
-
 import com.alibaba.cobar.parser.ast.expression.Expression;
 import com.alibaba.cobar.parser.ast.expression.UnaryOperatorExpression;
 import com.alibaba.cobar.parser.util.ExprEvalUtils;
 import com.alibaba.cobar.parser.util.UnaryOperandCalculator;
 
+import java.math.BigDecimal;
+import java.math.BigInteger;
+import java.util.Map;
+
 /**
  * <code>'-' higherExpr</code>
- * 
+ *
  * @author <a href="mailto:shuo.qius@alibaba-inc.com">QIU Shuo</a>
  */
 public class MinusExpression extends UnaryOperatorExpression implements UnaryOperandCalculator {
 
-    public MinusExpression(Expression operand){
+    public MinusExpression(Expression operand) {
         super(operand, PRECEDENCE_UNARY_OP);
     }
 

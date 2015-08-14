@@ -18,22 +18,6 @@
  */
 package com.alibaba.cobar.parser.recognizer.mysql.syntax;
 
-import static com.alibaba.cobar.parser.recognizer.mysql.MySQLToken.KW_DUAL;
-import static com.alibaba.cobar.parser.recognizer.mysql.MySQLToken.KW_FROM;
-import static com.alibaba.cobar.parser.recognizer.mysql.MySQLToken.KW_HAVING;
-import static com.alibaba.cobar.parser.recognizer.mysql.MySQLToken.KW_IN;
-import static com.alibaba.cobar.parser.recognizer.mysql.MySQLToken.KW_SELECT;
-import static com.alibaba.cobar.parser.recognizer.mysql.MySQLToken.KW_UPDATE;
-import static com.alibaba.cobar.parser.recognizer.mysql.MySQLToken.KW_WHERE;
-import static com.alibaba.cobar.parser.recognizer.mysql.MySQLToken.PUNC_COMMA;
-
-import java.sql.SQLSyntaxErrorException;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.LinkedList;
-import java.util.List;
-import java.util.Map;
-
 import com.alibaba.cobar.parser.ast.expression.Expression;
 import com.alibaba.cobar.parser.ast.fragment.GroupBy;
 import com.alibaba.cobar.parser.ast.fragment.Limit;
@@ -48,12 +32,17 @@ import com.alibaba.cobar.parser.recognizer.mysql.MySQLToken;
 import com.alibaba.cobar.parser.recognizer.mysql.lexer.MySQLLexer;
 import com.alibaba.cobar.parser.util.Pair;
 
+import java.sql.SQLSyntaxErrorException;
+import java.util.*;
+
+import static com.alibaba.cobar.parser.recognizer.mysql.MySQLToken.*;
+
 /**
  * @author <a href="mailto:shuo.qius@alibaba-inc.com">QIU Shuo</a>
  */
 public class MySQLDMLSelectParser extends MySQLDMLParser {
 
-    public MySQLDMLSelectParser(MySQLLexer lexer, MySQLExprParser exprParser){
+    public MySQLDMLSelectParser(MySQLLexer lexer, MySQLExprParser exprParser) {
         super(lexer, exprParser);
         this.exprParser.setSelectParser(this);
     }
@@ -63,6 +52,7 @@ public class MySQLDMLSelectParser extends MySQLDMLParser {
     }
 
     private static final Map<String, SpecialIdentifier> specialIdentifiers = new HashMap<String, SpecialIdentifier>();
+
     static {
         specialIdentifiers.put("SQL_BUFFER_RESULT", SpecialIdentifier.SQL_BUFFER_RESULT);
         specialIdentifiers.put("SQL_CACHE", SpecialIdentifier.SQL_CACHE);
@@ -70,8 +60,9 @@ public class MySQLDMLSelectParser extends MySQLDMLParser {
     }
 
     private DMLSelectStatement.SelectOption selectOption() throws SQLSyntaxErrorException {
-        for (DMLSelectStatement.SelectOption option = new DMLSelectStatement.SelectOption();; lexer.nextToken()) {
-            outer: switch (lexer.token()) {
+        for (DMLSelectStatement.SelectOption option = new DMLSelectStatement.SelectOption(); ; lexer.nextToken()) {
+            outer:
+            switch (lexer.token()) {
                 case KW_ALL:
                     option.resultDup = DMLSelectStatement.SelectDuplicationStrategy.ALL;
                     break outer;
@@ -200,7 +191,7 @@ public class MySQLDMLSelectParser extends MySQLDMLParser {
     /**
      * first token is either {@link MySQLToken#KW_SELECT} or {@link MySQLToken#PUNC_LEFT_PAREN} which has been scanned
      * but not yet consumed
-     * 
+     *
      * @return {@link DMLSelectStatement} or {@link DMLSelectUnionStatement}
      */
     public DMLQueryStatement selectUnion() throws SQLSyntaxErrorException {

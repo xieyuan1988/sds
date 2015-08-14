@@ -27,7 +27,7 @@ import com.alibaba.cobar.parser.visitor.SQLASTVisitor;
  */
 public class AssignmentExpression extends BinaryOperatorExpression {
 
-    public AssignmentExpression(Expression left, Expression right){
+    public AssignmentExpression(Expression left, Expression right) {
         super(left, right, Expression.PRECEDENCE_ASSIGNMENT, false);
     }
 

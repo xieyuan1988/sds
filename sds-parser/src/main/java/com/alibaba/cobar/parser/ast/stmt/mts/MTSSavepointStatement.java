@@ -29,7 +29,7 @@ public class MTSSavepointStatement implements SQLStatement {
 
     private final Identifier savepoint;
 
-    public MTSSavepointStatement(Identifier savepoint){
+    public MTSSavepointStatement(Identifier savepoint) {
         if (savepoint == null) throw new IllegalArgumentException("savepoint is null");
         this.savepoint = savepoint;
     }

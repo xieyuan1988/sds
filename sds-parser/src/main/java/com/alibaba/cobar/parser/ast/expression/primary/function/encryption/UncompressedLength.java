@@ -18,17 +18,17 @@
  */
 package com.alibaba.cobar.parser.ast.expression.primary.function.encryption;
 
-import java.util.List;
-
 import com.alibaba.cobar.parser.ast.expression.Expression;
 import com.alibaba.cobar.parser.ast.expression.primary.function.FunctionExpression;
+
+import java.util.List;
 
 /**
  * @author <a href="mailto:shuo.qius@alibaba-inc.com">QIU Shuo</a>
  */
 public class UncompressedLength extends FunctionExpression {
 
-    public UncompressedLength(List<Expression> arguments){
+    public UncompressedLength(List<Expression> arguments) {
         super("UNCOMPRESSED_LENGTH", arguments);
     }
 

@@ -18,26 +18,26 @@
  */
 package com.alibaba.cobar.parser.ast.expression.primary.literal;
 
-import java.util.Map;
-
 import com.alibaba.cobar.parser.visitor.SQLASTVisitor;
+
+import java.util.Map;
 
 /**
  * literal date is also possible
- * 
+ *
  * @author <a href="mailto:shuo.qius@alibaba-inc.com">QIU Shuo</a>
  */
 public class LiteralString extends Literal {
 
-    private final String  introducer;
-    private final String  string;
+    private final String introducer;
+    private final String string;
     private final boolean nchars;
 
     /**
      * @param string content of string, excluded of head and tail "'". e.g. for string token of "'don\\'t'", argument of
-     * string is "don\\'t"
+     *               string is "don\\'t"
      */
-    public LiteralString(String introducer, String string, boolean nchars){
+    public LiteralString(String introducer, String string, boolean nchars) {
         super();
         this.introducer = introducer;
         if (string == null) throw new IllegalArgumentException("argument string is null!");

@@ -19,23 +19,23 @@
  */
 package com.alibaba.cobar.parser.ast.expression.type;
 
-import java.util.Map;
-
 import com.alibaba.cobar.parser.ast.expression.AbstractExpression;
 import com.alibaba.cobar.parser.ast.expression.Expression;
 import com.alibaba.cobar.parser.visitor.SQLASTVisitor;
 
+import java.util.Map;
+
 /**
  * <code>higherExpr 'COLLATE' collateName</code>
- * 
+ *
  * @author <a href="mailto:shuo.qius@alibaba-inc.com">QIU Shuo</a>
  */
 public class CollateExpression extends AbstractExpression {
 
-    private final String     collateName;
+    private final String collateName;
     private final Expression string;
 
-    public CollateExpression(Expression string, String collateName){
+    public CollateExpression(Expression string, String collateName) {
         if (collateName == null) throw new IllegalArgumentException("collateName is null");
         this.string = string;
         this.collateName = collateName;

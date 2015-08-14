@@ -18,25 +18,25 @@
  */
 package com.alibaba.cobar.parser.ast.expression.primary.function.cast;
 
-import java.util.List;
-
 import com.alibaba.cobar.parser.ast.expression.Expression;
 import com.alibaba.cobar.parser.ast.expression.primary.function.FunctionExpression;
 import com.alibaba.cobar.parser.visitor.SQLASTVisitor;
+
+import java.util.List;
 
 /**
  * @author <a href="mailto:shuo.qius@alibaba-inc.com">QIU Shuo</a>
  */
 public class Cast extends FunctionExpression {
 
-    private final String     typeName;
+    private final String typeName;
     private final Expression typeInfo1;
     private final Expression typeInfo2;
 
     /**
      * @param expr never null
      */
-    public Cast(Expression expr, String typeName, Expression typeInfo1, Expression typeInfo2){
+    public Cast(Expression expr, String typeName, Expression typeInfo1, Expression typeInfo2) {
         super("CAST", wrapList(expr));
         if (null == typeName) {
             throw new IllegalArgumentException("typeName is null");

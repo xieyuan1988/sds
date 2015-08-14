@@ -18,17 +18,17 @@
  */
 package com.alibaba.cobar.parser.ast.expression.primary.function.encryption;
 
-import java.util.List;
-
 import com.alibaba.cobar.parser.ast.expression.Expression;
 import com.alibaba.cobar.parser.ast.expression.primary.function.FunctionExpression;
+
+import java.util.List;
 
 /**
  * @author <a href="mailto:shuo.qius@alibaba-inc.com">QIU Shuo</a>
  */
 public class AesEncrypt extends FunctionExpression {
 
-    public AesEncrypt(List<Expression> arguments){
+    public AesEncrypt(List<Expression> arguments) {
         super("AES_ENCRYPT", arguments);
     }
 

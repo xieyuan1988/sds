@@ -18,12 +18,11 @@
  */
 package com.alibaba.cobar.parser.recognizer.mysql.syntax;
 
-import java.sql.SQLSyntaxErrorException;
-
-import org.junit.Assert;
-
 import com.alibaba.cobar.parser.ast.stmt.dml.DMLUpdateStatement;
 import com.alibaba.cobar.parser.recognizer.mysql.lexer.MySQLLexer;
+import org.junit.Assert;
+
+import java.sql.SQLSyntaxErrorException;
 
 /**
  * @author <a href="mailto:shuo.qius@alibaba-inc.com">QIU Shuo</a>
@@ -75,7 +74,7 @@ public class MySQLDMLUpdateParserTest extends AbstractSyntaxTest {
         update = parser.update();
         output = output2MySQL(update, sql);
         Assert.assertEquals("UPDATE LOW_PRIORITY T1, TEST.T2 SET COL2 = DEFAULT, COL2 = '123\\'4' WHERE ID = 'a'",
-                            output);
+                output);
 
     }
 }

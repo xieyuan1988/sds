@@ -27,9 +27,9 @@ import com.alibaba.cobar.parser.ast.expression.primary.literal.LiteralString;
 public abstract class AliasableTableReference implements TableReference {
 
     protected final String alias;
-    protected String       aliasUpEscape;
+    protected String aliasUpEscape;
 
-    public AliasableTableReference(String alias){
+    public AliasableTableReference(String alias) {
         this.alias = alias;
     }
 
@@ -55,8 +55,8 @@ public abstract class AliasableTableReference implements TableReference {
                 }
                 if (ind >= 0) {
                     LiteralString st = new LiteralString(alias.substring(0, ind), alias.substring(ind + 1,
-                                                                                                  alias.length() - 1),
-                                                         false);
+                            alias.length() - 1),
+                            false);
                     return aliasUpEscape = st.getUnescapedString(true);
                 }
             default:

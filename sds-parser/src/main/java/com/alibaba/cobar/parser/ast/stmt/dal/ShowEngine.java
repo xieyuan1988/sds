@@ -31,7 +31,7 @@ public class ShowEngine extends DALShowStatement {
 
     private final Type type;
 
-    public ShowEngine(Type type){
+    public ShowEngine(Type type) {
         this.type = type;
     }
 

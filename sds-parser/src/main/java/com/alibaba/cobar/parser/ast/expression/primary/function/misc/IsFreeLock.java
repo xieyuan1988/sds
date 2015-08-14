@@ -18,17 +18,17 @@
  */
 package com.alibaba.cobar.parser.ast.expression.primary.function.misc;
 
-import java.util.List;
-
 import com.alibaba.cobar.parser.ast.expression.Expression;
 import com.alibaba.cobar.parser.ast.expression.primary.function.FunctionExpression;
+
+import java.util.List;
 
 /**
  * @author <a href="mailto:shuo.qius@alibaba-inc.com">QIU Shuo</a>
  */
 public class IsFreeLock extends FunctionExpression {
 
-    public IsFreeLock(List<Expression> arguments){
+    public IsFreeLock(List<Expression> arguments) {
         super("IS_FREE_LOCK", arguments);
     }
 

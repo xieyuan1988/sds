@@ -30,16 +30,16 @@ public class ShowIndex extends DALShowStatement {
         INDEX, INDEXES, KEYS
     }
 
-    private final Type       type;
+    private final Type type;
     private final Identifier table;
 
-    public ShowIndex(Type type, Identifier table, Identifier database){
+    public ShowIndex(Type type, Identifier table, Identifier database) {
         this.table = table;
         this.table.setParent(database);
         this.type = type;
     }
 
-    public ShowIndex(Type type, Identifier table){
+    public ShowIndex(Type type, Identifier table) {
         this.table = table;
         this.type = type;
     }

@@ -18,8 +18,6 @@
  */
 package com.alibaba.cobar.parser.ast.expression.comparison;
 
-import java.util.Map;
-
 import com.alibaba.cobar.parser.ast.expression.BinaryOperatorExpression;
 import com.alibaba.cobar.parser.ast.expression.Expression;
 import com.alibaba.cobar.parser.ast.expression.ReplacableExpression;
@@ -28,14 +26,16 @@ import com.alibaba.cobar.parser.util.ExprEvalUtils;
 import com.alibaba.cobar.parser.util.Pair;
 import com.alibaba.cobar.parser.visitor.SQLASTVisitor;
 
+import java.util.Map;
+
 /**
  * <code>higherPreExpr '<=>' higherPreExpr</code>
- * 
+ *
  * @author <a href="mailto:shuo.qius@alibaba-inc.com">QIU Shuo</a>
  */
 public class ComparisionNullSafeEqualsExpression extends BinaryOperatorExpression implements ReplacableExpression {
 
-    public ComparisionNullSafeEqualsExpression(Expression leftOprand, Expression rightOprand){
+    public ComparisionNullSafeEqualsExpression(Expression leftOprand, Expression rightOprand) {
         super(leftOprand, rightOprand, PRECEDENCE_COMPARISION);
     }
 

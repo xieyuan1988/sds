@@ -18,22 +18,6 @@
  */
 package com.alibaba.cobar.parser.recognizer.mysql.syntax;
 
-import static com.alibaba.cobar.parser.recognizer.mysql.MySQLToken.KW_IGNORE;
-import static com.alibaba.cobar.parser.recognizer.mysql.MySQLToken.KW_INSERT;
-import static com.alibaba.cobar.parser.recognizer.mysql.MySQLToken.KW_INTO;
-import static com.alibaba.cobar.parser.recognizer.mysql.MySQLToken.KW_KEY;
-import static com.alibaba.cobar.parser.recognizer.mysql.MySQLToken.KW_ON;
-import static com.alibaba.cobar.parser.recognizer.mysql.MySQLToken.KW_UPDATE;
-import static com.alibaba.cobar.parser.recognizer.mysql.MySQLToken.OP_ASSIGN;
-import static com.alibaba.cobar.parser.recognizer.mysql.MySQLToken.OP_EQUALS;
-import static com.alibaba.cobar.parser.recognizer.mysql.MySQLToken.PUNC_COMMA;
-import static com.alibaba.cobar.parser.recognizer.mysql.MySQLToken.PUNC_RIGHT_PAREN;
-
-import java.sql.SQLSyntaxErrorException;
-import java.util.ArrayList;
-import java.util.LinkedList;
-import java.util.List;
-
 import com.alibaba.cobar.parser.ast.expression.Expression;
 import com.alibaba.cobar.parser.ast.expression.misc.QueryExpression;
 import com.alibaba.cobar.parser.ast.expression.primary.Identifier;
@@ -42,30 +26,37 @@ import com.alibaba.cobar.parser.ast.stmt.dml.DMLInsertStatement;
 import com.alibaba.cobar.parser.recognizer.mysql.lexer.MySQLLexer;
 import com.alibaba.cobar.parser.util.Pair;
 
+import java.sql.SQLSyntaxErrorException;
+import java.util.ArrayList;
+import java.util.LinkedList;
+import java.util.List;
+
+import static com.alibaba.cobar.parser.recognizer.mysql.MySQLToken.*;
+
 /**
  * @author <a href="mailto:shuo.qius@alibaba-inc.com">QIU Shuo</a>
  */
 public class MySQLDMLInsertParser extends MySQLDMLInsertReplaceParser {
 
-    public MySQLDMLInsertParser(MySQLLexer lexer, MySQLExprParser exprParser){
+    public MySQLDMLInsertParser(MySQLLexer lexer, MySQLExprParser exprParser) {
         super(lexer, exprParser);
     }
 
     /**
      * nothing has been pre-consumed <code><pre>
-     * 'INSERT' ('LOW_PRIORITY'|'DELAYED'|'HIGH_PRIORITY')? 'IGNORE'? 'INTO'? tbname 
+     * 'INSERT' ('LOW_PRIORITY'|'DELAYED'|'HIGH_PRIORITY')? 'IGNORE'? 'INTO'? tbname
      *  (  'SET' colName ('='|':=') (expr|'DEFAULT') (',' colName ('='|':=') (expr|'DEFAULT'))*
      *   | '(' (  colName (',' colName)* ')' ( ('VALUES'|'VALUE') value (',' value)*
      *                                        | '(' 'SELECT' ... ')'
-     *                                        | 'SELECT' ...  
+     *                                        | 'SELECT' ...
      *                                       )
-     *          | 'SELECT' ... ')' 
+     *          | 'SELECT' ... ')'
      *         )
      *   |('VALUES'|'VALUE') value  ( ',' value )*
      *   | 'SELECT' ...
      *  )
      * ( 'ON' 'DUPLICATE' 'KEY' 'UPDATE' colName ('='|':=') expr ( ',' colName ('='|':=') expr)* )?
-     * 
+     * <p/>
      * value := '(' (expr|'DEFAULT') ( ',' (expr|'DEFAULT'))* ')'
      * </pre></code>
      */
@@ -106,7 +97,7 @@ public class MySQLDMLInsertParser extends MySQLDMLInsertReplaceParser {
                 lexer.nextToken();
                 columnNameList = new LinkedList<Identifier>();
                 tempRowValue = new LinkedList<Expression>();
-                for (;; lexer.nextToken()) {
+                for (; ; lexer.nextToken()) {
                     Identifier id = identifier();
                     match(OP_EQUALS, OP_ASSIGN);
                     Expression expr = exprParser.expression();
@@ -184,7 +175,7 @@ public class MySQLDMLInsertParser extends MySQLDMLInsertReplaceParser {
         if (lexer.token() == PUNC_COMMA) {
             list = new LinkedList<Pair<Identifier, Expression>>();
             list.add(new Pair<Identifier, Expression>(col, expr));
-            for (; lexer.token() == PUNC_COMMA;) {
+            for (; lexer.token() == PUNC_COMMA; ) {
                 lexer.nextToken();
                 col = identifier();
                 match(OP_EQUALS, OP_ASSIGN);

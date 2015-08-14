@@ -24,12 +24,12 @@ import com.alibaba.cobar.parser.visitor.SQLASTVisitor;
 
 /**
  * <code>higherPreExpr 'SOUNDS' 'LIKE' higherPreExpr</code>
- * 
+ *
  * @author <a href="mailto:shuo.qius@alibaba-inc.com">QIU Shuo</a>
  */
 public class SoundsLikeExpression extends BinaryOperatorExpression {
 
-    public SoundsLikeExpression(Expression leftOprand, Expression rightOprand){
+    public SoundsLikeExpression(Expression leftOprand, Expression rightOprand) {
         super(leftOprand, rightOprand, PRECEDENCE_COMPARISION);
     }
 

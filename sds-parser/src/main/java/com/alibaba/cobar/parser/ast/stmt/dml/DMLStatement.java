@@ -18,19 +18,19 @@
  */
 package com.alibaba.cobar.parser.ast.stmt.dml;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import com.alibaba.cobar.parser.ast.expression.Expression;
 import com.alibaba.cobar.parser.ast.stmt.SQLStatement;
 import com.alibaba.cobar.parser.visitor.MySQLOutputASTVisitor;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * @author <a href="mailto:shuo.qius@alibaba-inc.com">QIU Shuo</a>
  */
 public abstract class DMLStatement implements SQLStatement {
 
-    @SuppressWarnings( { "rawtypes", "unchecked" })
+    @SuppressWarnings({"rawtypes", "unchecked"})
     protected static List ensureListType(List list) {
         if (list == null || list.size() <= 0) return null;
         if (list instanceof ArrayList) return list;
@@ -43,7 +43,7 @@ public abstract class DMLStatement implements SQLStatement {
             throw new IllegalArgumentException("argument 'valuesList' is empty");
         }
         List<List<Expression>> rst = (valuesList instanceof ArrayList) ? valuesList : new ArrayList<List<Expression>>(
-                                                                                                                      valuesList.size());
+                valuesList.size());
         boolean copy = rst != valuesList;
         int size = -1;
         if (copy) {
@@ -55,8 +55,8 @@ public abstract class DMLStatement implements SQLStatement {
                     size = values.size();
                 } else if (size != values.size()) {
                     throw new IllegalArgumentException(
-                                                       "argument 'valuesList' contains empty elements with different size: "
-                                                               + size + " != " + values.size());
+                            "argument 'valuesList' contains empty elements with different size: "
+                                    + size + " != " + values.size());
                 }
                 rst.add(ensureListType(values));
             }
@@ -71,8 +71,8 @@ public abstract class DMLStatement implements SQLStatement {
                 size = values.size();
             } else if (size != values.size()) {
                 throw new IllegalArgumentException(
-                                                   "argument 'valuesList' contains empty elements with different size: "
-                                                           + size + " != " + values.size());
+                        "argument 'valuesList' contains empty elements with different size: "
+                                + size + " != " + values.size());
             }
             if (!(values instanceof ArrayList)) {
                 valuesList.set(i, new ArrayList<Expression>(values));

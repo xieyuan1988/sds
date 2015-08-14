@@ -18,11 +18,11 @@
  */
 package com.alibaba.cobar.parser.ast.expression.primary.function.cast;
 
-import java.util.List;
-
 import com.alibaba.cobar.parser.ast.expression.Expression;
 import com.alibaba.cobar.parser.ast.expression.primary.function.FunctionExpression;
 import com.alibaba.cobar.parser.visitor.SQLASTVisitor;
+
+import java.util.List;
 
 /**
  * @author <a href="mailto:shuo.qius@alibaba-inc.com">QIU Shuo</a>
@@ -34,7 +34,7 @@ public class Convert extends FunctionExpression {
      */
     private final String transcodeName;
 
-    public Convert(Expression arg, String transcodeName){
+    public Convert(Expression arg, String transcodeName) {
         super("CONVERT", wrapList(arg));
         if (null == transcodeName) {
             throw new IllegalArgumentException("transcodeName is null");

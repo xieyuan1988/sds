@@ -18,24 +18,24 @@
  */
 package com.alibaba.cobar.parser.ast.stmt.dml;
 
-import java.util.List;
-
 import com.alibaba.cobar.parser.ast.expression.misc.QueryExpression;
 import com.alibaba.cobar.parser.ast.expression.primary.Identifier;
 import com.alibaba.cobar.parser.ast.expression.primary.RowExpression;
+
+import java.util.List;
 
 /**
  * @author <a href="mailto:shuo.qius@alibaba-inc.com">QIU Shuo</a>
  */
 public abstract class DMLInsertReplaceStatement extends DMLStatement {
 
-    protected final Identifier       table;
+    protected final Identifier table;
     protected final List<Identifier> columnNameList;
-    protected List<RowExpression>    rowList;
-    protected final QueryExpression  select;
+    protected List<RowExpression> rowList;
+    protected final QueryExpression select;
 
     @SuppressWarnings("unchecked")
-    public DMLInsertReplaceStatement(Identifier table, List<Identifier> columnNameList, List<RowExpression> rowList){
+    public DMLInsertReplaceStatement(Identifier table, List<Identifier> columnNameList, List<RowExpression> rowList) {
         this.table = table;
         this.columnNameList = ensureListType(columnNameList);
         this.rowList = ensureListType(rowList);
@@ -43,7 +43,7 @@ public abstract class DMLInsertReplaceStatement extends DMLStatement {
     }
 
     @SuppressWarnings("unchecked")
-    public DMLInsertReplaceStatement(Identifier table, List<Identifier> columnNameList, QueryExpression select){
+    public DMLInsertReplaceStatement(Identifier table, List<Identifier> columnNameList, QueryExpression select) {
         if (select == null) throw new IllegalArgumentException("argument 'select' is empty");
         this.select = select;
         this.table = table;

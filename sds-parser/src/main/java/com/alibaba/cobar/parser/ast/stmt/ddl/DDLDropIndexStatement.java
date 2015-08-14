@@ -29,7 +29,7 @@ public class DDLDropIndexStatement implements DDLStatement {
     private final Identifier indexName;
     private final Identifier table;
 
-    public DDLDropIndexStatement(Identifier indexName, Identifier table){
+    public DDLDropIndexStatement(Identifier indexName, Identifier table) {
         this.indexName = indexName;
         this.table = table;
     }

@@ -28,11 +28,11 @@ public class DALSetCharacterSetStatement implements SQLStatement {
 
     private final String charset;
 
-    public DALSetCharacterSetStatement(){
+    public DALSetCharacterSetStatement() {
         this.charset = null;
     }
 
-    public DALSetCharacterSetStatement(String charset){
+    public DALSetCharacterSetStatement(String charset) {
         if (charset == null) throw new IllegalArgumentException("charsetName is null");
         this.charset = charset;
     }

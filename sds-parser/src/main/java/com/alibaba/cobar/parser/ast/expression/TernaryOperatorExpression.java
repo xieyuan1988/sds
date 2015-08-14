@@ -22,7 +22,7 @@ import java.util.Map;
 
 /**
  * an operator with arity of 3
- * 
+ *
  * @author <a href="mailto:shuo.qius@alibaba-inc.com">QIU Shuo</a>
  */
 public abstract class TernaryOperatorExpression extends AbstractExpression {
@@ -31,7 +31,7 @@ public abstract class TernaryOperatorExpression extends AbstractExpression {
     private final Expression second;
     private final Expression third;
 
-    public TernaryOperatorExpression(Expression first, Expression second, Expression third){
+    public TernaryOperatorExpression(Expression first, Expression second, Expression third) {
         this.first = first;
         this.second = second;
         this.third = third;

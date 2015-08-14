@@ -28,11 +28,11 @@ public class ShowGrants extends DALShowStatement {
 
     private final Expression user;
 
-    public ShowGrants(Expression user){
+    public ShowGrants(Expression user) {
         this.user = user;
     }
 
-    public ShowGrants(){
+    public ShowGrants() {
         this.user = null;
     }
 

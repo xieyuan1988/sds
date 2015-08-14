@@ -18,9 +18,6 @@
  */
 package com.alibaba.cobar.parser.ast.stmt.ddl;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import com.alibaba.cobar.parser.ast.expression.Expression;
 import com.alibaba.cobar.parser.ast.expression.primary.Identifier;
 import com.alibaba.cobar.parser.ast.fragment.ddl.ColumnDefinition;
@@ -30,9 +27,12 @@ import com.alibaba.cobar.parser.ast.stmt.dml.DMLSelectStatement;
 import com.alibaba.cobar.parser.util.Pair;
 import com.alibaba.cobar.parser.visitor.SQLASTVisitor;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  * NOT FULL AST: foreign key, ... not supported
- * 
+ *
  * @author <a href="mailto:shuo.qius@alibaba-inc.com">QIU Shuo</a>
  */
 public class DDLCreateTableStatement implements DDLStatement {
@@ -41,20 +41,20 @@ public class DDLCreateTableStatement implements DDLStatement {
         IGNORED, REPLACE
     }
 
-    private final boolean                                  temporary;
-    private final boolean                                  ifNotExists;
-    private final Identifier                               table;
+    private final boolean temporary;
+    private final boolean ifNotExists;
+    private final Identifier table;
     private final List<Pair<Identifier, ColumnDefinition>> colDefs;
-    private IndexDefinition                                primaryKey;
-    private final List<Pair<Identifier, IndexDefinition>>  uniqueKeys;
-    private final List<Pair<Identifier, IndexDefinition>>  keys;
-    private final List<Pair<Identifier, IndexDefinition>>  fullTextKeys;
-    private final List<Pair<Identifier, IndexDefinition>>  spatialKeys;
-    private final List<Expression>                         checks;
-    private TableOptions                                   tableOptions;
-    private Pair<SelectOption, DMLSelectStatement>         select;
+    private IndexDefinition primaryKey;
+    private final List<Pair<Identifier, IndexDefinition>> uniqueKeys;
+    private final List<Pair<Identifier, IndexDefinition>> keys;
+    private final List<Pair<Identifier, IndexDefinition>> fullTextKeys;
+    private final List<Pair<Identifier, IndexDefinition>> spatialKeys;
+    private final List<Expression> checks;
+    private TableOptions tableOptions;
+    private Pair<SelectOption, DMLSelectStatement> select;
 
-    public DDLCreateTableStatement(boolean temporary, boolean ifNotExists, Identifier table){
+    public DDLCreateTableStatement(boolean temporary, boolean ifNotExists, Identifier table) {
         this.table = table;
         this.temporary = temporary;
         this.ifNotExists = ifNotExists;

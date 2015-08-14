@@ -18,21 +18,21 @@
  */
 package com.alibaba.cobar.parser.ast.expression.logical;
 
-import java.util.Map;
-
 import com.alibaba.cobar.parser.ast.expression.Expression;
 import com.alibaba.cobar.parser.ast.expression.UnaryOperatorExpression;
 import com.alibaba.cobar.parser.ast.expression.primary.literal.LiteralBoolean;
 import com.alibaba.cobar.parser.util.ExprEvalUtils;
 
+import java.util.Map;
+
 /**
  * <code>'!' higherExpr</code>
- * 
+ *
  * @author <a href="mailto:shuo.qius@alibaba-inc.com">QIU Shuo</a>
  */
 public class NegativeValueExpression extends UnaryOperatorExpression {
 
-    public NegativeValueExpression(Expression operand){
+    public NegativeValueExpression(Expression operand) {
         super(operand, PRECEDENCE_UNARY_OP);
     }
 

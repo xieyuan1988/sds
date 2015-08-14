@@ -18,9 +18,9 @@
  */
 package com.alibaba.cobar.parser.recognizer.mysql.syntax;
 
-import static com.alibaba.cobar.parser.recognizer.mysql.MySQLToken.PUNC_COMMA;
-import static com.alibaba.cobar.parser.recognizer.mysql.MySQLToken.PUNC_LEFT_PAREN;
-import static com.alibaba.cobar.parser.recognizer.mysql.MySQLToken.PUNC_RIGHT_PAREN;
+import com.alibaba.cobar.parser.ast.expression.Expression;
+import com.alibaba.cobar.parser.ast.expression.primary.RowExpression;
+import com.alibaba.cobar.parser.recognizer.mysql.lexer.MySQLLexer;
 
 import java.sql.SQLSyntaxErrorException;
 import java.util.ArrayList;
@@ -28,16 +28,14 @@ import java.util.Collections;
 import java.util.LinkedList;
 import java.util.List;
 
-import com.alibaba.cobar.parser.ast.expression.Expression;
-import com.alibaba.cobar.parser.ast.expression.primary.RowExpression;
-import com.alibaba.cobar.parser.recognizer.mysql.lexer.MySQLLexer;
+import static com.alibaba.cobar.parser.recognizer.mysql.MySQLToken.*;
 
 /**
  * @author <a href="mailto:shuo.qius@alibaba-inc.com">QIU Shuo</a>
  */
 public abstract class MySQLDMLInsertReplaceParser extends MySQLDMLParser {
 
-    public MySQLDMLInsertReplaceParser(MySQLLexer lexer, MySQLExprParser exprParser){
+    public MySQLDMLInsertReplaceParser(MySQLLexer lexer, MySQLExprParser exprParser) {
         super(lexer, exprParser);
     }
 
@@ -47,7 +45,7 @@ public abstract class MySQLDMLInsertReplaceParser extends MySQLDMLParser {
         if (lexer.token() == PUNC_COMMA) {
             valuesList = new LinkedList<RowExpression>();
             valuesList.add(new RowExpression(tempRowValue));
-            for (; lexer.token() == PUNC_COMMA;) {
+            for (; lexer.token() == PUNC_COMMA; ) {
                 lexer.nextToken();
                 tempRowValue = rowValue();
                 valuesList.add(new RowExpression(tempRowValue));
@@ -72,7 +70,7 @@ public abstract class MySQLDMLInsertReplaceParser extends MySQLDMLParser {
         if (lexer.token() == PUNC_COMMA) {
             row = new LinkedList<Expression>();
             row.add(expr);
-            for (; lexer.token() == PUNC_COMMA;) {
+            for (; lexer.token() == PUNC_COMMA; ) {
                 lexer.nextToken();
                 expr = exprParser.expression();
                 row.add(expr);

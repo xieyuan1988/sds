@@ -18,11 +18,11 @@
  */
 package com.alibaba.cobar.parser.ast.expression.primary.literal;
 
-import java.util.HashMap;
-import java.util.Map;
-
 import com.alibaba.cobar.parser.ast.expression.Expression;
 import com.alibaba.cobar.parser.visitor.SQLASTVisitor;
+
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * @author <a href="mailto:shuo.qius@alibaba-inc.com">QIU Shuo</a>
@@ -53,10 +53,10 @@ public class IntervalPrimary extends Literal {
         return unitMap.get(unitString);
     }
 
-    private final Unit       unit;
+    private final Unit unit;
     private final Expression quantity;
 
-    public IntervalPrimary(Expression quantity, Unit unit){
+    public IntervalPrimary(Expression quantity, Unit unit) {
         super();
         if (quantity == null) throw new IllegalArgumentException("quantity expression is null");
         if (unit == null) throw new IllegalArgumentException("unit of time is null");

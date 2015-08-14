@@ -18,23 +18,25 @@
  */
 package com.alibaba.cobar.parser.ast.fragment.tableref;
 
+import com.alibaba.cobar.parser.ast.expression.primary.Identifier;
+import com.alibaba.cobar.parser.visitor.SQLASTVisitor;
+
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
-
-import com.alibaba.cobar.parser.ast.expression.primary.Identifier;
-import com.alibaba.cobar.parser.visitor.SQLASTVisitor;
 
 /**
  * @author <a href="mailto:shuo.qius@alibaba-inc.com">QIU Shuo</a>
  */
 public class TableRefFactor extends AliasableTableReference {
 
-    /** e.g. <code>"`db2`.`tb1`"</code> is possible */
-    private final Identifier      table;
+    /**
+     * e.g. <code>"`db2`.`tb1`"</code> is possible
+     */
+    private final Identifier table;
     private final List<IndexHint> hintList;
 
-    public TableRefFactor(Identifier table, String alias, List<IndexHint> hintList){
+    public TableRefFactor(Identifier table, String alias, List<IndexHint> hintList) {
         super(alias);
         this.table = table;
         if (hintList == null || hintList.isEmpty()) {
@@ -46,7 +48,7 @@ public class TableRefFactor extends AliasableTableReference {
         }
     }
 
-    public TableRefFactor(Identifier table, List<IndexHint> hintList){
+    public TableRefFactor(Identifier table, List<IndexHint> hintList) {
         this(table, null, hintList);
     }
 

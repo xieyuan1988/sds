@@ -18,12 +18,12 @@
  */
 package com.alibaba.cobar.parser.ast.expression.primary.function.datetime;
 
-import java.util.List;
-
 import com.alibaba.cobar.parser.ast.expression.Expression;
 import com.alibaba.cobar.parser.ast.expression.primary.function.FunctionExpression;
 import com.alibaba.cobar.parser.ast.expression.primary.literal.IntervalPrimary;
 import com.alibaba.cobar.parser.visitor.SQLASTVisitor;
+
+import java.util.List;
 
 /**
  * @author <a href="mailto:shuo.qius@alibaba-inc.com">QIU Shuo</a>
@@ -32,7 +32,7 @@ public class Extract extends FunctionExpression {
 
     private IntervalPrimary.Unit unit;
 
-    public Extract(IntervalPrimary.Unit unit, Expression date){
+    public Extract(IntervalPrimary.Unit unit, Expression date) {
         super("EXTRACT", wrapList(date));
         this.unit = unit;
     }

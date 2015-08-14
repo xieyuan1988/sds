@@ -18,17 +18,17 @@
  */
 package com.alibaba.cobar.parser.ast.expression.primary.function.datetime;
 
-import java.util.List;
-
 import com.alibaba.cobar.parser.ast.expression.Expression;
 import com.alibaba.cobar.parser.ast.expression.primary.function.FunctionExpression;
+
+import java.util.List;
 
 /**
  * @author <a href="mailto:shuo.qius@alibaba-inc.com">QIU Shuo</a>
  */
 public class PeriodDiff extends FunctionExpression {
 
-    public PeriodDiff(List<Expression> arguments){
+    public PeriodDiff(List<Expression> arguments) {
         super("PERIOD_DIFF", arguments);
     }
 

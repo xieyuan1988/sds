@@ -27,7 +27,7 @@ public class ShowProcesslist extends DALShowStatement {
 
     private final boolean full;
 
-    public ShowProcesslist(boolean full){
+    public ShowProcesslist(boolean full) {
         this.full = full;
     }
 

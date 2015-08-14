@@ -18,26 +18,16 @@
  */
 package com.alibaba.cobar.parser.recognizer;
 
-import java.sql.SQLSyntaxErrorException;
-import java.util.HashMap;
-import java.util.Map;
-
 import com.alibaba.cobar.parser.ast.stmt.SQLStatement;
 import com.alibaba.cobar.parser.ast.stmt.ddl.DDLCreateIndexStatement;
 import com.alibaba.cobar.parser.ast.stmt.ddl.DDLStatement;
 import com.alibaba.cobar.parser.recognizer.mysql.MySQLToken;
 import com.alibaba.cobar.parser.recognizer.mysql.lexer.MySQLLexer;
-import com.alibaba.cobar.parser.recognizer.mysql.syntax.MySQLDALParser;
-import com.alibaba.cobar.parser.recognizer.mysql.syntax.MySQLDDLParser;
-import com.alibaba.cobar.parser.recognizer.mysql.syntax.MySQLDMLCallParser;
-import com.alibaba.cobar.parser.recognizer.mysql.syntax.MySQLDMLDeleteParser;
-import com.alibaba.cobar.parser.recognizer.mysql.syntax.MySQLDMLInsertParser;
-import com.alibaba.cobar.parser.recognizer.mysql.syntax.MySQLDMLReplaceParser;
-import com.alibaba.cobar.parser.recognizer.mysql.syntax.MySQLDMLSelectParser;
-import com.alibaba.cobar.parser.recognizer.mysql.syntax.MySQLDMLUpdateParser;
-import com.alibaba.cobar.parser.recognizer.mysql.syntax.MySQLExprParser;
-import com.alibaba.cobar.parser.recognizer.mysql.syntax.MySQLMTSParser;
-import com.alibaba.cobar.parser.recognizer.mysql.syntax.MySQLParser;
+import com.alibaba.cobar.parser.recognizer.mysql.syntax.*;
+
+import java.sql.SQLSyntaxErrorException;
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * @author <a href="mailto:shuo.qius@alibaba-inc.com">QIU Shuo</a>
@@ -49,6 +39,7 @@ public final class SQLParserDelegate {
     }
 
     private static final Map<String, SpecialIdentifier> specialIdentifiers = new HashMap<String, SpecialIdentifier>();
+
     static {
         specialIdentifiers.put("TRUNCATE", SpecialIdentifier.TRUNCATE);
         specialIdentifiers.put("SAVEPOINT", SpecialIdentifier.SAVEPOINT);
@@ -64,7 +55,7 @@ public final class SQLParserDelegate {
 
     private static String buildErrorMsg(Exception e, MySQLLexer lexer, String sql) {
         StringBuilder sb = new StringBuilder(
-                                             "You have an error in your SQL syntax; Error occurs around this fragment: ");
+                "You have an error in your SQL syntax; Error occurs around this fragment: ");
         final int ch = lexer.getCurrentIndex();
         int from = ch - 16;
         if (from < 0) from = 0;
@@ -80,7 +71,8 @@ public final class SQLParserDelegate {
             SQLStatement stmt = null;
             boolean isEOF = true;
             MySQLExprParser exprParser = new MySQLExprParser(lexer, charset);
-            stmtSwitch: switch (lexer.token()) {
+            stmtSwitch:
+            switch (lexer.token()) {
                 case KW_DESC:
                 case KW_DESCRIBE:
                     stmt = new MySQLDALParser(lexer, exprParser).desc();
